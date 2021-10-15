@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     <div className="left">
       <Link href="/">
         <a className="bold" data-active={isActive("/")}>
-          Feed
+          <img src="https://i.imgur.com/NxwZ9x0.png"/>
         </a>
       </Link>
       <style jsx>{`
@@ -23,6 +23,11 @@ const Header: React.FC = () => {
           text-decoration: none;
           color: #000;
           display: inline-block;
+        }
+
+        img {
+          width: 100px;
+          height: 100px;
         }
 
         .left a[data-active="true"] {

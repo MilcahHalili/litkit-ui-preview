@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 export type PostProps = {
   id: number;
   title: string;
+  date: string;
   author: {
     name: string;
     email: string;
@@ -18,12 +19,19 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   return (
     <div onClick={() => Router.push("/p/[id]", `/p/${post.id}`)}>
       <h2>{post.title}</h2>
-      <small>By {authorName}</small>
+      <p className="authorName">By {authorName}</p>
       <ReactMarkdown source={post.content} />
       <style jsx>{`
         div {
           color: inherit;
           padding: 2rem;
+        }
+        h2 {
+          text-align: center;
+        }
+        .authorName {
+          text-align: center;
+          font-size: 13.333px;
         }
       `}</style>
     </div>
