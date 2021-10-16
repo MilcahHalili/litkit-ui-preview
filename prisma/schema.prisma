@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  published Boolean  @default(false)
+  author    User?     @relation(fields: [authorId], references: [id])
+  authorId  Int?
+  post      Post    @relation(fields: [postId], references: [id])
+  postId    Int
+  instructor Instructor? @relation(fields: [instructorId], references: [id])
+  instructorId Int? 
+}
+
+model Instructor {
+  id     Int     @id @default(autoincrement())
+  name    String
+  email   String    @unique
+  image String?
+  comments Comment[]
+  prompts Prompt[]
+  workshops Workshop[]
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String?    @db.VarChar(255)
+  content   String?
+  published Boolean   @default(false)
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  Int
+  comments  Comment[]
+  prompt Prompt @relation(fields: [promptId], references: [id])
+  promptId Int
+}
+
+model Prompt {
+  id Int @id @default(autoincrement())
+  workshop Workshop @relation(fields: [workshopId], references: [id])
+  workshopId Int
+  instructor Instructor @relation(fields: [instructorId], references: [id])
+  instructorId Int @unique
+  title String?
+  content String?
+  posts Post[]
+  published Boolean @default(false)
+}
+
+model User {
+  id      Int       @id @default(autoincrement())
+  email   String    @unique
+  name    String
+  image String?
+  posts   Post[]
+  comments Comment[]
+  workshops Workshop[]
+}
+
+model Workshop {
+  id Int @id @default(autoincrement())
+  name String
+  users User[]
+  prompts Prompt[]
+  instructor Instructor @relation(fields: [instructorId], references: [id])
+  instructorId Int @unique
+}
