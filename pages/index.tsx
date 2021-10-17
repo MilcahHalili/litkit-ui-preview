@@ -1,26 +1,26 @@
-import React from "react"
-import handler from '../pages/api/prompt'
+import React, { useEffect, useState } from "react"
 import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 
-export async function getServerSideProps(context) {
-  const request = await fetch('http://localhost:3000/api/prompt')
-  const json = await request.json()
+const Blog = () => {
+  const [ prompts, setPrompts ] = useState([])
 
-  return {
-    props: {
-      data: json
-    }
+  const getPrompts = async (data) => {
+    const res = await fetch('api/prompt')
+    const result = await res.json()
+    setPrompts(result)
   }
-}
 
-const Blog = (props) => {
+  useEffect(()=> {
+    getPrompts()
+  }, [])
+
   return (
     <Layout>
       <div className="page">
         <h1>Quick Writes</h1>
         <main>
-          {props.data.map((post) => (
+          {prompts.map((post) => (
             <>
               <p>{post.id}</p>
               <div key={post.id} className="post">
