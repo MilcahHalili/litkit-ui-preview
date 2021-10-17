@@ -1,3 +1,17 @@
-# Fullstack Authentication Example with Next.js and NextAuth.js
+# LitKit
 
-This is the starter project for the fullstack tutorial with Next.js and Prisma. You can find the final version of this project in the [`final`](https://github.com/prisma/blogr-nextjs-prisma/tree/final) branch of this repo.
+This is a project by @MilcahHalili and @PatriciaRealini with [Next.js](https://nextjs.org/), [Prisma](https://www.prisma.io/), and [Magic Link](https://magic.link/).
+
+## Getting Started
+
+### Install
+
+Run `npm install`.
+
+### Build
+
+Run `npx next build`.
+
+### Start
+
+Run `npx next start`.
