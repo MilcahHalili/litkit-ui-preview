@@ -23,6 +23,7 @@ const Blog = (props) => {
         <main>
           {props.data.map((post) => (
             <>
+              <p>{post.id}</p>
               <div key={post.id} className="post">
                 <Post post={post} />
               </div>
