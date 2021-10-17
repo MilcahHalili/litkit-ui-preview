@@ -3,28 +3,34 @@ import { GetStaticProps } from "next"
 import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 
-export async function getStaticProps(context) {
-  const res = await fetch(`api/prompt`)
-  const data = await res.json()
-
-  if (!data) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return {
-    props: { data }, // will be passed to the page component as props
-  }
+export const getStaticProps: GetStaticProps = async () => {
+  const feed = [
+    {
+      id: 1,
+      title: "This is a Quick Write Title",
+      date: "October 13, 2021",
+      content: "This is an excerpt. Click on me to read more.",
+      published: false,
+      author: {
+        name: "Ariel Gore",
+        email: "arielfiona@gmail.com",
+      },
+    },
+  ]
+  return { props: { feed } }
 }
 
-const Blog: React.FC = (props) => {
+type Props = {
+  feed: PostProps[]
+}
+
+const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div className="page">
         <h1>Quick Writes</h1>
         <main>
-          {props.map((post) => (
+          {props.feed.map((post) => (
             <>
               <p key={post.date}>{post.date}</p>
               <div key={post.id} className="post">
