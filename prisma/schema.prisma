@@ -53,7 +53,7 @@ model Prompt {
   workshop Workshop @relation(fields: [workshopId], references: [id])
   workshopId Int
   instructor Instructor @relation(fields: [instructorId], references: [id])
-  instructorId Int @unique
+  instructorId Int
   title String?
   content String?
   posts Post[]
@@ -76,5 +76,5 @@ model Workshop {
   users User[]
   prompts Prompt[]
   instructor Instructor @relation(fields: [instructorId], references: [id])
-  instructorId Int @unique
+  instructorId Int
 }
