@@ -17,7 +17,7 @@ const Blog = () => {
   }
 
   useEffect(() => {
-    fetchData()
+    getPrompts()
   }, [])
 
   return (
