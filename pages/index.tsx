@@ -5,7 +5,7 @@ import Post, { PostProps } from "../components/Post"
 const Blog = () => {
   const [ prompts, setPrompts ] = useState([])
 
-  const getPrompts = async () => {
+  const getPrompts = async (data) => {
     const res = await fetch('api/prompt')
     const result = await res.json()
     setPrompts(result)
