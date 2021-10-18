@@ -4,12 +4,13 @@ import Post, { PostProps } from "../components/Post"
 
 const Blog = () => {
   const [ prompts, setPrompts ] = useState([])
-
+  
   const getPrompts = async () => {
     const res = await fetch('api/prompt')
     const result = await res.json()
     setPrompts(result)
   }
+
 
   useEffect(() => {
     getPrompts()
@@ -22,9 +23,9 @@ const Blog = () => {
         <main>
           {prompts.map((post) => (
             <>
-              <p key={post.id}>{post.id}</p>
-              <div key={post.id} className="post">
-                <Post post={post} />
+              <p>{post.createdAt}</p>
+              <div className="post">
+                <Post key={post.id} post={post} />
               </div>
             </>
           ))}
