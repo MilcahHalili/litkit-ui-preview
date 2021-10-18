@@ -1,6 +1,7 @@
 import React from "react";
 import Router from "next/router";
 import ReactMarkdown from "react-markdown";
+import Styles from "../styles/Components.module.scss"
 
 export type PostProps = {
   id: number;
