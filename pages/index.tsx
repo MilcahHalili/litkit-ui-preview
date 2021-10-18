@@ -6,7 +6,7 @@ import Styles from "../styles/Index.module.scss"
 const Blog = () => {
   const [ prompts, setPrompts ] = useState([])
 
-  const getPrompts = async (data) => {
+  const getPrompts = async () => {
     const res = await fetch('api/prompt')
     const result = await res.json()
     setPrompts(result)
@@ -23,7 +23,7 @@ const Blog = () => {
         <main>
           {prompts.map((post) => (
             <>
-              <p>{post.id}</p>
+              <p key={post.id}>{post.id}</p>
               <div key={post.id} className="post">
                 <Post post={post} />
               </div>
