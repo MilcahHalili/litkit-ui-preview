@@ -11,7 +11,7 @@ const Blog = () => {
     setPrompts(result)
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     getPrompts()
   }, [])
 
