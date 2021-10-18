@@ -11,8 +11,8 @@ const Blog = () => {
     setPrompts(result)
   }
 
-  useEffect(()=> {
-    getPrompts()
+  useEffect(() => {
+    fetchData()
   }, [])
 
   return (
