@@ -15,3 +15,7 @@ Run `npx next build`.
 ### Start
 
 Run `npx next start`.
+
+### ORM 
+
+Run `npx prisma studio`.
