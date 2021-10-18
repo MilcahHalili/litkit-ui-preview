@@ -6,15 +6,12 @@ import Styles from "../styles/Index.module.scss"
 const Blog = () => {
   const [ prompts, setPrompts ] = useState([])
 
-  const fetchData = async () => {
-    const response = await fetch('api/prompt');
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    const prompts = await response.json();
-    return setPrompts(prompts);
+  const getPrompts = async () => {
+    const res = await fetch('api/prompt')
+    const result = await res.json()
+    setPrompts(result)
   }
+
 
   useEffect(() => {
     getPrompts()
@@ -27,9 +24,9 @@ const Blog = () => {
         <main>
           {prompts.map((post) => (
             <>
-              <p key={post.id}>{post.id}</p>
-              <div key={post.id} className="post">
-                <Post post={post} />
+              <p>{post.createdAt}</p>
+              <div className="post">
+                <Post key={post.id} post={post} />
               </div>
             </>
           ))}
