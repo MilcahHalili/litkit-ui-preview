@@ -5,14 +5,10 @@ import Post, { PostProps } from "../components/Post"
 const Blog = () => {
   const [ prompts, setPrompts ] = useState([])
 
-  const fetchData = async () => {
-    const response = await fetch('api/prompt');
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    const prompts = await response.json();
-    return setPrompts(prompts);
+  const getPrompts = async () => {
+    const res = await fetch('api/prompt')
+    const result = await res.json()
+    setPrompts(result)
   }
 
   useEffect(() => {
@@ -26,7 +22,7 @@ const Blog = () => {
         <main>
           {prompts.map((post) => (
             <>
-              <p>{post.id}</p>
+              <p key={post.id}>{post.id}</p>
               <div key={post.id} className="post">
                 <Post post={post} />
               </div>

@@ -4,7 +4,11 @@ export default function handler(req, res) {
   const prisma = new PrismaClient()
 
   async function main() {
-    const prompts = await prisma.prompt.findMany()
+    const prompts = await prisma.prompt.findMany({
+      include: {
+        posts: true
+      }
+    })
     console.log(prompts)
     res.status(200).json(prompts)
   }
