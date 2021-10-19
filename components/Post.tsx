@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "next/router";
 import ReactMarkdown from "react-markdown";
-import Styles from "../styles/Components.module.scss"
+import Styles from "../styles/Components/Post.module.scss"
 
 export type PostProps = {
   id: number;
@@ -18,23 +18,10 @@ export type PostProps = {
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : "Unknown author";
   return (
-    <div onClick={() => Router.push("/p/[id]", `/p/${post.id}`)}>
-      <h2>{post.title}</h2>
-      <p className="authorName">By {authorName}</p>
+    <div onClick={() => Router.push("/p/[id]", `/p/${post.id}`)} className={Styles.post}>
+      <h2 className={Styles.posth2}>{post.title}</h2>
+      <p className={Styles.authorName}>By {authorName}</p>
       <ReactMarkdown source={post.content} />
-      <style jsx>{`
-        div {
-          color: inherit;
-          padding: 2rem;
-        }
-        h2 {
-          text-align: center;
-        }
-        .authorName {
-          text-align: center;
-          font-size: 13.333px;
-        }
-      `}</style>
     </div>
   );
 };
