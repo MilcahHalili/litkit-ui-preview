@@ -21,10 +21,10 @@ const Blog = () => {
     <Layout>
       <div className={Styles.page}>
         <h1 className={Styles.pageh1}>Quick Writes</h1>
-        <main className={Styles.main}>
+        <main>
           {prompts.map((post) => (
             <>
-              <p>{post.createdAt}</p>
+              <p className={Styles.createdAt}>{post.createdAt}</p>
               <div className={Styles.post}>
                 <Post key={post.id} post={post} />
               </div>
