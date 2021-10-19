@@ -1,11 +1,4 @@
 /* SCSS */
-$dark-gray: #2E1F27;
-$light-gray: #D0D6CD;
-$lilac: #C5A8BF;
-$mint: #C5E2DE;
-$marigold: #F3AA51;
-$white: rgb(255, 255, 255);
-
 
 // body {
 //   margin: 0;
@@ -17,10 +10,11 @@ $white: rgb(255, 255, 255);
 //   background: #c5e2de;
 // }
 
-// h1 {
-//   text-align: center;
-//   color: #f3aa51;
-// }
+.pageh1 {
+  text-align: center;
+  color: $marigold;
+}
+
 // .page {
 //   margin: 0 auto;
 //   padding: 2rem;

@@ -20,7 +20,7 @@ const Blog = () => {
   return (
     <Layout>
       <div className="page">
-        <h1>Quick Writes</h1>
+        <h1 className={Styles.pageh1}>Quick Writes</h1>
         <main>
           {prompts.map((post) => (
             <>
@@ -33,10 +33,6 @@ const Blog = () => {
         </main>
       </div>
       <style jsx>{`
-        h1 {
-          text-align: center;
-          color: #f3aa51;
-        }
         .page {
           margin: 0 auto;
           padding: 2rem;
