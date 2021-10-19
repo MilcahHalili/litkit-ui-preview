@@ -19,46 +19,19 @@ const Blog = () => {
 
   return (
     <Layout>
-      <div className="page">
+      <div className={Styles.page}>
         <h1 className={Styles.pageh1}>Quick Writes</h1>
-        <main>
+        <main className={Styles.main}>
           {prompts.map((post) => (
             <>
               <p>{post.createdAt}</p>
-              <div className="post">
+              <div className={Styles.post}>
                 <Post key={post.id} post={post} />
               </div>
             </>
           ))}
         </main>
       </div>
-      <style jsx>{`
-        .page {
-          margin: 0 auto;
-          padding: 2rem;
-          background-color: rgb(255, 255, 255);
-          width: 60%;
-          border: 4px solid #f3aa51;
-        }
-        p {
-          margin-left: 20%;
-        }
-        .post {
-          margin: 0 auto;
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-          width: 60%;
-          border: 1px solid lightgrey;
-        }
-
-        .post:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .post + .post {
-          margin-top: 2rem;
-        }
-      `}</style>
     </Layout>
   )
 }
