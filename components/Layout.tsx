@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import Header from "./Header";
+import Styles from "../styles/Components/Layout.module.scss"
 
 type Props = {
   children: ReactNode;
@@ -8,18 +9,16 @@ type Props = {
 const Layout: React.FC<Props> = (props) => (
   <div>
     <Header />
-    <div className="layout">{props.children}</div>
+    <div className={Styles.layout}>{props.children}</div>
     <style jsx global>{`
       html {
         box-sizing: border-box;
       }
-
       *,
       *:before,
       *:after {
         box-sizing: inherit;
       }
-
       body {
         margin: 0;
         padding: 0;
@@ -29,19 +28,12 @@ const Layout: React.FC<Props> = (props) => (
           "Segoe UI Symbol";
         background: #c5e2de;
       }
-
       input,
       textarea {
         font-size: 16px;
       }
-
       button {
         cursor: pointer;
-      }
-    `}</style>
-    <style jsx>{`
-      .layout {
-        padding: 0 2rem;
       }
     `}</style>
   </div>
