@@ -2,18 +2,13 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import ReactMarkdown from "react-markdown"
 import Layout from "../../components/Layout"
-import { PromptProps } from "../../components/Post"
 
-const Post: React.FC<PromptProps> = () => {
+const Post = () => {
   const [ prompt, setPrompt ] = useState([])
   const router = useRouter()
   const {
     query: { id },
   } = router
-  let title = prompt.title
-  if (!prompt.published) {
-    title = `${title} (Draft)`
-  }
 
   const getOnePrompt = async () => {
     fetch(`../../api/prompt/${id}`)
@@ -29,6 +24,11 @@ const Post: React.FC<PromptProps> = () => {
     getOnePrompt()
     console.log(prompt)
   }, [])
+
+  let title = prompt.title
+  if (!prompt.published) {
+    title = `${title} (Draft)`
+  }
 
   return (
     <Layout>
