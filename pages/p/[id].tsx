@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { GetServerSideProps } from "next"
 import ReactMarkdown from "react-markdown"
 import Layout from "../../components/Layout"
@@ -10,7 +10,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     title: "This is a Quick Write",
     content: "I'm baby snackwave poke vegan, photo booth kogi squid tattooed microdosing DIY everyday carry. Stumptown kogi austin af bitters. Truffaut polaroid vape cornhole. Kickstarter art party everyday carry VHS. Air plant narwhal fam ramps, knausgaard deep v hashtag.",
     published: false,
-    author: {
+    instructor: {
       name: "Ariel Gore",
       email: "burk@prisma.io",
     },
@@ -21,17 +21,33 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 }
 
 const Post: React.FC<PostProps> = (props) => {
-  let title = props.title
-  if (!props.published) {
+  const [prompt, setPrompt] = useState([])
+
+  const getOnePrompt = async (id) => {
+    fetch('../../api/getOnePrompt')
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        setPrompt(res)
+      })
+      .catch(err => console.error(err))
+  }
+
+  let title = prompt.title
+  if (!prompt.published) {
     title = `${title} (Draft)`
   }
+
+  useEffect(() => {
+    getOnePrompt(props.key)
+  }, [])
 
   return (
     <Layout>
       <div className="post">
         <h2>{title}</h2>
-        <p>By {props?.author?.name || "Unknown author"}</p>
-        <ReactMarkdown source={props.content} />
+        <p>By {prompt?.instructor?.name || "Unknown instructor"}</p>
+        <ReactMarkdown source={prompt.content} />
       </div>
       <style jsx>{`
         h2, p {
