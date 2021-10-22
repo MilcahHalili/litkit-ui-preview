@@ -25,15 +25,10 @@ const Post = () => {
     console.log(prompt)
   }, [])
 
-  let title = prompt.title
-  if (!prompt.published) {
-    title = `${title} (Draft)`
-  }
-
   return (
     <Layout>
       <div className="post">
-        <h2>{title}</h2>
+        <h2>{prompt.title}</h2>
         <p>By {prompt?.instructor?.name || "Unknown instructor"}</p>
         <ReactMarkdown source={prompt.content} />
       </div>
