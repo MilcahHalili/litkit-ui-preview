@@ -1,30 +1,22 @@
 import React, { useEffect, useState } from "react"
-import { GetServerSideProps } from "next"
+import { useRouter } from "next/router"
 import ReactMarkdown from "react-markdown"
 import Layout from "../../components/Layout"
-import { PostProps } from "../../components/Post"
+import { PromptProps } from "../../components/Post"
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const post = {
-    id: 1,
-    title: "This is a Quick Write",
-    content: "I'm baby snackwave poke vegan, photo booth kogi squid tattooed microdosing DIY everyday carry. Stumptown kogi austin af bitters. Truffaut polaroid vape cornhole. Kickstarter art party everyday carry VHS. Air plant narwhal fam ramps, knausgaard deep v hashtag.",
-    published: false,
-    instructor: {
-      name: "Ariel Gore",
-      email: "burk@prisma.io",
-    },
+const Post: React.FC<PromptProps> = () => {
+  const [ prompt, setPrompt ] = useState([])
+  const router = useRouter()
+  const {
+    query: { id },
+  } = router
+  let title = prompt.title
+  if (!prompt.published) {
+    title = `${title} (Draft)`
   }
-  return {
-    props: post,
-  }
-}
 
-const Post: React.FC<PostProps> = (props) => {
-  const [prompt, setPrompt] = useState([])
-
-  const getOnePrompt = async (id) => {
-    fetch('../../api/getOnePrompt')
+  const getOnePrompt = async () => {
+    fetch(`../../api/prompt/${id}`)
       .then(res => res.json())
       .then(res => {
         console.log(res)
@@ -33,13 +25,9 @@ const Post: React.FC<PostProps> = (props) => {
       .catch(err => console.error(err))
   }
 
-  let title = prompt.title
-  if (!prompt.published) {
-    title = `${title} (Draft)`
-  }
-
   useEffect(() => {
-    getOnePrompt(props.key)
+    getOnePrompt()
+    console.log(prompt)
   }, [])
 
   return (
