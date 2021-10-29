@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import ReactMarkdown from "react-markdown"
 import Layout from "../../components/Layout"
+import { type } from "os"
 
 const Post = () => {
   const [ prompt, setPrompt ] = useState([])
@@ -11,13 +12,27 @@ const Post = () => {
   } = router
 
   const getOnePrompt = async () => {
-    fetch(`../../api/prompt/${id}`)
-      .then(res => res.json())
-      .then(res => {
-        console.log(res)
-        setPrompt(res)
-      })
-      .catch(err => console.error(err))
+    if (id && typeof window !== 'undefined') {
+      console.log('1')
+      fetch(`../../api/prompt/${id}`)
+        .then(res => res.json())
+        .then(res => {
+          console.log(res)
+          setPrompt(res)
+          localStorage.setItem('id', `${id}`)
+          console.log(localStorage.id)
+        })
+        .catch(err => console.error(err))
+    } else if (typeof window !== 'undefined') {
+      console.log('2')
+      fetch(`../../api/prompt/${localStorage.id}`)
+        .then(res => res.json())
+        .then(res => {
+          console.log(res)
+          setPrompt(res)
+        })
+        .catch(err => console.error(err))
+    }
   }
 
   useEffect(() => {
