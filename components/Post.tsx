@@ -1,27 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Router from "next/router";
 import ReactMarkdown from "react-markdown";
 import Styles from "../styles/Components/Post.module.scss"
 
-export type PostProps = {
-  id: number;
-  title: string;
-  date: string;
-  author: {
-    name: string;
-    email: string;
-  } | null;
-  content: string;
-  published: boolean;
-};
+const Post = ({ prompt }) => {
 
-const Post: React.FC<{ post: PostProps }> = ({ post }) => {
-  const authorName = post.author ? post.author.name : "Unknown author";
+  const instructorName = prompt.instructor ? prompt.instructor.name : "Unknown instructor";
+
+  useEffect(() => {
+  })
+
   return (
-    <div onClick={() => Router.push("/p/[id]", `/p/${post.id}`)} className={Styles.post}>
-      <h2 className={Styles.posth2}>{post.title}</h2>
-      <p className={Styles.authorName}>By {authorName}</p>
-      <ReactMarkdown source={post.content} />
+    <div onClick={() => Router.push("/p/[id]", `/p/${prompt.id}`)} className={Styles.post}>
+      <h2 className={Styles.posth2}>{prompt.title}</h2>
+      <p className={Styles.instructorName}>By {instructorName}</p>
+      <ReactMarkdown source={prompt.content} />
     </div>
   );
 };
