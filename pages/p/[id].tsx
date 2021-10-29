@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import ReactMarkdown from "react-markdown"
 import Layout from "../../components/Layout"
-import { type } from "os"
 
 const Post = () => {
   const [ prompt, setPrompt ] = useState([])

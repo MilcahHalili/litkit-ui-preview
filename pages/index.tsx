@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Layout from "../components/Layout"
-import Post, { PromptProps } from "../components/Post"
+import Post from "../components/Post"
 import Styles from "../styles/Index.module.scss"
 
 const Blog = () => {
