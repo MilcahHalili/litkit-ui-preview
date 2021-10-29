@@ -42,9 +42,9 @@ const Post = () => {
   return (
     <Layout>
       <div className="post">
-        <h2>{prompt.title || 'Loading'}</h2>
+        <h2>{prompt?.title || 'Loading'}</h2>
         <p>By {prompt?.instructor?.name || "Unknown instructor"}</p>
-        <ReactMarkdown source={prompt.content} />
+        <ReactMarkdown source={prompt?.content} />
       </div>
       <style jsx>{`
         h2, p {
