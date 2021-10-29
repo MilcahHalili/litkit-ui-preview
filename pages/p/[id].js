@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown"
 import Layout from "../../components/Layout"
 
 const Post = () => {
-  const [ prompt, setPrompt ] = useState([])
+  const [ data, setData ] = useState([])
   const router = useRouter()
   const {
     query: { id },
@@ -17,7 +17,7 @@ const Post = () => {
         .then(res => res.json())
         .then(res => {
           console.log(res)
-          setPrompt(res)
+          setData(res)
           localStorage.setItem('id', `${id}`)
           console.log(localStorage.id)
         })
@@ -28,7 +28,7 @@ const Post = () => {
         .then(res => res.json())
         .then(res => {
           console.log(res)
-          setPrompt(res)
+          setData(res)
         })
         .catch(err => console.error(err))
     }
@@ -36,18 +36,27 @@ const Post = () => {
 
   useEffect(() => {
     getOnePrompt()
-    console.log(prompt)
+    console.log(data)
   }, [])
 
   return (
     <Layout>
       <div className="post">
-        <h2>{prompt?.title || 'Loading'}</h2>
-        <p>By {prompt?.instructor?.name || "Unknown instructor"}</p>
-        <ReactMarkdown source={prompt?.content} />
+        <h2>{data[0]?.title || 'Loading'}</h2>
+        <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
+        <ReactMarkdown source={data[0]?.content} />
+      </div>
+      <div className="post">
+        {data[1]?.map(post => (
+          <>
+            <h3>{post.title}</h3>
+            <h4>{post.author.name}</h4>
+            <p>{post.content}</p>
+          </> 
+        ))}
       </div>
       <style jsx>{`
-        h2, p {
+        h2, h3, h4 {
           text-align: center;
         }
         .page {

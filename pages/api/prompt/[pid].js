@@ -14,9 +14,13 @@ export default function handler(req, res) {
         instructor: true
       }
     })
-    console.log(prompt)
+    const posts = await prisma.post.findMany({
+      include: {
+        author: true
+      }
+    })
     console.log('🔵🔵🔵', parseInt(pid))
-    res.status(200).json(prompt)
+    res.status(200).json([prompt, posts])
   }
 
   main()
