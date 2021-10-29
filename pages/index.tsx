@@ -23,7 +23,7 @@ const Blog = () => {
         <main>
           {prompts.map(prompt => (
             <>
-              <p className={Styles.createdAt}>{prompt.createdAt}</p>
+              <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
               <div className={Styles.post}>
                 <Post
                   key={prompt.id}
