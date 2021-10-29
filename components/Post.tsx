@@ -3,20 +3,7 @@ import Router from "next/router";
 import ReactMarkdown from "react-markdown";
 import Styles from "../styles/Components/Post.module.scss"
 
-export type PromptProps = {
-  id: number;
-  title: string;
-  createdAt: string;
-  instructor: {
-    name: string;
-    email: string;
-  } | null;
-  content: string;
-  published: boolean;
-  posts: Array<object>
-};
-
-const Post: React.FC<{ prompt: PromptProps }> = ({ prompt }) => {
+const Post = ({ prompt }) => {
 
   const instructorName = prompt.instructor ? prompt.instructor.name : "Unknown instructor";
 
