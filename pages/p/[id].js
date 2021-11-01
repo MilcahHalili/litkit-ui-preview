@@ -39,6 +39,24 @@ const Post = () => {
     console.log(data)
   }, [])
 
+  const posts = data[1]?.map(post => (
+    <>
+      <h3>{post.title}</h3>
+      <h4>{post.author.name}</h4>
+      <p>{post.content}</p>
+      <div>
+        <div className="comment">
+          <h5>{post.comments.length} comments</h5>
+          {post.comments.map(comment => (
+            <>
+              <p>{comment.content} —<span>{comment.author?.name || comment.instructor?.name}</span></p>
+            </>
+          ))}
+        </div>
+      </div>
+    </>
+  ))
+
   return (
     <Layout>
       <div className="post">
@@ -47,13 +65,7 @@ const Post = () => {
         <ReactMarkdown source={data[0]?.content} />
       </div>
       <div className="post">
-        {data[1]?.map(post => (
-          <>
-            <h3>{post.title}</h3>
-            <h4>{post.author.name}</h4>
-            <p>{post.content}</p>
-          </> 
-        ))}
+        { posts }
       </div>
       <style jsx>{`
         h2, h3, h4 {
