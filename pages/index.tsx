@@ -21,7 +21,7 @@ const Blog = () => {
       <div className={Styles.page}>
         <h1 className={Styles.pageh1}>Quick Writes</h1>
         <main>
-          {prompts.map(prompt => (
+          {prompts.reverse().map(prompt => (
             <>
               <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
               <div className={Styles.post}>
