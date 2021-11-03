@@ -14,6 +14,9 @@ export default function handler(req, res) {
       }
     })
     const posts = await prisma.post.findMany({
+      where: {
+        promptId: parseInt(pid)
+      },
       include: {
         author: true,
         comments: {
