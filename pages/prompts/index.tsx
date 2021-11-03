@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from "react"
-import Layout from "../components/Layout"
-import Post from "../components/Post"
-import Styles from "../styles/Index.module.scss"
+import Router from 'next/router'
+import { magic } from '../../magic'
+import Layout from "../../components/Layout"
+import Loading from '../../components/loading'
+import Post from "../../components/Post"
+import Styles from "../../styles/Index.module.scss"
 
 const Blog = () => {
-  const [ prompts, setPrompts ] = useState([])
+  const [prompts, setPrompts] = useState([])
+  const [userMetadata, setUserMetadata] = useState()
   
   const getPrompts = async () => {
-    const res = await fetch('api/prompt')
+    const res = await fetch('api/prompt/get-all')
     const result = await res.json()
     setPrompts(result)
   }
 
   useEffect(() => {
-    getPrompts()
+    magic.user.isLoggedIn()
+    .then(magicIsLoggedIn => {
+      if (magicIsLoggedIn) {
+        magic.user.getMetadata()
+          .then(setUserMetadata)
+          getPrompts()
+      } else {
+        Router.push('/login')
+      }
+    })
   }, [])
 
-  return (
+  return userMetadata ? (
     <Layout>
       <div className={Styles.page}>
         <h1 className={Styles.pageh1}>Quick Writes</h1>
@@ -35,6 +48,8 @@ const Blog = () => {
         </main>
       </div>
     </Layout>
+  ) : (
+    <Loading />
   )
 }
 
