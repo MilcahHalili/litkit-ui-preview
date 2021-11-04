@@ -9,7 +9,7 @@ const NewWorkshop = () => {
     data = {
       name: workshopName
     }
-    const res = await fetch('/api/workshop/new', {
+    const res = await fetch('/api/workshop/create', {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
@@ -27,7 +27,6 @@ const NewWorkshop = () => {
   const handleSubmit = async (e) => {
     await e.preventDefault()
     createWorkshop()
-    console.log('yay!')
     router.push('/#__next', '/')
   }
 

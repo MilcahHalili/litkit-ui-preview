@@ -1,41 +1,39 @@
-import React, { useEffect, useState } from "react"
-import Layout from "../components/Layout"
-import Post from "../components/Post"
-import Styles from "../styles/Index.module.scss"
+import React, { useEffect, useState, useCallback } from 'react';
+import Router from 'next/router';
+import { magic } from '../magic';
+import Loading from '../components/loading';
 
-const Blog = () => {
-  const [ prompts, setPrompts ] = useState([])
-  
-  const getPrompts = async () => {
-    const res = await fetch('api/prompt')
-    const result = await res.json()
-    setPrompts(result)
-  }
+export default function Index() {
+  const [userMetadata, setUserMetadata] = useState();
 
   useEffect(() => {
-    getPrompts()
-  }, [])
+    // On mount, we check if a user is logged in.
+    // If so, we'll retrieve the authenticated user's profile.
+    magic.user.isLoggedIn().then((magicIsLoggedIn) => {
+      if (magicIsLoggedIn) {
+        magic.user.getMetadata().then(setUserMetadata);
+      } else {
+        // If no user is logged in, redirect to `/login`
+        Router.push('/login');
+      }
+    });
+  }, []);
 
-  return (
-    <Layout>
-      <div className={Styles.page}>
-        <h1 className={Styles.pageh1}>Quick Writes</h1>
-        <main>
-          {prompts.reverse().map(prompt => (
-            <>
-              <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
-              <div className={Styles.post}>
-                <Post
-                  key={prompt.id}
-                  prompt={prompt}
-                />
-              </div>
-            </>
-          ))}
-        </main>
-      </div>
-    </Layout>
-  )
+  /**
+   * Perform logout action via Magic.
+   */
+  const logout = useCallback(() => {
+    magic.user.logout().then(() => {
+      Router.push('/login');
+    });
+  }, [Router]);
+
+  return userMetadata ? (
+    <div className='container'>
+      <h1>Welcome, {userMetadata.email}</h1>
+      <button onClick={logout}>Logout</button>
+    </div>
+  ) : (
+    <Loading />
+  );
 }
-
-export default Blog

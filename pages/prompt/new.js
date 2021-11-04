@@ -11,7 +11,7 @@ const NewPrompt = () => {
       title: promptTitle,
       content: promptContent
     }
-    const res = await fetch('/api/prompt/new', {
+    const res = await fetch('/api/prompt/create', {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
