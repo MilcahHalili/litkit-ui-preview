@@ -2,11 +2,7 @@ import React, { ReactNode } from "react";
 import Header from "./Header";
 import Styles from "../styles/Components/Layout.module.scss"
 
-type Props = {
-  children: ReactNode;
-};
-
-const Layout: React.FC<Props> = (props) => (
+const Layout = (props) => (
   <div>
     <Header />
     <div className={Styles.layout}>{props.children}</div>
