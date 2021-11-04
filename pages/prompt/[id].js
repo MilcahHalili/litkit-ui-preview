@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import ReactMarkdown from "react-markdown"
 import Layout from "../../components/Layout"
 
-const Post = () => {
+const Prompt = () => {
   const [ data, setData ] = useState([])
   const router = useRouter()
   const {
@@ -39,15 +39,15 @@ const Post = () => {
     console.log(data)
   }, [])
 
-  const posts = data[1]?.map(post => (
+  const prompts = data[1]?.map(prompt => (
     <>
-      <h3>{post.title}</h3>
-      <h4>{post.author.name}</h4>
-      <p>{post.content}</p>
+      <h3>{prompt.title}</h3>
+      <h4>{prompt.author.name}</h4>
+      <p>{prompt.content}</p>
       <div>
         <div className="comment">
-          <h5>{post.comments.length} comments</h5>
-          {post.comments.map(comment => (
+          <h5>{prompt.comments.length} comments</h5>
+          {prompt.comments.map(comment => (
             <>
               <p>{comment.content} —<span>{comment.author?.name || comment.instructor?.name}</span></p>
             </>
@@ -59,13 +59,13 @@ const Post = () => {
 
   return (
     <Layout>
-      <div className="post">
+      <div className="prompt">
         <h2>{data[0]?.title || 'Loading'}</h2>
         <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
       </div>
-      <div className="post">
-        { posts }
+      <div className="prompt">
+        { prompts }
       </div>
       <style jsx>{`
         h2, h3, h4 {
@@ -75,7 +75,7 @@ const Post = () => {
           background: white;
           padding: 2rem;
         }
-        .post {
+        .prompt {
           margin: 2rem auto;
           padding: 2rem;
           background: white;
@@ -99,4 +99,4 @@ const Post = () => {
   )
 }
 
-export default Post
+export default Prompt

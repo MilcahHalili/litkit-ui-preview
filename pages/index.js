@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import Router from 'next/router';
-import { magic } from '../magic';
-import Loading from '../components/loading';
+import React, { useEffect, useState, useCallback } from 'react'
+import Router from 'next/router'
+import { magic } from '../magic'
+import Loading from '../components/loading'
+import Prompts from '../pages/prompts/index'
 
 export default function Index() {
   const [userMetadata, setUserMetadata] = useState();
@@ -32,6 +33,7 @@ export default function Index() {
     <div className='container'>
       <h1>Welcome, {userMetadata.email}</h1>
       <button onClick={logout}>Logout</button>
+      <Prompts />
     </div>
   ) : (
     <Loading />
