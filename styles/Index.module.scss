@@ -15,7 +15,7 @@
 .createdAt {
   margin: 1em 20%;
 }
-.post {
+.prompt {
   margin: 0 auto;
   background: white;
   transition: box-shadow 0.1s ease-in;
@@ -23,10 +23,10 @@
   border: 1px solid lightgrey;
 }
 
-.post:hover {
+.prompt:hover {
   box-shadow: 1px 1px 3px #aaa;
 }
 
-.post + .post {
+.prompt + .prompt {
   margin-top: 2rem;
 }
