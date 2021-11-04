@@ -32,7 +32,7 @@ const Blog = () => {
   return userMetadata ? (
     <Layout>
       <div className={Styles.page}>
-        <h1 className={Styles.pageh1}>Quick Writes</h1>
+        <h1 className={Styles.pageh1}>Prompts</h1>
         <main>
           {prompts.reverse().map(prompt => (
             <>
