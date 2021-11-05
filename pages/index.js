@@ -6,6 +6,7 @@ import Prompts from '../pages/prompts/index'
 
 export default function Index() {
   const [userMetadata, setUserMetadata] = useState();
+  const [userName, setUserName] = useState()
 
   useEffect(() => {
     // On mount, we check if a user is logged in.
@@ -28,14 +29,29 @@ export default function Index() {
       Router.push('/login');
     });
   }, [Router]);
-
-  return userMetadata ? (
+  
+  return (userMetadata && userName) ? (
     <div className='container'>
       <h1>Welcome, {userMetadata.email}</h1>
       <button onClick={logout}>Logout</button>
       <Prompts />
     </div>
+  ) : (userMetadata && !userName) ? (
+    <>
+      <h2>What's your name?</h2>
+      <form>
+        <input placeholder="name" />
+        <input
+          type="submit"
+          value="submit"
+          onClick={(e) => {
+            e.preventDefault()
+            console.log('click! ✨')
+          }}
+        />
+      </form>
+    </>
   ) : (
     <Loading />
-  );
+  )
 }
