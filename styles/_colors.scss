@@ -5,6 +5,7 @@ $marigold: #F3AA51;
 $pewter: #D0D6CD;
 
 $shadow: #AAA;
+$black: rgb(0, 0, 0);
 $white: rgb(255, 255, 255);
 
 :export {
@@ -13,7 +14,4 @@ $white: rgb(255, 255, 255);
   mintColor: $mint;
   marigoldColor: $marigold;
   pewterColor: $pewter;
-
-  shadowColor: $shadow;
-  whiteColor: $white;
 }
