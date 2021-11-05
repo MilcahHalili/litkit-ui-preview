@@ -1,5 +1,5 @@
 {
-  "name": "hello-next",
+  "name": "LitKit",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -8,7 +8,8 @@
     "start": "next start"
   },
   "keywords": [],
-  "author": "",
+  "author": ["Milcah Halili",
+    "Patricia Realini"],
   "license": "MIT",
   "engines": {
     "node": "14.x"
