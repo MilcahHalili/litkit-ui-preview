@@ -6,8 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start",
-    "litkitdev": "next build && next dev"
+    "start": "next start"
   },
   "keywords": [],
   "author": [

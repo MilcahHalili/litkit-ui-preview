@@ -11,7 +11,12 @@ const Header = () => {
     <div className={Styles.left}>
       <Link href="/">
         <a className={Styles.boldA} data-active={isActive("/")}>
-          <img src="https://i.imgur.com/NxwZ9x0.png" width="100px" height="100px"/>
+            <img
+                src="https://i.imgur.com/NxwZ9x0.png"
+                alt=""
+                width="100px"
+                height="100px"
+            />
         </a>
       </Link>
     </div>
