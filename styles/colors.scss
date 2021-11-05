@@ -1,6 +1,19 @@
-$dark-gray: #2E1F27;
-$light-gray: #D0D6CD;
+$compost: #2E1F27;
 $lilac: #C5A8BF;
 $mint: #C5E2DE;
 $marigold: #F3AA51;
+$pewter: #D0D6CD;
+
+$shadow: #AAA;
 $white: rgb(255, 255, 255);
+
+:export {
+  compostColor: $compost;
+  lilacColor: $lilac;
+  mintColor: $mint;
+  marigoldColor: $marigold;
+  pewterColor: $pewter;
+
+  shadowColor: $shadow;
+  whiteColor: $white;
+}
