@@ -6,32 +6,6 @@ const Layout = (props) => (
   <div>
     <Header />
     <div className={Styles.layout}>{props.children}</div>
-    <style jsx global>{`
-      html {
-        box-sizing: border-box;
-      }
-      *,
-      *:before,
-      *:after {
-        box-sizing: inherit;
-      }
-      body {
-        margin: 0;
-        padding: 0;
-        font-size: 16px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-          "Segoe UI Symbol";
-        background: #c5e2de;
-      }
-      input,
-      textarea {
-        font-size: 16px;
-      }
-      button {
-        cursor: pointer;
-      }
-    `}</style>
   </div>
 );
 
