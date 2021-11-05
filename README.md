@@ -1,6 +1,6 @@
 # LitKit
 
-This is a project by [@MilcahHalili](https://github.com/MilcahHalili/) and [@PatriciaRealini](https://github.com/PatriciaRealini) with [Next.js](https://nextjs.org/), [Prisma](https://www.prisma.io/), and [Magic Link](https://magic.link/).
+This is a project by [@MilcahHalili](https://github.com/MilcahHalili/) and [@PatriciaRealini](https://github.com/PatriciaRealini) with [Next.js](https://nextjs.org/), [Prisma](https://www.prisma.io/), [Magic Link](https://magic.link/), and [Vercel](https://vercel.com/).
 
 ## Getting Started
 
