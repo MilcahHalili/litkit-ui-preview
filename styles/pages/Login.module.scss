@@ -1,4 +1,4 @@
-@import '../_colors';
+@import '../colors';
 
 .login {
   margin: 0 auto;
@@ -6,8 +6,11 @@
   background-color: $white;
   width: 60%;
   border: 4px solid $compost;
+
+
   h1 {
-      text-align: center;
-      color: $compost;
+    text-align: center;
+    color: $compost;
   }
+
 }

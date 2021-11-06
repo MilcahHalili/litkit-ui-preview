@@ -1,24 +1,32 @@
-@import '_colors';
+@import 'colors';
 
 .nav {
   display: flex;
   padding: 2rem;
   align-items: center;
 }
+
+
 .boldA {
   font-weight: bold;
 }
 
+
 .left {
-    a {
-        text-decoration: none;
-        color: $black;
-        display: inline-block;
-    }
-    & a[data-active="true"] {
-        color: $pewter;
-    }
-    & + a {
-        margin-left: 1rem;
-    }
+  a {
+    text-decoration: none;
+    color: $black;
+    display: inline-block;
+  }
+
+
+  // TODO: Fix no-qualifying-elements Warning
+  & a[data-active='true'] {
+    color: $pewter;
+  }
+
+
+  & + a {
+    margin-left: 1rem;
+  }
 }
