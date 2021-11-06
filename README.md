@@ -44,4 +44,4 @@ Go to `http://localhost:5555`.
 
 For ESLint, run `npx next lint`.
 
-For Sass Lint, run `npm run lintsass`
+For Sass Lint, run `npm run lintsass`.
