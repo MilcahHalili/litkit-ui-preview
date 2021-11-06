@@ -42,6 +42,6 @@ Go to `http://localhost:5555`.
 
 ### Linting
 
-For ESLint, run `npx next lint`. 
+For ESLint, run `npx next lint`.
 
-For Sass Lint, run `sass-lint -c .sass-lint.yml '**/*.scss' -v -q`
+For Sass Lint, run `npm run lintsass`
