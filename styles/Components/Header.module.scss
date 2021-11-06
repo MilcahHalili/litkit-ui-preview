@@ -9,15 +9,16 @@
   font-weight: bold;
 }
 
-.left a {
-  text-decoration: none;
-  color: $black;
-  display: inline-block;
+.left {
+    a {
+        text-decoration: none;
+        color: $black;
+        display: inline-block;
+    }
+    & a[data-active="true"] {
+        color: $pewter;
+    }
+    & + a {
+        margin-left: 1rem;
+    }
 }
-
-.left a[data-active="true"] {
-  color: $pewter;
-}
-// .left a + a {
-//   margin-left: 1rem;
-// }
