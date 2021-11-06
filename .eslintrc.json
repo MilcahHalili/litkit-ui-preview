@@ -6,9 +6,11 @@
     "next"
   ],
   "rules": {
+    // TODO: ESLint no-inner-declaration Error in `page/aapi/prompt/create.js`
     "no-inner-declarations": "off",
     "react/react-in-jsx-scope": "off",
     "react/no-unescaped-entities": "off",
+    // TODO: ESLint react-hooks/exhaustive-deps Warnings
     "react-hooks/exhaustive-deps": "off",
     "@next/next/no-page-custom-font": "off",
     "@next/next/no-img-element": "off"
