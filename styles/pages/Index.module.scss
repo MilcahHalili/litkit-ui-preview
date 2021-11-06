@@ -1,0 +1,13 @@
+@import '../_colors';
+
+.index {
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: $white;
+  width: 60%;
+  border: 4px solid $compost;
+}
+.index h1 {
+  text-align: center;
+  color: $compost;
+}
