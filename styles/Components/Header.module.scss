@@ -1,3 +1,5 @@
+@import '_colors';
+
 .nav {
   display: flex;
   padding: 2rem;
@@ -9,12 +11,12 @@
 
 .left a {
   text-decoration: none;
-  color: #000;
+  color: $black;
   display: inline-block;
 }
 
 .left a[data-active="true"] {
-  color: gray;
+  color: $pewter;
 }
 // .left a + a {
 //   margin-left: 1rem;

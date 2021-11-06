@@ -1,0 +1,17 @@
+$compost: #2E1F27;
+$lilac: #C5A8BF;
+$mint: #C5E2DE;
+$marigold: #F3AA51;
+$pewter: #D0D6CD;
+
+$shadow: #AAA;
+$black: rgb(0, 0, 0);
+$white: rgb(255, 255, 255);
+
+:export {
+  compostColor: $compost;
+  lilacColor: $lilac;
+  mintColor: $mint;
+  marigoldColor: $marigold;
+  pewterColor: $pewter;
+}

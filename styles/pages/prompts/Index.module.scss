@@ -1,5 +1,5 @@
 /* SCSS */
-@import 'colors';
+@import '_colors';
 
 .pageh1 {
   text-align: center;
@@ -17,10 +17,10 @@
 }
 .prompt {
   margin: 0 auto;
-  background: white;
+  background: $white;
   transition: box-shadow 0.1s ease-in;
   width: 60%;
-  border: 1px solid lightgrey;
+  border: 1px solid $pewter;
 }
 
 .prompt:hover {
