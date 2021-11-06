@@ -49,11 +49,6 @@ const Prompt = () => {
         <div>
           <div className="comment">
             <h5>{post.comments.length} comments</h5>
-            {post.comments.map(comment => (
-              <>
-                <p>{comment.content} —<span>{comment.author?.name || comment.instructor?.name}</span></p>
-              </>
-            ))}
           </div>
         </div>
       </div>
