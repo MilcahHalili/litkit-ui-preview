@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
+import Link from 'next/link'
 import { useRouter } from "next/router"
 import ReactMarkdown from "react-markdown"
-import Layout from "../../components/Layout"
+import Layout from '../../components/Layout'
 
 const Prompt = () => {
   const [ data, setData ] = useState([])
@@ -39,22 +40,24 @@ const Prompt = () => {
     console.log(data)
   }, [])
 
-  const prompts = data[1]?.map(prompt => (
-    <>
-      <h3>{prompt.title}</h3>
-      <h4>{prompt.author.name}</h4>
-      <p>{prompt.content}</p>
+  const posts = data[1]?.map(post => (
+    <Link href={`/post/${post.id}`}>
       <div>
-        <div className="comment">
-          <h5>{prompt.comments.length} comments</h5>
-          {prompt.comments.map(comment => (
-            <>
-              <p>{comment.content} —<span>{comment.author?.name || comment.instructor?.name}</span></p>
-            </>
-          ))}
+        <h3>{post.title}</h3>
+        <h4>{post.author.name}</h4>
+        <p>{post.content}</p>
+        <div>
+          <div className="comment">
+            <h5>{post.comments.length} comments</h5>
+            {post.comments.map(comment => (
+              <>
+                <p>{comment.content} —<span>{comment.author?.name || comment.instructor?.name}</span></p>
+              </>
+            ))}
+          </div>
         </div>
       </div>
-    </>
+    </Link>
   ))
 
   return (
@@ -64,8 +67,8 @@ const Prompt = () => {
         <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
       </div>
-      <div className="prompt">
-        { prompts }
+      <div className="prompt post">
+        { posts }
       </div>
       <style jsx>{`
         h2, h3, h4 {
