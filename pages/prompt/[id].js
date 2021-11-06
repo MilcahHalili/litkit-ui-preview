@@ -6,6 +6,7 @@ import Layout from '../../components/Layout'
 
 const Prompt = () => {
   const [ data, setData ] = useState([])
+  const [ postContent, setPostContent] = useState([])
   const router = useRouter()
   const {
     query: { id },
@@ -33,6 +34,10 @@ const Prompt = () => {
         })
         .catch(err => console.error(err))
     }
+  }
+
+  const submitPost = () => {
+    
   }
 
   useEffect(() => {
