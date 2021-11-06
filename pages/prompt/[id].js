@@ -61,6 +61,24 @@ const Prompt = () => {
         <h2>{data[0]?.title || 'Loading'}</h2>
         <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
+        <form>
+          <textarea
+            className="textBox"
+            type="text"
+            name="content"
+            id="content"
+          >
+          </textarea>
+          <input
+            type="submit"
+            value="Submit"
+            id="submit"
+            onClick={(e => {
+              e.preventDefault()
+              console.log('submitted post!!!!')
+            })}
+          />
+        </form>
       </div>
       <div className="prompt post">
         { posts }
@@ -68,6 +86,15 @@ const Prompt = () => {
       <style jsx>{`
         h2, h3, h4 {
           text-align: center;
+        }
+        form {
+          text-align: center;
+        }
+        .textBox {
+          height: 300px;
+          width: 100%;
+          resize: none;
+          margin: 5% 0 5% 0;
         }
         .page {
           background: white;
@@ -100,6 +127,20 @@ const Prompt = () => {
         <h2>{data[0]?.title || 'Loading'}</h2>
         <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
+        <form>
+          <textarea
+            className="textBox"
+            type="text"
+            name="content"
+            id="content"
+          >
+          </textarea>
+          <input
+            type="submit"
+            name="submit"
+            id="submit"
+          />
+        </form>
       </div>
       <style jsx>{`
         h2, h3, h4 {
