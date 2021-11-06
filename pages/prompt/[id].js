@@ -47,7 +47,7 @@ const Prompt = () => {
 
   const posts = data[1]?.map(post => (
     <Link href={`/post/${post.id}`}>
-      <div>
+      <div key={post.id}>
         <h3>{post.title}</h3>
         <h4>{post.author.name}</h4>
         <p>{post.content}</p>
