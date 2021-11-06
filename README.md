@@ -38,3 +38,10 @@ Run `npx next dev`.
 Run `npx prisma studio`.
 
 Go to `http://localhost:5555`.
+
+
+### Linting
+
+For ESLint, run `npx next lint`. 
+
+For Sass Lint, run `sass-lint -c .sass-lint.yml '**/*.scss' -v -q`
