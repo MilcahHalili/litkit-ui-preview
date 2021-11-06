@@ -60,7 +60,7 @@ const Prompt = () => {
     </Link>
   ))
 
-  return (
+  return (data[1]?.length > 0) ? (
     <Layout>
       <div className="prompt">
         <h2>{data[0]?.title || 'Loading'}</h2>
@@ -69,6 +69,42 @@ const Prompt = () => {
       </div>
       <div className="prompt post">
         { posts }
+      </div>
+      <style jsx>{`
+        h2, h3, h4 {
+          text-align: center;
+        }
+        .page {
+          background: white;
+          padding: 2rem;
+        }
+        .prompt {
+          margin: 2rem auto;
+          padding: 2rem;
+          background: white;
+          transition: box-shadow 0.1s ease-in;
+          width: 60%;
+        }
+        .actions {
+          margin-top: 2rem;
+        }
+        button {
+          background: #ececec;
+          border: 0;
+          border-radius: 0.125rem;
+          padding: 1rem 2rem;
+        }
+        button + button {
+          margin-left: 1rem;
+        }
+      `}</style>
+    </Layout>
+  ) : (
+    <Layout>
+      <div className="prompt">
+        <h2>{data[0]?.title || 'Loading'}</h2>
+        <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
+        <ReactMarkdown source={data[0]?.content} />
       </div>
       <style jsx>{`
         h2, h3, h4 {
