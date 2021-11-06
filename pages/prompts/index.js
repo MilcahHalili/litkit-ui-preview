@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react"
 import Router from 'next/router'
 import { magic } from '../../magic'
 import Layout from "../../components/Layout"
-import Loading from '../../components/loading'
+import Loading from '../../components/Loading'
 import Prompt from "../../components/Prompt"
-import Styles from "../../styles/Index.module.scss"
+import Styles from "../../styles/pages/prompts/Index.module.scss"
 
 const Prompts = () => {
   const [prompts, setPrompts] = useState([])
   const [userMetadata, setUserMetadata] = useState()
-  
+
   const getPrompts = async () => {
     const res = await fetch('api/prompt/get-all')
     const result = await res.json()
