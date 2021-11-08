@@ -38,7 +38,7 @@ const Post = () => {
   }, [])
 
   const comments = data[1]?.map(comment => (
-    <div>
+    <div key={comment.id}>
       <p>{comment.content}</p>
       <h4>{comment?.author?.name}</h4>
     </div>
