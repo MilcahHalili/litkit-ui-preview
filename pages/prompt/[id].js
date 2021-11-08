@@ -36,8 +36,33 @@ const Prompt = () => {
     }
   }
 
-  const submitPost = () => {
-    
+  const createPost = async (data) => {
+    data = {
+      content: postContent,
+      promptId: id
+    }
+    console.log(data, 'data from create post')
+    const res = await fetch('/api/post/create', {
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    })
+    const result = await res.json()
+    console.log(result)
+  }
+
+  const handleChange = e => {
+    setPostContent(e.target.value)
+  }
+
+  const handleSubmit = async e => {
+    await e.preventDefault()
+    await createPost()
+    console.log('yes!')
+    // rerender posts
+    getOnePrompt()
   }
 
   useEffect(() => {
@@ -45,9 +70,12 @@ const Prompt = () => {
     console.log(data)
   }, [])
 
-  const posts = data[1]?.map(post => (
-    <Link href={`/post/${post.id}`}>
-      <div key={post.id}>
+  const posts = data[1]?.reverse().map(post => (
+    <Link
+      key={post.id}
+      href={`/post/${post.id}`}
+    >
+      <div>
         <h3>{post.title}</h3>
         <h4>{post.author.name}</h4>
         <p>{post.content}</p>
@@ -69,19 +97,16 @@ const Prompt = () => {
         <form>
           <textarea
             className="textBox"
-            type="text"
             name="content"
             id="content"
+            onChange={handleChange}
           >
           </textarea>
           <input
             type="submit"
             value="Submit"
             id="submit"
-            onClick={(e => {
-              e.preventDefault()
-              console.log('submitted post!!!!')
-            })}
+            onClick={handleSubmit}
           />
         </form>
       </div>
@@ -135,15 +160,16 @@ const Prompt = () => {
         <form>
           <textarea
             className="textBox"
-            type="text"
             name="content"
             id="content"
+            onChange={handleChange}
           >
           </textarea>
           <input
             type="submit"
-            name="submit"
+            value="Submit"
             id="submit"
+            onClick={handleSubmit}
           />
         </form>
       </div>
