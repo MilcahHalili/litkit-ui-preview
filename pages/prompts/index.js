@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react"
 import Router from 'next/router'
 import { magic } from '../../magic'
 import Layout from "../../components/Layout"
-import Loading from '../../components/loading'
-import Post from "../../components/Post"
-import Styles from "../../styles/Index.module.scss"
+import Loading from '../../components/Loading'
+import Prompt from "../../components/Prompt"
+import Styles from "../../styles/pages/prompts/Index.module.scss"
 
-const Blog = () => {
+const Prompts = () => {
   const [prompts, setPrompts] = useState([])
   const [userMetadata, setUserMetadata] = useState()
-  
+
   const getPrompts = async () => {
     const res = await fetch('api/prompt/get-all')
     const result = await res.json()
@@ -37,8 +37,8 @@ const Blog = () => {
           {prompts.reverse().map(prompt => (
             <>
               <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
-              <div className={Styles.post}>
-                <Post
+              <div className={Styles.prompt}>
+                <Prompt
                   key={prompt.id}
                   prompt={prompt}
                 />
@@ -53,4 +53,4 @@ const Blog = () => {
   )
 }
 
-export default Blog
+export default Prompts

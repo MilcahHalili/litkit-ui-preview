@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Router from 'next/router';
-import Loading from '../components/loading';
+import Loading from '../components/Loading';
 import { magic } from '../magic';
 
 export default function Callback() {

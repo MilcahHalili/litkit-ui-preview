@@ -1,27 +1,27 @@
 import { PrismaClient } from '@prisma/client'
 
 export default function handler(req, res) {
-  console.log(req.method)
+  console.log(req.body.content, req.body.promptId, req.method)
   const prisma = new PrismaClient()
   if (req.method === 'POST') {
     async function main() {
-      const prompt = await prisma.prompt.create({
+      const post = await prisma.post.create({
         data: {
-          instructorId: 1,
-          workshopId: 1,
-          title: req.body.title,
-          content: req.body.content
+          authorId: 2,
+          content: req.body.content,
+          promptId: parseInt(req.body.promptId),
+          title: 'untitled'
         }
       })
-      res.status(200).json(prompt)
+      res.status(200).json(post)
     }
 
     main()
       .catch(e => {
         throw e
       })
-      .finally(async () => {
+      .finally(async () => [
         await prisma.$disconnect()
-      })
+      ])
   }
 }
