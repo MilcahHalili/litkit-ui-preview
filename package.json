@@ -23,8 +23,8 @@
     "@prisma/client": "^3.2.1",
     "magic-sdk": "^6.2.0",
     "next": "^9.5.5",
-    "react": "^16.6.0",
-    "react-dom": "16.4.0",
+    "react": "^16.14.0",
+    "react-dom": "16.10",
     "react-markdown": "5.0.2",
     "sass": "^1.43.3"
   },
