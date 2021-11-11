@@ -6,22 +6,22 @@ export default function handler(req, res) {
     async function main() {
       const user = await prisma.user.update({
         where: {
-          email: ''
+          email: req.body.email
         },
         data: {
-          name: 'Milcah'
+          name: req.body.name
         }
       })
       console.log(user)
       res.status(200).json(user)
     }
+    
+    main()
+      .catch(e => {
+        throw e
+      })
+      .finally(async () => {
+        await prisma.$disconnect()
+      })
   }
-
-  main()
-    .catch(e => {
-      throw e
-    })
-    .finally(async () => {
-      await prisma.$disconnect()
-    })
 }

@@ -8,6 +8,24 @@ export default function Index(props) {
   const [userMetadata, setUserMetadata] = useState();
   const [pendingUsername, setPendingUsername] = useState()
 
+  const updateUsername = async (data) => {
+    console.log(pendingUsername)
+    console.log(userMetadata.email)
+    data = {
+      name: pendingUsername,
+      email: userMetadata.email
+    }
+    const res = await fetch('/api/user/edit', {
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    })
+    const result = await res.json()
+    console.log(result)
+  }
+
   const handleChange = e => {
     setPendingUsername(e.target.value)
     console.log(pendingUsername)
@@ -55,6 +73,7 @@ export default function Index(props) {
           onClick={(e) => {
             e.preventDefault()
             props.setUsername(pendingUsername)
+            updateUsername()
           }}
         />
       </form>
