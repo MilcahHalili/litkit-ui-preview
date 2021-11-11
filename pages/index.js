@@ -4,9 +4,14 @@ import { magic } from '../magic'
 import Loading from '../components/loading'
 import Prompts from '../pages/prompts/index'
 
-export default function Index() {
+export default function Index(props) {
   const [userMetadata, setUserMetadata] = useState();
-  const [userName, setUserName] = useState()
+  const [pendingUsername, setPendingUsername] = useState()
+
+  const handleChange = e => {
+    setPendingUsername(e.target.value)
+    console.log(pendingUsername)
+  }
 
   useEffect(() => {
     // On mount, we check if a user is logged in.
@@ -30,23 +35,26 @@ export default function Index() {
     });
   }, [Router]);
   
-  return (userMetadata && userName) ? (
+  return (userMetadata && props.username) ? (
     <div className='container'>
-      <h1>Welcome, {userMetadata.email}</h1>
+      <h1>Welcome, {props.username}</h1>
       <button onClick={logout}>Logout</button>
       <Prompts />
     </div>
-  ) : (userMetadata && !userName) ? (
+  ) : (userMetadata && !props.username) ? (
     <>
       <h2>What's your name?</h2>
       <form>
-        <input placeholder="name" />
+        <input
+          placeholder="name"
+          onChange={handleChange}
+        />
         <input
           type="submit"
           value="submit"
           onClick={(e) => {
             e.preventDefault()
-            console.log('click! ✨')
+            props.setUsername(pendingUsername)
           }}
         />
       </form>
