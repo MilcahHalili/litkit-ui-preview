@@ -1,15 +1,41 @@
 @import '../colors';
 
 .index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
   padding: 2rem;
   background-color: $white;
+  height: 40%;
   width: 60%;
   border: 4px solid $compost;
-
 
   h1 {
     text-align: center;
     color: $compost;
   }
+}
+
+.welcomeForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 50%;
+
+  h2 {
+    margin: 1em auto;
+    text-align: center;
+    color: $compost;
+  }
+
 }
