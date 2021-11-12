@@ -55,19 +55,7 @@ export default function Index(props) {
       }
     })
   }, []);
-
-<<<<<<< HEAD
-  /**
-   * Perform logout action via Magic.
-   */
-  const logout = useCallback(() => {
-    magic.user.logout().then(() => {
-      Router.push('/login');
-    });
-  }, [Router]);
-=======
   
->>>>>>> 1df4831 (moves name to right, removes logout button)
   return (userMetadata && (props.username || localStorage.name)) ? (
     <div className='container'>
       <Prompts />
