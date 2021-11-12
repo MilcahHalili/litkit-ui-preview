@@ -4,7 +4,7 @@ import { magic } from '../../magic'
 import Layout from "../../components/Layout"
 import Loading from '../../components/Loading'
 import Prompt from "../../components/Prompt"
-import Styles from "../../styles/pages/prompt/Index.module.scss"
+import Styles from "../../styles/pages/prompt/Prompt.module.scss"
 
 const Prompts = (props) => {
   const [prompts, setPrompts] = useState([])
