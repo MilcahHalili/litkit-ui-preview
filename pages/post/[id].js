@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
 import Loading from '../../components/Loading'
 import parse from 'html-react-parser';
+import Styles from '../../styles/pages/post/Id.module.scss'
 
 const Post = (props) => {
   const [data, setData] = useState([])
@@ -35,7 +36,7 @@ const Post = (props) => {
   }, [])
 
   const comments = data[1]?.map(comment => (
-    <div key={comment.id}>
+    <div className={Styles.comment} key={comment.id}>
       <p>{comment.content}</p>
       <h4>{comment?.author?.name}</h4>
     </div>
@@ -43,13 +44,15 @@ const Post = (props) => {
 
   return data[0] ? (
     <Layout>
-      <div>
-        <h3>By {data[0].author.name}</h3>
-        <p>{parse(data[0].content)}</p>
-      </div>
-      <div>
-        { comments }
-      </div>
+      <main className={Styles.main}>
+        <div className={Styles.post}>
+          <h3>By {data[0].author.name}</h3>
+          <p>{parse(data[0].content)}</p>
+        </div>
+        <div>
+          { comments }
+        </div>
+      </main>
     </Layout>
   ) : (
     <Loading />
