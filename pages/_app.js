@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import 'react-quill/dist/quill.snow.css';
 import "../styles/globals.scss";
 
 const App = ({ Component, pageProps }) => {
