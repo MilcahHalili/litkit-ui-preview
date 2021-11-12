@@ -4,9 +4,7 @@ import Styles from "../styles/Components/Layout.module.scss"
 
 const Layout = (props) => (
   <div>
-    <Header
-      props={props}
-    />
+    <Header/>
     <div className={Styles.layout}>{props.children}</div>
   </div>
 );
