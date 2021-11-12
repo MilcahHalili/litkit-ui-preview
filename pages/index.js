@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import { magic } from '../magic'
 import Loading from '../components/Loading'
@@ -56,6 +56,7 @@ export default function Index(props) {
     })
   }, []);
 
+<<<<<<< HEAD
   /**
    * Perform logout action via Magic.
    */
@@ -64,10 +65,11 @@ export default function Index(props) {
       Router.push('/login');
     });
   }, [Router]);
+=======
+  
+>>>>>>> 1df4831 (moves name to right, removes logout button)
   return (userMetadata && (props.username || localStorage.name)) ? (
     <div className='container'>
-      <h1>Welcome, {props.username || localStorage.name}</h1>
-      <button onClick={logout}>Logout</button>
       <Prompts />
     </div>
   ) : (userMetadata && (!props.username || !localStorage.name)) ? (
