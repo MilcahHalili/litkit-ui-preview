@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Router from 'next/router'
 import { magic } from '../magic'
+
 import Styles from "../styles/Components/Header.module.scss"
 
 const Header = ({ props }) => {
