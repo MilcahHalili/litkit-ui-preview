@@ -21,7 +21,7 @@ export default function Login() {
         email,
         redirectURI: new URL('/callback', window.location.origin).href,
       });
-
+      
       // Validate auth token with server
       const res = await fetch('/api/login', {
         headers: {

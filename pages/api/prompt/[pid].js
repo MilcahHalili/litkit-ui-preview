@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client'
 export default function handler(req, res) {
   const prisma = new PrismaClient()
   const { pid } = req.query
-  
   async function main() {
     const prompt = await prisma.prompt.findUnique({
       where: {
@@ -27,7 +26,6 @@ export default function handler(req, res) {
         }
       }
     })
-    console.log('🔵🔵🔵', parseInt(pid))
     res.status(200).json([prompt, posts])
   }
 
