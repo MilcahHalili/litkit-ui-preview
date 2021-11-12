@@ -6,7 +6,7 @@ import Loading from '../../components/Loading'
 import Prompt from "../../components/Prompt"
 import Styles from "../../styles/pages/prompts/Index.module.scss"
 
-const Prompts = () => {
+const Prompts = (props) => {
   const [prompts, setPrompts] = useState([])
   const [userMetadata, setUserMetadata] = useState()
 
@@ -30,7 +30,9 @@ const Prompts = () => {
   }, [])
 
   return userMetadata ? (
-    <Layout>
+    <Layout
+      props={props}
+    >
       <div className={Styles.page}>
         <h1 className={Styles.pageh1}>Quick Writes</h1>
         <main>

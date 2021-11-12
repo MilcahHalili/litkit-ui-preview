@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Router from 'next/router'
+import { magic } from '../magic'
 import Styles from "../styles/Components/Header.module.scss"
 
-const Header = () => {
+const Header = ({ props }) => {
   const router = useRouter();
   const isActive = (pathname) => router.pathname === pathname;
+
+
+  /**
+   * Perform logout action via Magic.
+  */
+  const logout = useCallback(() => {
+    magic.user.logout().then(() => {
+      Router.push('/login');
+    });
+  }, [Router]);
 
   let left = (
     <div className={Styles.left}>
@@ -19,7 +31,8 @@ const Header = () => {
 
   let right = (
     <>
-      <h3>👋🏼{(typeof window !== 'undefined' && localStorage) ? ', ' + localStorage.name : ''}!</h3>
+      <h3>👋🏼{(typeof window !== 'undefined' && (localStorage || props.username)) ? ', ' + (localStorage.name || props.username) + '!' : ''}</h3>
+      <button onClick={logout}>Logout</button>
     </>
   );
 
