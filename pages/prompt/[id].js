@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown"
 import Layout from '../../components/Layout'
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
-import Styles from "../../styles/pages/prompts/Index.module.scss"
+import Styles from "../../styles/pages/prompt/Id.module.scss"
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
   ssr: false,
@@ -75,11 +75,11 @@ const Prompt = () => {
       key={post.id}
       href={`/post/${post.id}`}
     >
-      <div className={Styles.prompt}>
+      <div className={Styles.post}>
         <h4>{post.author.name}</h4>
         <p>{parse(post.content)}</p>
         <div>
-          <div className="comment">
+          <div>
             <h5>{post.comments.length} comments</h5>
           </div>
         </div>

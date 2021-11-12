@@ -1,0 +1,20 @@
+@import 'colors';
+
+.post {
+  margin: 5% auto;
+  padding: 5%;
+  background: $white;
+  transition: box-shadow 0.1s ease-in;
+  width: 100%;
+  border: 1px solid $pewter;
+
+
+  &:hover {
+    box-shadow: 1px 1px 3px $shadow;
+  }
+
+
+  & + .post {
+    margin-top: 2rem;
+  }
+}

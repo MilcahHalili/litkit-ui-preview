@@ -4,14 +4,14 @@ import { magic } from '../../magic'
 import Layout from "../../components/Layout"
 import Loading from '../../components/Loading'
 import Prompt from "../../components/Prompt"
-import Styles from "../../styles/pages/prompts/Index.module.scss"
+import Styles from "../../styles/pages/prompt/Index.module.scss"
 
 const Prompts = (props) => {
   const [prompts, setPrompts] = useState([])
   const [userMetadata, setUserMetadata] = useState()
 
   const getPrompts = async () => {
-    const res = await fetch('api/prompt/get-all')
+    const res = await fetch('api/prompt')
     const result = await res.json()
     result.reverse()
     setPrompts(result)

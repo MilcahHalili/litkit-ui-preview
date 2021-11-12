@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import { magic } from '../magic'
 import Loading from '../components/Loading'
-import Prompts from '../pages/prompts/index'
+import Prompts from '../pages/prompt/index'
 
 export default function Index(props) {
   const [userMetadata, setUserMetadata] = useState();
