@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import ReactMarkdown from 'react-markdown'
 import Layout from '../../components/Layout'
 
-const Post = () => {
+const Post = (props) => {
   const [data, setData] = useState([])
   const router = useRouter()
   const {
@@ -34,7 +34,6 @@ const Post = () => {
 
   useEffect(() => {
     getOnePost()
-    console.log(data)
   }, [])
 
   const comments = data[1]?.map(comment => (

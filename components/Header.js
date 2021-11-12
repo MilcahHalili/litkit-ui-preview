@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Styles from "../styles/Components/Header.module.scss"
 
-const Header = (props) => {
+const Header = () => {
   const router = useRouter();
   const isActive = (pathname) => router.pathname === pathname;
 
@@ -17,11 +17,9 @@ const Header = (props) => {
     </div>
   );
 
-  let right = !localStorage ? (
-    null
-  ) : (
+  let right = (
     <>
-      <h3>👋🏼{localStorage ? ', ' + (props.username || localStorage.name) : ''}!</h3>
+      <h3>👋🏼{(typeof window !== 'undefined' && localStorage) ? ', ' + localStorage.name : ''}!</h3>
     </>
   );
 

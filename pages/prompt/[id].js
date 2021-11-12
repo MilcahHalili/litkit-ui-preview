@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import ReactMarkdown from "react-markdown"
 import Layout from '../../components/Layout'
 
-const Prompt = () => {
+const Prompt = (props) => {
   const [ data, setData ] = useState([])
   const [ postContent, setPostContent] = useState([])
   const router = useRouter()
