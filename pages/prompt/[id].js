@@ -3,8 +3,15 @@ import Link from 'next/link'
 import { useRouter } from "next/router"
 import ReactMarkdown from "react-markdown"
 import Layout from '../../components/Layout'
+import dynamic from 'next/dynamic'
+import parse from 'html-react-parser';
 
-const Prompt = (props) => {
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+})
+
+const Prompt = () => {
   const [ data, setData ] = useState([])
   const [ postContent, setPostContent] = useState([])
   const router = useRouter()
@@ -52,6 +59,7 @@ const Prompt = (props) => {
 
   const handleChange = e => {
     setPostContent(e.target.value)
+    console.log(e.target.value)
   }
 
   const handleSubmit = async e => {
@@ -74,7 +82,7 @@ const Prompt = (props) => {
       <div>
         <h3>{post.title}</h3>
         <h4>{post.author.name}</h4>
-        <p>{post.content}</p>
+        <p>{parse(post.content)}</p>
         <div>
           <div className="comment">
             <h5>{post.comments.length} comments</h5>
@@ -91,13 +99,13 @@ const Prompt = (props) => {
         <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
         <form>
-          <textarea
-            className="textBox"
+          <QuillNoSSRWrapper
+            theme="snow"
             name="content"
             id="content"
-            onChange={handleChange}
-          >
-          </textarea>
+            value={postContent}
+            onChange={setPostContent}
+          />
           <input
             type="submit"
             value="Submit"
@@ -115,12 +123,6 @@ const Prompt = (props) => {
         }
         form {
           text-align: center;
-        }
-        .textBox {
-          height: 300px;
-          width: 100%;
-          resize: none;
-          margin: 5% 0 5% 0;
         }
         .page {
           background: white;
@@ -144,6 +146,9 @@ const Prompt = (props) => {
         }
         button + button {
           margin-left: 1rem;
+        }
+        #submit {
+          margin-top: 3.5rem;
         }
       `}</style>
     </Layout>
