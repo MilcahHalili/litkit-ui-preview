@@ -16,10 +16,8 @@ const Prompt = () => {
       fetch(`../../api/prompt/${id}`)
         .then(res => res.json())
         .then(res => {
-          console.log(res)
           setData(res)
           localStorage.setItem('id', `${id}`)
-          console.log(localStorage.id)
         })
         .catch(err => console.error(err))
     } else if (typeof window !== 'undefined') {
@@ -27,7 +25,6 @@ const Prompt = () => {
       fetch(`../../api/prompt/${localStorage.id}`)
         .then(res => res.json())
         .then(res => {
-          console.log(res)
           setData(res)
         })
         .catch(err => console.error(err))
@@ -36,7 +33,6 @@ const Prompt = () => {
 
   useEffect(() => {
     getOnePrompt()
-    console.log(data)
   }, [])
 
   const prompts = data[1]?.map(prompt => (

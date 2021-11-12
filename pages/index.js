@@ -8,9 +8,19 @@ export default function Index(props) {
   const [userMetadata, setUserMetadata] = useState();
   const [pendingUsername, setPendingUsername] = useState()
 
+  const getUserData = async () => {
+    if (typeof window !== 'undefined' && localStorage) {
+      await console.log(localStorage.email)
+      await fetch(`/api/user/${localStorage.email}`)
+        .then(res => res.json())
+          .then(res => {
+            console.log(res)
+          })
+        .catch(err => console.error(err))
+    }
+  }
+
   const updateUsername = async (data) => {
-    console.log(pendingUsername)
-    console.log(userMetadata.email)
     data = {
       name: pendingUsername,
       email: userMetadata.email
@@ -23,12 +33,12 @@ export default function Index(props) {
       method: 'POST'
     })
     const result = await res.json()
-    console.log(result)
+    localStorage.setItem('email', result.email)
+    localStorage.setItem('name', result.name)
   }
 
   const handleChange = e => {
     setPendingUsername(e.target.value)
-    console.log(pendingUsername)
   }
 
   useEffect(() => {
@@ -36,12 +46,13 @@ export default function Index(props) {
     // If so, we'll retrieve the authenticated user's profile.
     magic.user.isLoggedIn().then((magicIsLoggedIn) => {
       if (magicIsLoggedIn) {
-        magic.user.getMetadata().then(setUserMetadata);
+        magic.user.getMetadata().then(setUserMetadata)
+        getUserData()
       } else {
         // If no user is logged in, redirect to `/login`
         Router.push('/login');
       }
-    });
+    })
   }, []);
 
   /**
@@ -53,13 +64,13 @@ export default function Index(props) {
     });
   }, [Router]);
   
-  return (userMetadata && props.username) ? (
+  return (userMetadata && (props.username || localStorage.name)) ? (
     <div className='container'>
-      <h1>Welcome, {props.username}</h1>
+      <h1>Welcome, {props.username || localStorage.name}</h1>
       <button onClick={logout}>Logout</button>
       <Prompts />
     </div>
-  ) : (userMetadata && !props.username) ? (
+  ) : (userMetadata && (!props.username || !localStorage.name)) ? (
     <>
       <h2>What's your name?</h2>
       <form>
