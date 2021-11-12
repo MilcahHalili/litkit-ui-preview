@@ -1,0 +1,15 @@
+$sm-phone: 320px;
+$md-phone: 414px;
+$tablet: 768px;
+$desktop: 1024px;
+
+$sm-phone-breakpoint: (min-width: $sm-phone);
+$md-phone-breakpoint: (min-width: $md-phone);
+$tablet-breakpoint: (min-width: $tablet);
+$desktop-breakpoint: (min-width: $desktop);
+
+$landscape: (orientation: landscape);
+$portrait: (orientation: portrait);
+
+$retina2x: (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx);
+$retina3x: (-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx);
