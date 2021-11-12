@@ -29,24 +29,35 @@ export default function Index(props) {
     setPendingUsername(e.target.value)
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    props.setUsername(pendingUsername)
+    updateUsername()
+  }
+
   useEffect(() => {
     // On mount, we check if a user is logged in.
     // If so, we'll retrieve the authenticated user's profile.
     magic.user.isLoggedIn().then((magicIsLoggedIn) => {
       if (magicIsLoggedIn) {
-        magic.user.getMetadata().then(setUserMetadata)
+        magic.user.getMetadata()
+          .then(setUserMetadata)
       } else {
         // If no user is logged in, redirect to `/login`
         Router.push('/login');
       }
     })
+    props.setUserEmail(userMetadata?.email || localStorage?.email)
+    props.setUsername(localStorage?.name)
   }, []);
   
   return (userMetadata && (props.username || localStorage.name)) ? (
     <div className='container'>
-      <Prompts />
+      <Prompts
+        props={props}
+      />
     </div>
-  ) : (userMetadata && (!props.username || !localStorage.name)) ? (
+  ) : (!props.username || !localStorage.name) ? (
     <>
       <h2>What's your name?</h2>
       <form>
@@ -57,11 +68,7 @@ export default function Index(props) {
         <input
           type="submit"
           value="submit"
-          onClick={(e) => {
-            e.preventDefault()
-            props.setUsername(pendingUsername)
-            updateUsername()
-          }}
+          onClick={handleSubmit}
         />
       </form>
     </>
