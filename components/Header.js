@@ -31,7 +31,7 @@ const Header = ({ props }) => {
 
   let right = (
     <>
-      <h3>👋🏼{(typeof window !== 'undefined' && (localStorage || props.username)) ? ', ' + (localStorage.name || props.username) + '!' : ''}</h3>
+      <h2>👋🏼{(typeof window !== 'undefined' && (localStorage || props.username)) ? ', ' + (localStorage.name || props.username) + '!' : ''}</h2>
       <button onClick={logout}>Logout</button>
     </>
   );
