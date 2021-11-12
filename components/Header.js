@@ -22,10 +22,12 @@ const Header = (props) => {
     </div>
   );
 
-  let right = (
+  let right = localStorage ? (
     <>
       <h3>👋🏼{localStorage ? ', ' + (props.username || localStorage.name) : ''}!</h3>
     </>
+  ) : (
+    null
   );
 
   return (
