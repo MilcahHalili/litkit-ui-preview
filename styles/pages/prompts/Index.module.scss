@@ -1,0 +1,39 @@
+@import 'colors';
+
+.page {
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: $white;
+  width: 60%;
+  border: 4px solid $marigold;
+
+
+  h1 {
+    text-align: center;
+    color: $marigold;
+  }
+}
+
+
+.createdAt {
+  margin: 1em 20%;
+}
+
+
+.prompt {
+  margin: 0 auto;
+  background: $white;
+  transition: box-shadow 0.1s ease-in;
+  width: 60%;
+  border: 1px solid $pewter;
+
+
+  &:hover {
+    box-shadow: 1px 1px 3px $shadow;
+  }
+
+
+  & + .prompt {
+    margin-top: 2rem;
+  }
+}

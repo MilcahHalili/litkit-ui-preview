@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import Router from 'next/router'
 import { magic } from '../magic'
-import Loading from '../components/loading'
+import Loading from '../components/Loading'
 import Prompts from '../pages/prompts/index'
+import Styles from '../styles/pages/Index.module.scss'
 
 export default function Index(props) {
   const [userMetadata, setUserMetadata] = useState();
@@ -63,7 +64,6 @@ export default function Index(props) {
       Router.push('/login');
     });
   }, [Router]);
-  
   return (userMetadata && (props.username || localStorage.name)) ? (
     <div className='container'>
       <h1>Welcome, {props.username || localStorage.name}</h1>
