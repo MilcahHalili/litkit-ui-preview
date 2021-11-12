@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown"
 import Layout from '../../components/Layout'
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
+import Styles from "../../styles/pages/prompts/Index.module.scss"
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
   ssr: false,
@@ -57,11 +58,6 @@ const Prompt = () => {
     console.log(result)
   }
 
-  const handleChange = e => {
-    setPostContent(e.target.value)
-    console.log(e.target.value)
-  }
-
   const handleSubmit = async e => {
     await e.preventDefault()
     await createPost()
@@ -74,13 +70,12 @@ const Prompt = () => {
     getOnePrompt()
   }, [])
 
-  const posts = data[1]?.reverse().map(post => (
+  const posts = data[1]?.map(post => (
     <Link
       key={post.id}
       href={`/post/${post.id}`}
     >
-      <div>
-        <h3>{post.title}</h3>
+      <div className={Styles.prompt}>
         <h4>{post.author.name}</h4>
         <p>{parse(post.content)}</p>
         <div>
@@ -113,16 +108,16 @@ const Prompt = () => {
             onClick={handleSubmit}
           />
         </form>
-      </div>
-      <div className="prompt post">
-        { posts }
+        { posts.reverse() }
       </div>
       <style jsx>{`
         h2, h3, h4 {
           text-align: center;
         }
-        form {
-          text-align: center;
+        .container {
+          margin: 2rem auto;
+          padding: 2rem;
+          width: 60%;
         }
         .page {
           background: white;
@@ -159,13 +154,13 @@ const Prompt = () => {
         <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
         <form>
-          <textarea
-            className="textBox"
+          <QuillNoSSRWrapper
+            theme="snow"
             name="content"
             id="content"
-            onChange={handleChange}
-          >
-          </textarea>
+            value={postContent}
+            onChange={setPostContent}
+          />
           <input
             type="submit"
             value="Submit"

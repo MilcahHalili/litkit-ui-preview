@@ -13,6 +13,7 @@ const Prompts = (props) => {
   const getPrompts = async () => {
     const res = await fetch('api/prompt/get-all')
     const result = await res.json()
+    result.reverse()
     setPrompts(result)
   }
 
@@ -36,7 +37,7 @@ const Prompts = (props) => {
       <div className={Styles.page}>
         <h1 className={Styles.pageh1}>Quick Writes</h1>
         <main>
-          {prompts.reverse().map(prompt => (
+          {prompts.map(prompt => (
             <>
               <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
               <div className={Styles.prompt}>

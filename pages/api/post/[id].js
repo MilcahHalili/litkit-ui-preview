@@ -22,7 +22,6 @@ export default function handler(req, res) {
         }
       }
     )
-    console.log('🔵🔵🔵', parseInt(id))
     res.status(200).json([post, comments])
   }
 
