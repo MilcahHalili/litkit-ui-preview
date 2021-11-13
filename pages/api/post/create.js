@@ -1,13 +1,17 @@
 import { PrismaClient } from '@prisma/client'
 
 export default function handler(req, res) {
-  console.log(req.body.content, req.body.promptId, req.method)
   const prisma = new PrismaClient()
   if (req.method === 'POST') {
     async function main() {
+      const user = await prisma.user.findUnique({
+        where: {
+          email: req.body.email
+        }
+      })
       const post = await prisma.post.create({
         data: {
-          authorId: req.body.authorId,
+          authorId: user.id,
           content: req.body.content,
           promptId: parseInt(req.body.promptId),
           title: 'untitled'

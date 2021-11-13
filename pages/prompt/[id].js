@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useRouter } from "next/router"
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
-
 import Layout from '../../components/Layout'
 import Styles from "../../styles/pages/prompt/Id.module.scss"
 
@@ -23,7 +22,6 @@ const Prompt = () => {
 
   const getOnePrompt = async () => {
     if (id && typeof window !== 'undefined') {
-      console.log('1')
       fetch(`../../api/prompt/${id}`)
         .then(res => res.json())
         .then(res => {
@@ -32,7 +30,6 @@ const Prompt = () => {
         })
         .catch(err => console.error(err))
     } else if (typeof window !== 'undefined') {
-      console.log('2')
       fetch(`../../api/prompt/${localStorage.id}`)
         .then(res => res.json())
         .then(res => {
@@ -42,11 +39,11 @@ const Prompt = () => {
     }
   }
 
-  const createPost = async (state) => {
+  const createPost = async () => {
     const data = {
       content: postContent,
       promptId: id,
-      authorId: state[2].id
+      email: localStorage.email
     }
     const res = await fetch('/api/post/create', {
       body: JSON.stringify(data),
@@ -99,6 +96,7 @@ const Prompt = () => {
             name="content"
             id="content"
             value={postContent}
+            className={Styles.quill}
             onChange={setPostContent}
           />
           <input
