@@ -35,7 +35,7 @@ const Header = ({ props }) => {
 
   let right = (
     <>
-      <h2><FontAwesomeIcon icon={faHandSparkles} className={Styles.usernameIcon} />{(typeof window !== 'undefined' && (localStorage || props.username)) ? ', ' + (localStorage.name || props.username) + '!' : ''}</h2>
+      <h2><FontAwesomeIcon icon={faHandSparkles} className={Styles.usernameIcon} />{(typeof window !== 'undefined' && (props.username || localStorage.name)) ? ', ' + (props.username || localStorage.name) + '!' : ''}</h2>
       <button className={Styles.logoutButton} onClick={logout}>Logout</button>
     </>
   );
