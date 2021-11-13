@@ -42,12 +42,12 @@ const Prompt = () => {
     }
   }
 
-  const createPost = async (data) => {
-    data = {
+  const createPost = async (state) => {
+    const data = {
       content: postContent,
-      promptId: id
+      promptId: id,
+      authorId: state[2].id
     }
-    console.log(data, 'data from create post')
     const res = await fetch('/api/post/create', {
       body: JSON.stringify(data),
       headers: {
@@ -56,14 +56,13 @@ const Prompt = () => {
       method: 'POST'
     })
     const result = await res.json()
-    console.log(result)
+    return result
   }
 
   const handleSubmit = async e => {
     await e.preventDefault()
-    await createPost()
+    await createPost(data)
     console.log('yes!')
-    // rerender posts
     getOnePrompt()
   }
 
