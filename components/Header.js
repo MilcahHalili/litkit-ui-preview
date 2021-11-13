@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import Router from 'next/router'
 import { magic } from '../magic'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHandSparkles } from '@fortawesome/free-solid-svg-icons'
+
 import Styles from "../styles/Components/Header.module.scss"
 
 const Header = ({ props }) => {
@@ -32,7 +35,7 @@ const Header = ({ props }) => {
 
   let right = (
     <>
-      <h2>👋🏼{(typeof window !== 'undefined' && (localStorage || props.username)) ? ', ' + (localStorage.name || props.username) + '!' : ''}</h2>
+      <h2><FontAwesomeIcon icon={faHandSparkles} className={Styles.usernameIcon} />{(typeof window !== 'undefined' && (localStorage || props.username)) ? ', ' + (localStorage.name || props.username) + '!' : ''}</h2>
       <button className={Styles.logoutButton} onClick={logout}>Logout</button>
     </>
   );

@@ -3,6 +3,7 @@ import Router from 'next/router'
 import { magic } from '../magic'
 import Loading from '../components/Loading'
 import Prompts from '../pages/prompt/index'
+import Styles from '../styles/pages/Index.module.scss'
 
 export default function Index(props) {
   const [userMetadata, setUserMetadata] = useState();
@@ -50,28 +51,33 @@ export default function Index(props) {
     props.setUserEmail(userMetadata?.email || localStorage?.email)
     props.setUsername(localStorage?.name)
   }, []);
-  
+
   return (userMetadata && (props.username || localStorage.name)) ? (
-    <div className='container'>
+    <div className='container' className={Styles.index}>
       <Prompts
         props={props}
       />
     </div>
   ) : (!props.username || !localStorage.name) ? (
-    <>
-      <h2>What's your name?</h2>
-      <form>
-        <input
-          placeholder="name"
-          onChange={handleChange}
-        />
-        <input
-          type="submit"
-          value="submit"
-          onClick={handleSubmit}
-        />
-      </form>
-    </>
+    <div className={Styles.index}>
+      <img src="https://i.imgur.com/NxwZ9x0.png" width="100px" height="100px" className={Styles.logo} />
+      <div className={Styles.welcome}>
+        <form className={Styles.welcomeForm}>
+          <h2>What's your name?</h2>
+          <input
+            placeholder="My name is..."
+            onChange={handleChange}
+            className={Styles.input}
+          />
+          <input
+            type="submit"
+            value="Get started"
+            onClick={handleSubmit}
+            className={Styles.button}
+          />
+        </form>
+      </div>
+    </div>
   ) : (
     <Loading />
   )
