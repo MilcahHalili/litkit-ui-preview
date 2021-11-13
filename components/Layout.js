@@ -3,9 +3,9 @@ import Header from "./Header";
 import Styles from "../styles/Components/Layout.module.scss"
 
 const Layout = (props) => (
-  <div>
+  <div className={Styles.layout}>
     <Header props={props} />
-    <div className={Styles.layout}>{props.children}</div>
+    <div>{props.children}</div>
   </div>
 );
 
