@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react"
-import Router from 'next/router'
-import { magic } from '../../magic'
 import Layout from "../../components/Layout"
 import Loading from '../../components/Loading'
 import Prompt from "../../components/Prompt"
@@ -8,7 +6,6 @@ import Styles from "../../styles/pages/prompt/Prompt.module.scss"
 
 const Prompts = (props) => {
   const [prompts, setPrompts] = useState([])
-  const [userMetadata, setUserMetadata] = useState()
 
   const getPrompts = async () => {
     const res = await fetch('api/prompt')
@@ -18,24 +15,15 @@ const Prompts = (props) => {
   }
 
   useEffect(() => {
-    magic.user.isLoggedIn()
-    .then(magicIsLoggedIn => {
-      if (magicIsLoggedIn) {
-        magic.user.getMetadata()
-          .then(setUserMetadata)
-          getPrompts()
-      } else {
-        Router.push('/login')
-      }
-    })
+    getPrompts()
   }, [])
 
-  return userMetadata ? (
+  return props.userMetadata ? (
     <Layout
       props={props}
     >
       <div className={Styles.page}>
-        <h1 className={Styles.pageh1}>Quick Writes</h1>
+        <h1 className={Styles.pageh1}>Prompts</h1>
         <main>
           {prompts.map(prompt => (
             <>
