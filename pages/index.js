@@ -55,6 +55,7 @@ export default function Index(props) {
     <div className='container'>
       <Prompts
         props={props}
+        userMetadata={userMetadata}
       />
     </div>
   ) : (!props.username || !localStorage.name) ? (
