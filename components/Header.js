@@ -26,7 +26,7 @@ const Header = ({ props }) => {
   let left = (
     <div className={Styles.left}>
       <Link href="/">
-        <a className={Styles.boldA} data-active={isActive("/")}>
+        <a className={Styles.logo} data-active={isActive("/")}>
           <img src="https://i.imgur.com/NxwZ9x0.png" width="100px" height="100px"/>
         </a>
       </Link>

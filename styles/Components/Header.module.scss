@@ -1,4 +1,5 @@
 @import 'colors';
+@import 'breakpoints';
 
 .logoutButton {
   background: $white;
@@ -19,7 +20,7 @@
 }
 
 
-.boldA {
+.logo {
   font-weight: bold;
 }
 
@@ -31,12 +32,9 @@
     display: inline-block;
   }
 
-
-  // TODO: Fix no-qualifying-elements Warning
-  & a[data-active='true'] {
+  &:active {
     color: $sage;
   }
-
 
   & + a {
     margin-left: 1rem;
