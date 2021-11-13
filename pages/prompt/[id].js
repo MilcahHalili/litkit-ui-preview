@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react"
+import ReactMarkdown from "react-markdown"
 import Link from 'next/link'
 import { useRouter } from "next/router"
-import ReactMarkdown from "react-markdown"
+import dynamic from 'next/dynamic'
+import parse from 'html-react-parser';
+
 import Layout from '../../components/Layout'
+import Styles from "../../styles/pages/prompt/Id.module.scss"
+
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+})
 
 const Prompt = () => {
   const [ data, setData ] = useState([])
@@ -18,10 +27,8 @@ const Prompt = () => {
       fetch(`../../api/prompt/${id}`)
         .then(res => res.json())
         .then(res => {
-          console.log(res)
           setData(res)
           localStorage.setItem('id', `${id}`)
-          console.log(localStorage.id)
         })
         .catch(err => console.error(err))
     } else if (typeof window !== 'undefined') {
@@ -29,19 +36,18 @@ const Prompt = () => {
       fetch(`../../api/prompt/${localStorage.id}`)
         .then(res => res.json())
         .then(res => {
-          console.log(res)
           setData(res)
         })
         .catch(err => console.error(err))
     }
   }
 
-  const createPost = async (data) => {
-    data = {
+  const createPost = async (state) => {
+    const data = {
       content: postContent,
-      promptId: id
+      promptId: id,
+      authorId: state[2].id
     }
-    console.log(data, 'data from create post')
     const res = await fetch('/api/post/create', {
       body: JSON.stringify(data),
       headers: {
@@ -50,37 +56,30 @@ const Prompt = () => {
       method: 'POST'
     })
     const result = await res.json()
-    console.log(result)
-  }
-
-  const handleChange = e => {
-    setPostContent(e.target.value)
+    return result
   }
 
   const handleSubmit = async e => {
     await e.preventDefault()
-    await createPost()
+    await createPost(data)
     console.log('yes!')
-    // rerender posts
     getOnePrompt()
   }
 
   useEffect(() => {
     getOnePrompt()
-    console.log(data)
   }, [])
 
-  const posts = data[1]?.reverse().map(post => (
+  const posts = data[1]?.map(post => (
     <Link
       key={post.id}
       href={`/post/${post.id}`}
     >
-      <div>
-        <h3>{post.title}</h3>
+      <div className={Styles.post}>
         <h4>{post.author.name}</h4>
-        <p>{post.content}</p>
+        <p>{parse(post.content)}</p>
         <div>
-          <div className="comment">
+          <div>
             <h5>{post.comments.length} comments</h5>
           </div>
         </div>
@@ -95,13 +94,13 @@ const Prompt = () => {
         <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
         <form>
-          <textarea
-            className="textBox"
+          <QuillNoSSRWrapper
+            theme="snow"
             name="content"
             id="content"
-            onChange={handleChange}
-          >
-          </textarea>
+            value={postContent}
+            onChange={setPostContent}
+          />
           <input
             type="submit"
             value="Submit"
@@ -109,22 +108,16 @@ const Prompt = () => {
             onClick={handleSubmit}
           />
         </form>
-      </div>
-      <div className="prompt post">
-        { posts }
+        { posts.reverse() }
       </div>
       <style jsx>{`
         h2, h3, h4 {
           text-align: center;
         }
-        form {
-          text-align: center;
-        }
-        .textBox {
-          height: 300px;
-          width: 100%;
-          resize: none;
-          margin: 5% 0 5% 0;
+        .container {
+          margin: 2rem auto;
+          padding: 2rem;
+          width: 60%;
         }
         .page {
           background: white;
@@ -149,6 +142,9 @@ const Prompt = () => {
         button + button {
           margin-left: 1rem;
         }
+        #submit {
+          margin-top: 3.5rem;
+        }
       `}</style>
     </Layout>
   ) : (
@@ -158,13 +154,13 @@ const Prompt = () => {
         <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
         <form>
-          <textarea
-            className="textBox"
+          <QuillNoSSRWrapper
+            theme="snow"
             name="content"
             id="content"
-            onChange={handleChange}
-          >
-          </textarea>
+            value={postContent}
+            onChange={setPostContent}
+          />
           <input
             type="submit"
             value="Submit"

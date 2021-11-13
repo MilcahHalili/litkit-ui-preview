@@ -7,7 +7,7 @@ export default function handler(req, res) {
     async function main() {
       const post = await prisma.post.create({
         data: {
-          authorId: 2,
+          authorId: req.body.authorId,
           content: req.body.content,
           promptId: parseInt(req.body.promptId),
           title: 'untitled'

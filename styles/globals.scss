@@ -11,6 +11,7 @@ html {
 }
 
 body {
+  color: $compost;
   margin: 0;
   padding: 0;
   font-size: 16px;
@@ -25,4 +26,10 @@ textarea {
 
 button {
   cursor: pointer;
+}
+
+.loading
+
+.quill {
+  height: 300px;
 }
