@@ -26,7 +26,12 @@ export default function handler(req, res) {
         }
       }
     })
-    res.status(200).json([prompt, posts])
+    const user = await prisma.user.findUnique({
+      where: {
+        email: 'milcahhalili@gmail.com'
+      }
+    })
+    res.status(200).json([prompt, posts, user])
   }
 
   main()
