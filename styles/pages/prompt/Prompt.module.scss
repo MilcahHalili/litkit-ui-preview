@@ -25,11 +25,9 @@
   width: 60%;
   border: 1px solid $sage;
 
-
   &:hover {
     box-shadow: 1px 1px 3px $shadow;
   }
-
 
   & + .prompt {
     margin-top: 2rem;
