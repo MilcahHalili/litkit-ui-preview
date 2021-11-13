@@ -8,13 +8,24 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
+  const createUser = async () => {
+    const res = await fetch('/api/user/create', {
+      body: JSON.stringify({email: email}),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    })
+    const result = await res.json()
+    return result
+  }
+
   /**
    * Perform login action via Magic's passwordless flow. Upon successuful
    * completion of the login flow, a user is redirected to the homepage.
    */
   const login = useCallback(async () => {
     setIsLoggingIn(true);
-
     try {
       // Grab auth token from loginWithMagicLink
       const didToken = await magic.auth.loginWithMagicLink({
@@ -30,6 +41,7 @@ export default function Login() {
         },
       });
       res.status === 200 && Router.push('/');
+      await createUser()
     } catch {
       setIsLoggingIn(false);
     }
