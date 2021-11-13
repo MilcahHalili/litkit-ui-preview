@@ -44,9 +44,10 @@ export default function Login() {
 
   return (
     <div className={Styles.index}>
+      <img src="https://i.imgur.com/NxwZ9x0.png" width="100px" height="100px" className={Styles.logo} />
       <div className={Styles.login}>
-        <h1>Welcome Header</h1>
-        <p>I'm baby roof party whatever actually swag literally trust fund lomo pickled yr raclette four loko iPhone distillery. Meh chartreuse tumeric umami, disrupt pok pok wolf listicle trust fund mixtape. Next level cold-pressed church-key unicorn banjo photo booth 90's vexillologist poke pickled mixtape cronut. Messenger bag scenester wolf, food truck listicle iPhone pop-up air plant blue bottle try-hard celiac tousled retro marfa yr.</p>
+        <h1>Welcome!</h1>
+        <p>Chartreuse tumeric umami, disrupt pok pok wolf listicle trust fund mixtape. Next level cold-pressed church-key unicorn banjo photo booth 90's vexillologist poke pickled mixtape cronut. Messenger bag scenester wolf, food truck listicle iPhone pop-up air plant blue bottle try-hard celiac tousled retro marfa.</p>
         <input
           type='email'
           name='email'
@@ -54,9 +55,10 @@ export default function Login() {
           placeholder='your@email.com'
           onChange={handleInputOnChange}
           disabled={isLoggingIn}
+          className={Styles.input}
         />
-        <button onClick={login} disabled={isLoggingIn}>
-          Send
+        <button className={Styles.loginButton} onClick={login} disabled={isLoggingIn}>
+          Sign Up
           </button>
       </div>
     </div>
