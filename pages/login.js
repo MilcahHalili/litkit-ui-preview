@@ -58,7 +58,7 @@ export default function Login() {
           className={Styles.input}
         />
         <button className={Styles.loginButton} onClick={login} disabled={isLoggingIn}>
-          Sign Up
+          Sign In
           </button>
       </div>
     </div>

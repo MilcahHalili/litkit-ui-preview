@@ -60,17 +60,20 @@ export default function Index(props) {
     </div>
   ) : (!props.username || !localStorage.name) ? (
     <div className={Styles.index}>
+      <img src="https://i.imgur.com/NxwZ9x0.png" width="100px" height="100px" className={Styles.logo} />
       <div className={Styles.welcome}>
         <form className={Styles.welcomeForm}>
           <h2>What's your name?</h2>
           <input
-            placeholder="name"
+            placeholder="My name is..."
             onChange={handleChange}
+            className={Styles.input}
           />
           <input
             type="submit"
-            value="submit"
+            value="Get started"
             onClick={handleSubmit}
+            className={Styles.button}
           />
         </form>
       </div>

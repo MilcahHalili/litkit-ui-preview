@@ -7,6 +7,11 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  min-height: 500px;
+
+  @media only screen and (orientation: landscape) and (min-width: $md-phone) {
+    min-height: 400px;
+  }
 }
 
 .login {
@@ -15,8 +20,17 @@
   justify-content: center;
   align-items: center;
 
-  @media only screen and (min-width: $tablet) {
+  @media only screen and (orientation: portrait) and (min-width: $tablet) {
     height: 40%;
+    width: 60%;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: $white;
+    border: 5px solid $marigold;
+  }
+
+  @media only screen and (orientation: landscape) and (min-width: $desktop) {
+    height: 60%;
     width: 60%;
     margin: 0 auto;
     padding: 2rem;
@@ -30,7 +44,12 @@
     color: $white;
     text-shadow: 3px 3px $marigold;
 
-    @media only screen and (min-width: $tablet) {
+    @media only screen and (orientation: portrait) and (min-width: $tablet) {
+      color: $marigold;
+      text-shadow: none;
+    }
+
+    @media only screen and (orientation: landscape) and (min-width: $desktop) {
       color: $marigold;
       text-shadow: none;
     }
@@ -40,7 +59,11 @@
     max-width: 75%;
     color: $white;
 
-    @media only screen and (min-width: $tablet) {
+    @media only screen and (orientation: portrait) and (min-width: $tablet) {
+      color: $compost;
+    }
+
+    @media only screen and (orientation: landscape) and (min-width: $desktop) {
       color: $compost;
     }
   }
@@ -69,8 +92,9 @@
   font-weight: bold;
   color: $marigold;
 
+  &:active,
   &:hover,
-  &:active {
+  &:focus {
     box-shadow: none;
     margin: calc(0.5em + 4px) 0 1.5em;
   }
