@@ -4,13 +4,13 @@ export default function handler(req, res) {
   const prisma = new PrismaClient()
   if (req.method === 'POST') {
     async function main() {
-      const isUser = await prisma.user.findUnique({
+      const existingUser = await prisma.user.findUnique({
         where: {
           email: req.body.email
         }
       })
-      if (isUser) {
-        console.log(isUser)
+      if (existingUser) {
+        res.status(200).json(existingUser)
       } else {
         const user = await prisma.user.create({
           data: {

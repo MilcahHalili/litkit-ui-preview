@@ -26,6 +26,9 @@ export default function Login() {
    */
   const login = useCallback(async () => {
     setIsLoggingIn(true);
+    const result = await createUser()
+    await localStorage.setItem('name', result.name)
+    await localStorage.setItem('email', email)
     try {
       // Grab auth token from loginWithMagicLink
       const didToken = await magic.auth.loginWithMagicLink({
@@ -41,7 +44,6 @@ export default function Login() {
         },
       });
       res.status === 200 && Router.push('/');
-      await createUser()
     } catch {
       setIsLoggingIn(false);
     }
