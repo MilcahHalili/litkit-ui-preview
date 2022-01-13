@@ -76,8 +76,10 @@ const Post = () => {
     <Layout>
       <main className={Styles.main}>
         <div className={Styles.post}>
-          <h3>By {data[0].author.name}</h3>
-          <p>{parse(data[0].content)}</p>
+          <section className={Styles.content}>
+            <h3>By {data[0].author.name}</h3>
+            <p>{parse(data[0].content)}</p>
+          </section>
           <form>
             <QuillNoSSRWrapper
               theme="snow"
@@ -91,11 +93,13 @@ const Post = () => {
               type="submit"
               value="Submit"
               id="submit"
+              className={Styles.input}
               onClick={handleSubmit}
             />
           </form>
         </div>
-        <div>
+        <div className={Styles.post}>
+          <h4>Comments ({comments.length}/3)</h4>
           { comments }
         </div>
       </main>

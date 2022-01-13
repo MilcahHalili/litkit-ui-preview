@@ -9,6 +9,14 @@
   border: 1px solid $sage;
 }
 
+.content {
+  margin-bottom: 5rem;
+}
+
+.input {
+  margin-top: 56px;
+}
+
 .main {
   margin: 2.5% auto;
   padding: 2.5%;
@@ -24,4 +32,8 @@
   background: $white;
   transition: box-shadow 0.1s ease-in;
   width: 100%;
+}
+
+.quill {
+  height: 300px;
 }
