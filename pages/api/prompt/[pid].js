@@ -9,7 +9,7 @@ export default function handler(req, res) {
         id: parseInt(pid)
       },
       include: {
-        instructor: true
+        author: true
       }
     })
     const posts = await prisma.post.findMany({
@@ -20,8 +20,7 @@ export default function handler(req, res) {
         author: true,
         comments: {
           include: {
-            author: true,
-            instructor: true
+            author: true
           }
         }
       }
