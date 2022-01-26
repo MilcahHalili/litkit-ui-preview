@@ -6,8 +6,7 @@ export default function handler(req, res) {
   async function main() {
     const prompts = await prisma.prompt.findMany({
       include: {
-        posts: true,
-        instructor: true
+        posts: true
       }
     })
     res.status(200).json(prompts)

@@ -88,7 +88,7 @@ const Prompt = () => {
     <Layout>
       <div className="prompt">
         <h2>{data[0]?.title || 'Loading'}</h2>
-        <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
+        <h3>By {data[0]?.author?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
         <form>
           <QuillNoSSRWrapper
@@ -149,7 +149,7 @@ const Prompt = () => {
     <Layout>
       <div className="prompt">
         <h2>{data[0]?.title || 'Loading'}</h2>
-        <h3>By {data[0]?.instructor?.name || "Unknown instructor"}</h3>
+        <h3>By {data[0]?.author?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
         <form>
           <QuillNoSSRWrapper
@@ -157,6 +157,7 @@ const Prompt = () => {
             name="content"
             id="content"
             value={postContent}
+            className={Styles.quill}
             onChange={setPostContent}
           />
           <input
@@ -193,6 +194,9 @@ const Prompt = () => {
         }
         button + button {
           margin-left: 1rem;
+        }
+        #submit {
+          margin-top: 3.5rem;
         }
       `}</style>
     </Layout>
