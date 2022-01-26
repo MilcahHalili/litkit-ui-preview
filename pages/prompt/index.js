@@ -22,7 +22,7 @@ const Prompts = (props) => {
     <Layout
       props={props}
     >
-      <div className={Styles.page}>
+      <div className={Styles.promptIndexContainer}>
         <h1 className={Styles.pageh1}>Prompts</h1>
         <main>
           {prompts.map(prompt => (

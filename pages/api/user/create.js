@@ -15,7 +15,8 @@ export default function handler(req, res) {
         const user = await prisma.user.create({
           data: {
             email: req.body.email,
-            name: ''
+            name: '',
+            isInstructor: false
           }
         })
         res.status(200).json(user)
