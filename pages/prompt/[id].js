@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
 import Layout from '../../components/Layout'
 import Styles from "../../styles/pages/prompt/Id.module.scss"
+import Loading from '../../components/Loading'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
   ssr: false,
@@ -84,7 +85,7 @@ const Prompt = () => {
     </Link>
   ));
 
-  return (
+  return data[0] ? (
     <Layout>
       <div className={Styles.prompt}>
         <h2 className={Styles.h2}>{data[0]?.title || 'Loading'}</h2>
@@ -120,7 +121,9 @@ const Prompt = () => {
         }
       </div>
     </Layout>
-  );
+  ) : (
+    <Loading />
+  )
 };
 
 export default Prompt;

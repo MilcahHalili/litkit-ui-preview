@@ -93,7 +93,7 @@ const Post = () => {
               type="submit"
               value="Submit"
               id="submit"
-              className={Styles.input}
+              className={Styles.submit}
               onClick={handleSubmit}
             />
           </form>
