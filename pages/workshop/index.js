@@ -24,7 +24,7 @@ const Workshops = () => {
                 <main>
                     {workshops.map(workshop => (
                         <div>
-                            workshop info placeholder
+                            {workshop.name}
                         </div>
                     ))}
                 </main>
