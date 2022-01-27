@@ -1,35 +1,56 @@
 @import 'colors';
+@import 'breakpoints';
 
-.page {
-  margin: 0 auto 2.5rem;
-  padding: 2rem;
-  background-color: $white;
-  width: 80%;
-  border: 4px solid $marigold;
+.promptIndexContainer {
+	margin: 0 auto 2.5rem;
+	background-color: $white;
+	width: 80%;
+	border: 4px solid $marigold;
+  padding: 0 2rem 2rem;
 
-  h1 {
-    text-align: center;
+	h1 {
+		text-align: center;
+	}
+
+  @media only screen and (orientation: portrait) and (min-width: $tablet), 
+  (orientation: portrait) and (min-width: $sm-phone),
+  (orientation: portrait) and (min-width: $md-phone),
+  (orientation: portrait) and (min-width: $lg-phone) {
+    width: 100%;
   }
 }
-
 
 .createdAt {
-  margin: 1em 20%;
-}
-
-
-.prompt {
-  margin: 0 auto;
-  background: $white;
-  transition: box-shadow 0.1s ease-in;
-  width: 60%;
-  border: 1px solid $sage;
-
-  &:hover {
-    box-shadow: 1px 1px 3px $shadow;
+  @media only screen and (orientation: portrait) and (max-width: $sm-phone),
+  (orientation: portrait) and (max-width: $md-phone),
+  (orientation: portrait) and (max-width: $lg-phone) {
+    text-align: center;
   }
 
-  & + .prompt {
-    margin-top: 2rem;
+  @media only screen and (orientation: portrait) and (min-width: $tablet) {
+    text-align: left;
+  }
+}
+
+.prompt {
+	margin: 0 auto;
+	background: $white;
+	transition: box-shadow 0.1s ease-in;
+	width: 100%;
+	border: 1px solid $sage;
+
+	&:hover {
+		box-shadow: 1px 1px 3px $shadow;
+	}
+
+	& + .prompt {
+		margin-top: 2rem;
+	}
+
+  @media only screen and (orientation: portrait) and (min-width: $tablet),
+  (orientation: portrait) and (min-width: $sm-phone),
+  (orientation: portrait) and (min-width: $md-phone),
+  (orientation: portrait) and (min-width: $lg-phone) {
+    width: 100%;
   }
 }

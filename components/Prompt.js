@@ -12,7 +12,7 @@ const Prompt = ({ prompt }) => {
 
   return (
     <div onClick={() => Router.push("/prompt/[id]", `/prompt/${prompt.id}`)} className={Styles.prompt}>
-      <h2 className={Styles.prompth2}>{prompt.title}</h2>
+      <h2 className={Styles.prompth2}>{prompt.title}</h2> 
       <p className={Styles.instructorName}>By {instructorName}</p>
       <ReactMarkdown source={prompt.content} />
     </div>

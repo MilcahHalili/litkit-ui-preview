@@ -56,7 +56,7 @@ model User {
   email        String     @unique
   name         String
   image        String?
-  isInstructor Boolean
+  isInstructor Boolean?
   posts        Post[]
   comments     Comment[]
   workshops    Workshop[]

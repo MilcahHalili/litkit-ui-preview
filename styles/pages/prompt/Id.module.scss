@@ -1,24 +1,96 @@
 @import 'colors';
+@import 'breakpoints';
 
 .post {
-  margin: 5% auto;
-  padding: 5%;
-  background: $white;
-  transition: box-shadow 0.1s ease-in;
-  width: 100%;
-  border: 1px solid $sage;
+	margin: 0 auto 5%;
+	padding: 5%;
+	background: $white;
+	transition: box-shadow 0.1s ease-in;
+	width: 100%;
+	border: 1px solid $sage;
 
+	&:hover {
+		box-shadow: 1px 1px 3px $shadow;
+	}
 
-  &:hover {
-    box-shadow: 1px 1px 3px $shadow;
-  }
-
-
-  & + .post {
-    margin-top: 2rem;
-  }
+	& + .post {
+		margin-top: 2rem;
+	}
 }
 
 .quill {
-  height: 300px;
+	height: 300px;
+  background: $white;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+
+.h2, .h3 {
+	text-align: center;
+}
+
+@media only screen and (orientation: portrait) and (max-width: $sm-phone),
+(orientation: portrait) and (max-width: $md-phone),
+(orientation: portrait) and (max-width: $lg-phone) {
+  .h2 {
+    font-size: 1.1rem;
+  }
+
+  .h3 {
+    font-size: 1rem;
+  }
+}
+
+.container {
+	margin: 2rem auto;
+	padding: 2rem;
+	width: 60%;
+}
+
+.page {
+	background: white;
+	padding: 2rem;
+}
+
+.prompt {
+	margin: 0 auto 2rem;
+	padding: 2rem;
+  background: $white;
+	transition: box-shadow 0.1s ease-in;
+	width: 60%;
+  
+  @media only screen and (orientation: portrait) and (min-width: $tablet), 
+  (orientation: portrait) and (min-width: $sm-phone),
+  (orientation: portrait) and (min-width: $md-phone),
+  (orientation: portrait) and (min-width: $lg-phone) {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.actions {
+	margin-top: 2rem;
+}
+
+// .button {
+// 	background: #ececec;
+// 	border: 0;
+// 	border-radius: 0.125rem;
+// 	padding: 1rem 2rem;
+// }
+
+#submit {
+	margin-top: 20px;
+  background: $white;
+  height: 44px;
+  width: 100%;
+  border-radius: 75px;
+  border: 4px solid $sage;
+  font-size: 16px;
+  font-weight: 600;
+  color: $compost;
+}
+
+.divider {
+  margin-top: 2rem;
 }
