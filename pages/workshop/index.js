@@ -23,12 +23,9 @@ const Workshops = () => {
                 <h1 className={Styles.h1}>Workshops</h1>
                 <main>
                     {workshops.map(workshop => (
-                        <>
-                            <p>date</p>
-                            <div>
-                                workshops component placeholder
-                            </div>
-                        </>
+                        <div>
+                            workshop info placeholder
+                        </div>
                     ))}
                 </main>
             </div>
