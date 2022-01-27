@@ -23,7 +23,7 @@ const Workshops = () => {
                 <h1 className={Styles.h1}>Workshops</h1>
                 <main>
                     {workshops.map(workshop => (
-                        <div>
+                        <div className={Styles.workshopButton}>
                             {workshop.name}
                         </div>
                     ))}
