@@ -13,8 +13,8 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 
 const Prompt = () => {
-  const [ data, setData ] = useState([])
-  const [ postContent, setPostContent] = useState([])
+  const [data, setData] = useState([])
+  const [postContent, setPostContent] = useState([])
   const router = useRouter()
   const {
     query: { id },
@@ -82,13 +82,13 @@ const Prompt = () => {
         </div>
       </div>
     </Link>
-  ))
+  ));
 
-  return (data[1]?.length > 0) ? (
+  return (
     <Layout>
-      <div className="prompt">
-        <h2>{data[0]?.title || 'Loading'}</h2>
-        <h3>By {data[0]?.author?.name || "Unknown instructor"}</h3>
+      <div className={Styles.prompt}>
+        <h2 className={Styles.h2}>{data[0]?.title || 'Loading'}</h2>
+        <h3 className={Styles.h3}>By {data[0]?.author?.name || "Unknown instructor"}</h3>
         <ReactMarkdown source={data[0]?.content} />
         <form>
           <QuillNoSSRWrapper
@@ -102,105 +102,25 @@ const Prompt = () => {
           <input
             type="submit"
             value="Submit"
-            id="submit"
+            id={Styles.submit}
             onClick={handleSubmit}
           />
         </form>
-        { posts.reverse() }
-      </div>
-      <style jsx>{`
-        h2, h3, h4 {
-          text-align: center;
-        }
-        .container {
-          margin: 2rem auto;
-          padding: 2rem;
-          width: 60%;
-        }
-        .page {
-          background: white;
-          padding: 2rem;
-        }
-        .prompt {
-          margin: 2rem auto;
-          padding: 2rem;
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-          width: 60%;
-        }
-        .actions {
-          margin-top: 2rem;
-        }
-        button {
-          background: #ececec;
-          border: 0;
-          border-radius: 0.125rem;
-          padding: 1rem 2rem;
-        }
-        button + button {
-          margin-left: 1rem;
-        }
-        #submit {
-          margin-top: 3.5rem;
-        }
-      `}</style>
-    </Layout>
-  ) : (
-    <Layout>
-      <div className="prompt">
-        <h2>{data[0]?.title || 'Loading'}</h2>
-        <h3>By {data[0]?.author?.name || "Unknown instructor"}</h3>
-        <ReactMarkdown source={data[0]?.content} />
-        <form>
-          <QuillNoSSRWrapper
-            theme="snow"
-            name="content"
-            id="content"
-            value={postContent}
-            className={Styles.quill}
-            onChange={setPostContent}
-          />
-          <input
-            type="submit"
-            value="Submit"
-            id="submit"
-            onClick={handleSubmit}
-          />
-        </form>
-      </div>
-      <style jsx>{`
-        h2, h3, h4 {
-          text-align: center;
-        }
-        .page {
-          background: white;
-          padding: 2rem;
-        }
-        .prompt {
-          margin: 2rem auto;
-          padding: 2rem;
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-          width: 60%;
-        }
-        .actions {
-          margin-top: 2rem;
-        }
-        button {
-          background: #ececec;
-          border: 0;
-          border-radius: 0.125rem;
-          padding: 1rem 2rem;
-        }
-        button + button {
-          margin-left: 1rem;
-        }
-        #submit {
-          margin-top: 3.5rem;
-        }
-      `}</style>
-    </Layout>
-  )
-}
 
-export default Prompt
+        <hr className={Styles.divider} />
+
+        {data[1]?.length > 0
+          ? <>
+            <h2 className={Styles.h2}>Responses</h2>
+            {posts.reverse()}
+          </>
+          : <>
+            <h2 className={Styles.h2}>No responses yet...</h2>
+          </>
+        }
+      </div>
+    </Layout>
+  );
+};
+
+export default Prompt;

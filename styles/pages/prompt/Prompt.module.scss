@@ -21,8 +21,7 @@
 }
 
 .createdAt {
-  @media only screen and 
-  (orientation: portrait) and (max-width: $sm-phone),
+  @media only screen and (orientation: portrait) and (max-width: $sm-phone),
   (orientation: portrait) and (max-width: $md-phone),
   (orientation: portrait) and (max-width: $lg-phone) {
     text-align: center;
