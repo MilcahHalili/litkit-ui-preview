@@ -17,7 +17,7 @@ const Workshops = () => {
         getWorkshops();
     }, []);
 
-    return workshops ? (
+    return workshops.length ? (
         <Layout>
             <div className={Styles.workshopsIndexContainer}>
                 <h1 className={Styles.h1}>Workshops</h1>
