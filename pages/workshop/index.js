@@ -7,12 +7,10 @@ const Workshops = () => {
     const [workshops, setWorkshops] = useState([]);
 
     const getWorkshops = async () => {
-        console.log('hitttinng ggeettttt')
         const res = await fetch('api/workshop');
         const workshopsData = await res.json();
         workshopsData.reverse();
         setWorkshops(workshopsData);
-        console.log('weeee', workshops)
     };
 
     useEffect(() => {
