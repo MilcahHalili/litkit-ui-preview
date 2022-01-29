@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
+import Layout from '../../components/Layout'
+import Styles from '../../styles/pages/prompt/Id.module.scss'
+
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+})
 
 const NewPrompt = () => {
-  const [ promptTitle, setPromptTitle ] = useState([])
-  const [ promptContent, setPromptContent ] = useState([])
+  const [promptTitle, setPromptTitle] = useState([])
+  const [promptContent, setPromptContent] = useState([])
   const router = useRouter()
 
   const createPrompt = async (data) => {
@@ -39,26 +47,35 @@ const NewPrompt = () => {
   }
 
   return (
-    <>
-      <h1>Create new prompt</h1>
-      <main>
-        <form onSubmit={handleSubmit}>
+    <Layout>
+      <div className={Styles.prompt}>
+        <h2 className={Styles.h2}>Create New Prompt</h2>
+        <form>
           <input
-            id="title"
-            placeholder="title"
+            type="text"
+            placeholder="Title..."
             onChange={handleChange}
+            className={Styles.titleInput}
           />
-          <input
+
+          <QuillNoSSRWrapper
+            theme="snow"
+            name="content"
             id="content"
-            placeholder="content"
-            onChange={handleChange}
+            value={promptContent}
+            className={Styles.quill}
+            onChange={setPromptContent}
           />
+
           <input
-            type="submit" value="Create"
+            type="submit"
+            value="Create"
+            id={Styles.submit}
+            onClick={handleSubmit}
           />
         </form>
-      </main>
-    </>
+      </div>
+    </Layout>
   )
 }
 
