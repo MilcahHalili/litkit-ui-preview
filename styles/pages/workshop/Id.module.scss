@@ -1,0 +1,35 @@
+@import 'colors';
+@import 'breakpoints';
+
+.workshopsIndexContainer {
+	margin: 0 auto 2.5rem;
+	background-color: $white;
+	width: 80%;
+	border: 4px solid $marigold;
+	padding: 0 2rem 2rem;
+
+	h1 {
+		text-align: center;
+	}
+
+	@media only screen and (orientation: portrait) and (min-width: $tablet),
+		(orientation: portrait) and (min-width: $sm-phone),
+		(orientation: portrait) and (min-width: $md-phone),
+		(orientation: portrait) and (min-width: $lg-phone) {
+		width: 100%;
+	}
+}
+
+.workshopButton {
+	margin: 0 auto 1rem;
+	background: $white;
+	transition: box-shadow 0.1s ease-in;
+	width: 100%;
+	border: 1px solid $sage;
+	padding: 1rem;
+	cursor: pointer;
+
+	&:hover {
+		box-shadow: 1px 1px 3px $shadow;
+	}
+}

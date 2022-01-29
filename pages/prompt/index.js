@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Layout from "../../components/Layout"
-import Loading from '../../components/Loading'
+import Loading from "../../components/Loading"
 import Prompt from "../../components/Prompt"
 import Styles from "../../styles/pages/prompt/Prompt.module.scss"
 
