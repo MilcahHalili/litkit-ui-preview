@@ -29,9 +29,7 @@ const NewPrompt = () => {
       },
       method: 'POST'
     })
-    console.log('success post')
     const result = await res.json()
-    console.log('ressssuullttt => ', result)
   }
 
   const handleChange = e => {
