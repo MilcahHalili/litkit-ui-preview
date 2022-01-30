@@ -44,10 +44,11 @@ const Prompt = () => {
   }
 
   const handleSubmit = async e => {
-    await e.preventDefault()
-    await createPost(data)
-    console.log('yes!')
-    getOnePrompt()
+    await e.preventDefault();
+    await createPost();
+    setPostContent('');
+    console.log('yes!');
+    getOnePrompt();
   }
 
   useEffect(() => {
