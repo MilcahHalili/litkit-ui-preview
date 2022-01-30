@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import ReactMarkdown from "react-markdown"
 import Link from 'next/link'
 import { useRouter } from "next/router"
 import dynamic from 'next/dynamic'
@@ -14,31 +13,18 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 
 const Prompt = () => {
-  const [data, setData] = useState([])
-  const [postContent, setPostContent] = useState([])
-  const router = useRouter()
+  const [data, setData] = useState([]);
+  const [postContent, setPostContent] = useState('');
+  const router = useRouter();
   const {
     query: { id },
-  } = router
+  } = router;
 
   const getOnePrompt = async () => {
-    if (id && typeof window !== 'undefined') {
-      fetch(`../../api/prompt/${id}`)
-        .then(res => res.json())
-        .then(res => {
-          setData(res)
-          localStorage.setItem('id', `${id}`)
-        })
-        .catch(err => console.error(err))
-    } else if (typeof window !== 'undefined') {
-      fetch(`../../api/prompt/${localStorage.id}`)
-        .then(res => res.json())
-        .then(res => {
-          setData(res)
-        })
-        .catch(err => console.error(err))
-    }
-  }
+    const promptData = await fetch(`../api/prompt/${router.query.id}`);
+    const res = await promptData.json();
+    setData(res);
+  };
 
   const createPost = async () => {
     const data = {
@@ -58,15 +44,15 @@ const Prompt = () => {
   }
 
   const handleSubmit = async e => {
-    await e.preventDefault()
-    await createPost(data)
-    console.log('yes!')
-    getOnePrompt()
+    await e.preventDefault();
+    await createPost();
+    setPostContent('');
+    getOnePrompt();
   }
 
   useEffect(() => {
-    getOnePrompt()
-  }, [])
+    getOnePrompt();
+  }, [router]);
 
   const posts = data[1]?.map(post => (
     <Link
@@ -75,7 +61,7 @@ const Prompt = () => {
     >
       <div className={Styles.post}>
         <h4>{post.author.name}</h4>
-        <p>{parse(post.content)}</p>
+        {parse(post.content)}
         <div>
           <div>
             <h5>{post.comments.length} comments</h5>
@@ -90,7 +76,7 @@ const Prompt = () => {
       <div className={Styles.prompt}>
         <h2 className={Styles.h2}>{data[0]?.title || 'Loading'}</h2>
         <h3 className={Styles.h3}>By {data[0]?.author?.name || "Unknown instructor"}</h3>
-        <ReactMarkdown source={data[0]?.content} />
+        {parse(data[0].content)}
         <form>
           <QuillNoSSRWrapper
             theme="snow"

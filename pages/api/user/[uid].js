@@ -6,7 +6,7 @@ export default function handler(req, res) {
   async function main() {
     const user = await prisma.user.findUnique({
       where: {
-        email: uid
+        id: parseInt(uid)
       }
     })
     res.status(200).json(user)

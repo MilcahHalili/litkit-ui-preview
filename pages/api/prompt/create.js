@@ -5,14 +5,19 @@ export default function handler(req, res) {
   const prisma = new PrismaClient()
   if (req.method === 'POST') {
     async function main() {
+      const user = await prisma.user.findUnique({
+        where: {
+          email: req.body.email
+        }
+      });
       const prompt = await prisma.prompt.create({
         data: {
-          instructorId: 1,
+          authorId: user.id,
           workshopId: 1,
           title: req.body.title,
           content: req.body.content
         }
-      })
+      });
       res.status(200).json(prompt)
     }
 

@@ -1,16 +1,26 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
+import Layout from '../../components/Layout'
+import Styles from '../../styles/pages/prompt/Id.module.scss'
+
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+})
 
 const NewPrompt = () => {
-  const [ promptTitle, setPromptTitle ] = useState([])
-  const [ promptContent, setPromptContent ] = useState([])
+  const [promptTitle, setPromptTitle] = useState([])
+  const [promptContent, setPromptContent] = useState([])
   const router = useRouter()
 
-  const createPrompt = async (data) => {
-    data = {
+  const createPrompt = async () => {
+    const data = {
       title: promptTitle,
-      content: promptContent
+      content: promptContent,
+      email: localStorage.email
     }
+
     console.log(data, 'data from create prompt')
     const res = await fetch('/api/prompt/create', {
       body: JSON.stringify(data),
@@ -20,7 +30,6 @@ const NewPrompt = () => {
       method: 'POST'
     })
     const result = await res.json()
-    console.log(result)
   }
 
   const handleChange = e => {
@@ -33,32 +42,42 @@ const NewPrompt = () => {
 
   const handleSubmit = async (e) => {
     await e.preventDefault()
-    createPrompt()
+    await createPrompt()
     console.log('yay!')
     router.push('/#__next', '/')
   }
 
   return (
-    <>
-      <h1>Create new prompt</h1>
-      <main>
-        <form onSubmit={handleSubmit}>
+    <Layout>
+      <div className={Styles.prompt}>
+        <h2 className={Styles.h2}>Create New Prompt</h2>
+        <form>
           <input
+            type="text"
+            placeholder="Title..."
+            onChange={handleChange}
+            className={Styles.titleInput}
             id="title"
-            placeholder="title"
-            onChange={handleChange}
           />
-          <input
+
+          <QuillNoSSRWrapper
+            theme="snow"
+            name="content"
             id="content"
-            placeholder="content"
-            onChange={handleChange}
+            value={promptContent}
+            className={Styles.quill}
+            onChange={setPromptContent}
           />
+
           <input
-            type="submit" value="Create"
+            type="submit"
+            value="Create"
+            id={Styles.submit}
+            onClick={handleSubmit}
           />
         </form>
-      </main>
-    </>
+      </div>
+    </Layout>
   )
 }
 
