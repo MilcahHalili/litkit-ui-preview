@@ -24,14 +24,14 @@ const Prompt = () => {
   const getOnePrompt = async () => {
     if (id && typeof window !== 'undefined') {
       fetch(`../../api/prompt/${id}`)
-        .then(res => res.json())
+        .then(res => {res.json()})
         .then(res => {
           setData(res)
           localStorage.setItem('id', `${id}`)
         })
         .catch(err => console.error(err))
-    } else if (typeof window !== 'undefined') {
-      fetch(`../../api/prompt/${localStorage.id}`)
+      } else if (typeof window !== 'undefined') {
+        fetch(`../../api/prompt/${localStorage.id}`)
         .then(res => res.json())
         .then(res => {
           setData(res)

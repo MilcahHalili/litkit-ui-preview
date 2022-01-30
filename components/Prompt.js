@@ -5,9 +5,10 @@ import Styles from "../styles/Components/Prompt.module.scss"
 
 const Prompt = ({ prompt }) => {
 
-  const instructorName = prompt.instructor ? prompt.instructor.name : "Unknown instructor";
+  const instructorName = prompt.author ? prompt.author : "Unknown Instructor";
 
   useEffect(() => {
+    console.log(prompt)
   })
 
   return (

@@ -14,11 +14,13 @@ const NewPrompt = () => {
   const [promptContent, setPromptContent] = useState([])
   const router = useRouter()
 
-  const createPrompt = async (data) => {
-    data = {
+  const createPrompt = async () => {
+    const data = {
       title: promptTitle,
-      content: promptContent
+      content: promptContent,
+      email: localStorage.email
     }
+
     console.log(data, 'data from create prompt')
     const res = await fetch('/api/prompt/create', {
       body: JSON.stringify(data),
@@ -27,8 +29,9 @@ const NewPrompt = () => {
       },
       method: 'POST'
     })
+    console.log('success post')
     const result = await res.json()
-    console.log(result)
+    console.log('ressssuullttt => ', result)
   }
 
   const handleChange = e => {
@@ -41,7 +44,7 @@ const NewPrompt = () => {
 
   const handleSubmit = async (e) => {
     await e.preventDefault()
-    createPrompt()
+    await createPrompt()
     console.log('yay!')
     router.push('/#__next', '/')
   }
@@ -56,6 +59,7 @@ const NewPrompt = () => {
             placeholder="Title..."
             onChange={handleChange}
             className={Styles.titleInput}
+            id="title"
           />
 
           <QuillNoSSRWrapper
