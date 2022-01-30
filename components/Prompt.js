@@ -12,6 +12,11 @@ const Prompt = ({ prompt }) => {
     setAuthorName(name);
   }
 
+  const handleClick = () => {
+    localStorage.setItem('id', prompt.id);
+    Router.push("/prompt/[id]", `/prompt/${prompt.id}`);
+  }
+
   const promptContent = parse(prompt.content)
 
   useEffect(() => {
@@ -19,7 +24,7 @@ const Prompt = ({ prompt }) => {
   })
 
   return (
-    <div onClick={() => Router.push("/prompt/[id]", `/prompt/${prompt.id}`)} className={Styles.prompt}>
+    <div onClick={() => handleClick()} className={Styles.prompt}>
       <h2 className={Styles.prompth2}>{prompt.title}</h2>
       <p className={Styles.instructorName}>By {authorName || 'Unknown Instrcutor'}</p>
       {promptContent}
