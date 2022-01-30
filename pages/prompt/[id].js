@@ -47,7 +47,6 @@ const Prompt = () => {
     await e.preventDefault();
     await createPost();
     setPostContent('');
-    console.log('yes!');
     getOnePrompt();
   }
 

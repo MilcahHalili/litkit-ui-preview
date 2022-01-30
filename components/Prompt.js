@@ -26,7 +26,7 @@ const Prompt = ({ prompt }) => {
   return (
     <div onClick={() => handleClick()} className={Styles.prompt}>
       <h2 className={Styles.prompth2}>{prompt.title}</h2>
-      <p className={Styles.instructorName}>By {authorName || 'Unknown Instrcutor'}</p>
+      <p className={Styles.instructorName}>By {authorName || 'Unknown Instructor'}</p>
       {promptContent}
     </div>
   );
