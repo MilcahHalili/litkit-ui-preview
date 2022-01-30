@@ -1,3 +1,4 @@
+import { faGlassMartiniAlt } from '@fortawesome/free-solid-svg-icons'
 import { PrismaClient } from '@prisma/client'
 
 export default function handler(req, res) {
@@ -6,7 +7,7 @@ export default function handler(req, res) {
   async function main() {
     const user = await prisma.user.findUnique({
       where: {
-        email: uid
+        id: parseInt(uid)
       }
     })
     res.status(200).json(user)

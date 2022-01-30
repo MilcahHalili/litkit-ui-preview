@@ -5,23 +5,21 @@ import Prompt from "../../components/Prompt"
 import Styles from "../../styles/pages/prompt/Prompt.module.scss"
 
 const Prompts = (props) => {
-  const [prompts, setPrompts] = useState([])
+  const [prompts, setPrompts] = useState([]);
 
   const getPrompts = async () => {
-    const res = await fetch('api/prompt')
-    const result = await res.json()
-    result.reverse()
-    setPrompts(result)
-  }
+    const res = await fetch('api/prompt');
+    const result = await res.json();
+    result.reverse();
+    setPrompts(result);
+  };
 
   useEffect(() => {
-    getPrompts()
-  }, [])
+    getPrompts();
+  }, []);
 
   return props.userMetadata ? (
-    <Layout
-      props={props}
-    >
+    <Layout props={props}>
       <div className={Styles.promptIndexContainer}>
         <h1 className={Styles.pageh1}>Prompts</h1>
         <main>
@@ -42,6 +40,6 @@ const Prompts = (props) => {
   ) : (
     <Loading />
   )
-}
+};
 
-export default Prompts
+export default Prompts;

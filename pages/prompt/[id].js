@@ -14,59 +14,44 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 
 const Prompt = () => {
-  const [data, setData] = useState([])
-  const [postContent, setPostContent] = useState([])
-  const router = useRouter()
-  const {
-    query: { id },
-  } = router
+  const [data, setData] = useState([]);
+  const [postContent, setPostContent] = useState([]);
+  const path = window.location.pathname.split('/');
+  const id = parseInt(path[path.length -1]);
 
   const getOnePrompt = async () => {
-    if (id && typeof window !== 'undefined') {
-      fetch(`../../api/prompt/${id}`)
-        .then(res => {res.json()})
-        .then(res => {
-          setData(res)
-          localStorage.setItem('id', `${id}`)
-        })
-        .catch(err => console.error(err))
-      } else if (typeof window !== 'undefined') {
-        fetch(`../../api/prompt/${localStorage.id}`)
-        .then(res => res.json())
-        .then(res => {
-          setData(res)
-        })
-        .catch(err => console.error(err))
-    }
-  }
-
+    const promptData = await fetch(`../api/prompt/${id}`);
+    const res = await promptData.json();
+    setData(res);
+  };
+  
   const createPost = async () => {
     const data = {
       content: postContent,
       promptId: id,
       email: localStorage.email
-    }
+    };
     const res = await fetch('/api/post/create', {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
       },
       method: 'POST'
-    })
-    const result = await res.json()
-    return result
-  }
+    });
+    const result = await res.json();
+    return result;
+  };
 
   const handleSubmit = async e => {
-    await e.preventDefault()
-    await createPost(data)
-    console.log('yes!')
-    getOnePrompt()
-  }
+    await e.preventDefault();
+    await createPost();
+    setPostContent([]);
+    getOnePrompt();
+  };
 
   useEffect(() => {
-    getOnePrompt()
-  }, [])
+    getOnePrompt();
+  }, []);
 
   const posts = data[1]?.map(post => (
     <Link
@@ -90,7 +75,8 @@ const Prompt = () => {
       <div className={Styles.prompt}>
         <h2 className={Styles.h2}>{data[0]?.title || 'Loading'}</h2>
         <h3 className={Styles.h3}>By {data[0]?.author?.name || "Unknown instructor"}</h3>
-        <ReactMarkdown source={data[0]?.content} />
+        <p>{parse(data[0]?.content)}</p>
+        
         <form>
           <QuillNoSSRWrapper
             theme="snow"
