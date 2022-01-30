@@ -13,8 +13,8 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 
 const Prompt = () => {
-  const [data, setData] = useState([])
-  const [postContent, setPostContent] = useState([])
+  const [data, setData] = useState([]);
+  const [postContent, setPostContent] = useState('');
   const router = useRouter();
   const {
     query: { id },
@@ -61,7 +61,7 @@ const Prompt = () => {
     >
       <div className={Styles.post}>
         <h4>{post.author.name}</h4>
-        <p>{parse(post.content)}</p>
+        {parse(post.content)}
         <div>
           <div>
             <h5>{post.comments.length} comments</h5>
