@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react"
-import ReactMarkdown from "react-markdown"
 import Link from 'next/link'
-import { useRouter } from "next/router"
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
 import Layout from '../../components/Layout'
