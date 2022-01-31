@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { useRouter } from "next/router"
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
-import Layout from '../../components/Layout'
-import Styles from "../../styles/pages/prompt/Id.module.scss"
-import Loading from '../../components/Loading'
+import Layout from '../../../../components/Layout'
+import Styles from "../../../../styles/pages/prompt/Id.module.scss"
+import Loading from '../../../../components/Loading'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
   ssr: false,
@@ -21,7 +21,8 @@ const Prompt = () => {
   } = router;
 
   const getOnePrompt = async () => {
-    const promptData = await fetch(`../api/prompt/${router.query.id}`);
+    const promptData = await fetch(`/api/workshop/1/prompt/${router.query.id}`);
+    console.log(promptData)
     const res = await promptData.json();
     setData(res);
   };

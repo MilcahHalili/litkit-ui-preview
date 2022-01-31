@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import { magic } from '../magic'
 import Loading from '../components/Loading'
-import Prompts from '../pages/prompt/index'
+import Prompts from '../pages/workshop/[wid]/prompt/index.js'
 import Styles from '../styles/pages/Index.module.scss'
 
 export default function Index(props) {
