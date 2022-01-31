@@ -25,12 +25,12 @@ const Prompts = (props) => {
       <div className={Styles.promptIndexContainer}>
         <h1 className={Styles.pageh1}>Prompts</h1>
         <main>
-          {prompts.map(prompt => (
+          {prompts.map((prompt, idx) => (
             <>
               <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
               <div className={Styles.prompt}>
                 <Prompt
-                  key={prompt.id}
+                  key={idx}
                   prompt={prompt}
                 />
               </div>
