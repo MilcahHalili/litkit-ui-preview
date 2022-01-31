@@ -39,7 +39,6 @@ export default function Index(props) {
 
   const checkVerification = async () => {
     const user = await fetch(`api/user/${localStorage.userId}`).then(res => res.json());
-    console.log("userrrr??? ", user)
     if (user.isVerified === false) {
       setIsVerified(false);
     }
