@@ -27,9 +27,10 @@ export default function Login() {
   const login = useCallback(async () => {
     setIsLoggingIn(true);
     const result = await createUser()
-    await localStorage.setItem('name', result.name)
-    await localStorage.setItem('email', email)
-    await localStorage.setItem('userId', result.id)
+    await localStorage.setItem('name', result.name);
+    await localStorage.setItem('email', email);
+    await localStorage.setItem('userId', result.id);
+    
     try {
       // Grab auth token from loginWithMagicLink
       const didToken = await magic.auth.loginWithMagicLink({
