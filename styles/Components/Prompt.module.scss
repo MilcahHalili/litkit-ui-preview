@@ -26,3 +26,24 @@
   text-align: center;
   font-size: 13.333px;
 }
+
+.checkMark {
+  color: $sage;
+}
+
+.minus {
+  color: $marigold;
+}
+
+.statusContainer {
+  margin-top: 2.5rem;
+}
+
+.statusText {
+  font-weight: bold;
+}
+
+.commentText {
+  color: $marigold;
+  font-weight: bold;
+}
