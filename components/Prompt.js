@@ -59,7 +59,7 @@ const Prompt = ({ prompt }) => {
         <p>
           {complete
             ? <span>
-              <FontAwesomeIcon icon={faCheckCircle} className={Styles.checkMark} /> Completed  (<span className={commentCount > 0 ? Styles.commentText : ''}>{commentCount} Comment{commentCount ===1 ? '' : 's'}</span>)
+              <FontAwesomeIcon icon={faCheckCircle} className={Styles.checkMark} /> Completed  (<span className={commentCount > 0 ? Styles.commentText : ''}>{commentCount}/3 comments</span>)
             </span>
             : <span>
               <FontAwesomeIcon icon={faMinusCircle} className={Styles.minus} /> Incomplete
