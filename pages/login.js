@@ -29,6 +29,7 @@ export default function Login() {
     const result = await createUser()
     await localStorage.setItem('name', result.name)
     await localStorage.setItem('email', email)
+    await localStorage.setItem('userId', result.id)
     try {
       // Grab auth token from loginWithMagicLink
       const didToken = await magic.auth.loginWithMagicLink({
