@@ -28,7 +28,7 @@ export default function Login() {
     setIsLoggingIn(true);
     const result = await createUser()
     await localStorage.setItem('name', result.name);
-    await localStorage.setItem('email', email);
+    await localStorage.setItem('email', result.email);
     await localStorage.setItem('userId', result.id);
     
     try {
