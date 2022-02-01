@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
-import Styles from "../styles/Components/Prompt.module.scss"
-import parse from 'html-react-parser';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinusCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import Styles from "../styles/Components/Prompt.module.scss";
+import parse from "html-react-parser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinusCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Prompt = ({ prompt }) => {
   const [authorName, setAuthorName] = useState('');
@@ -36,7 +36,7 @@ const Prompt = ({ prompt }) => {
   const handleClick = () => {
     localStorage.setItem('promptId', prompt.id);
     localStorage.setItem('workshopId', prompt.workshopId);
-    Router.push('workshop/[wid]/prompt/[id]', `workshop/${prompt.workshopId}/prompt/${prompt.id}`);
+    Router.push(`/workshop/${prompt.workshopId}/prompt/[id]`, `/workshop/${prompt.workshopId}/prompt/${prompt.id}`);
   };
   
   useEffect(() => {
