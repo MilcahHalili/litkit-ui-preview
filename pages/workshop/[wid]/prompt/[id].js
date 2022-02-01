@@ -49,9 +49,9 @@ const Prompt = () => {
     getOnePrompt();
   }, []);
 
-  const posts = data[1]?.map(post => (
+  const posts = data[1]?.map((post, idx) => (
     <Link
-      key={post.id}
+      key={idx}
       href={`/post/${post.id}`}
     >
       <div className={Styles.post}>
