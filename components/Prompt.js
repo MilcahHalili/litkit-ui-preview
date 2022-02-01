@@ -32,13 +32,13 @@ const Prompt = ({ prompt }) => {
     const res = await responseDetails.json();
     setCommentCount(res[1].length);
   };
-  
+
   const handleClick = () => {
     localStorage.setItem('promptId', prompt.id);
     localStorage.setItem('workshopId', prompt.workshopId);
     Router.push(`/workshop/${prompt.workshopId}/prompt/[id]`, `/workshop/${prompt.workshopId}/prompt/${prompt.id}`);
   };
-  
+
   useEffect(() => {
     getAuthorName();
     setResponseCount(responses.length);
@@ -66,7 +66,7 @@ const Prompt = ({ prompt }) => {
               <FontAwesomeIcon icon={faMinusCircle} className={Styles.minus} /> Incomplete
             </span>
           }
-          </p>
+        </p>
       </div>
     </div>
   );
