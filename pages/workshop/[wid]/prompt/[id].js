@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Link from 'next/link'
-import { useRouter } from "next/router"
+// import { useRouter } from "next/router"
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
 import Layout from '../../../../components/Layout'
@@ -15,14 +15,13 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 const Prompt = () => {
   const [data, setData] = useState([]);
   const [postContent, setPostContent] = useState('');
-  const router = useRouter();
-  const {
-    query: { id },
-  } = router;
+  // const router = useRouter();
+  // const {
+  //   query: { id },
+  // } = router;
 
   const getOnePrompt = async () => {
     const promptData = await fetch(`/api/workshop/${localStorage.workshopId}/prompt/${localStorage.promptId}`);
-    console.log(promptData)
     const res = await promptData.json();
     setData(res);
   };
@@ -30,7 +29,7 @@ const Prompt = () => {
   const createPost = async () => {
     const data = {
       content: postContent,
-      promptId: id,
+      promptId: localStorage.promptId,
       email: localStorage.email
     }
     const res = await fetch('/api/post/create', {
@@ -53,7 +52,7 @@ const Prompt = () => {
 
   useEffect(() => {
     getOnePrompt();
-  }, [router]);
+  }, []);
 
   const posts = data[1]?.map(post => (
     <Link
