@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Link from 'next/link'
-// import { useRouter } from "next/router"
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
 import Layout from '../../../../components/Layout'
@@ -15,10 +14,6 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 const Prompt = () => {
   const [data, setData] = useState([]);
   const [postContent, setPostContent] = useState('');
-  // const router = useRouter();
-  // const {
-  //   query: { id },
-  // } = router;
 
   const getOnePrompt = async () => {
     const promptData = await fetch(`/api/workshop/${localStorage.workshopId}/prompt/${localStorage.promptId}`);
