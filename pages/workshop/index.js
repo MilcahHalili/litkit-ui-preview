@@ -15,7 +15,6 @@ const Workshops = () => {
     };
 
     const handleClick = workshopId => {
-        console.log(workshopId)
         localStorage.setItem('workshopId', workshopId);
         Router.push('workshop/[wid]/prompt', `workshop/${workshopId}/prompt`);
     };

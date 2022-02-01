@@ -42,10 +42,9 @@ const NewPrompt = () => {
   }
 
   const handleSubmit = async (e) => {
-    await e.preventDefault()
-    await createPrompt()
-    console.log('yay!')
-    router.push(`/workshop/${localStorage.workshopId}/prompt`)
+    await e.preventDefault();
+    await createPrompt();
+    router.push(`/workshop/${localStorage.workshopId}/prompt`);
   }
 
   return (

@@ -12,7 +12,6 @@ export default function handler(req, res) {
         posts: true
       }
     })
-    console.log(prompts)
     res.status(200).json(prompts)
   }
 

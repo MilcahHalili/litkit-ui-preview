@@ -18,7 +18,6 @@ const NewWorkshop = () => {
       method: 'POST'
     })
     const result = await res.json()
-    console.log(result)
   }
 
   const handleChange = e => {

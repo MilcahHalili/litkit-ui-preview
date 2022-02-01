@@ -12,7 +12,6 @@ export default function handler(req, res) {
           name: req.body.name
         }
       })
-      console.log(user)
       res.status(200).json(user)
     }
     
