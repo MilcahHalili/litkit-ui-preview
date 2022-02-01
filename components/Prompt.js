@@ -34,8 +34,9 @@ const Prompt = ({ prompt }) => {
   };
   
   const handleClick = () => {
-    localStorage.setItem('id', prompt.id);
-    Router.push("workshop/[wid]/prompt/[id]", `workshop/1/prompt/${prompt.id}`);
+    localStorage.setItem('promptId', prompt.id);
+    localStorage.setItem('workshopId', prompt.workshopId);
+    Router.push('workshop/[wid]/prompt/[id]', `workshop/${prompt.workshopId}/prompt/${prompt.id}`);
   };
   
   useEffect(() => {

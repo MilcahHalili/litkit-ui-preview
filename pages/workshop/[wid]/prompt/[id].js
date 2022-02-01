@@ -21,7 +21,7 @@ const Prompt = () => {
   } = router;
 
   const getOnePrompt = async () => {
-    const promptData = await fetch(`/api/workshop/1/prompt/${router.query.id}`);
+    const promptData = await fetch(`/api/workshop/${localStorage.workshopId}/prompt/${localStorage.promptId}`);
     console.log(promptData)
     const res = await promptData.json();
     setData(res);
