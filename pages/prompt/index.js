@@ -18,7 +18,7 @@ const Prompts = (props) => {
     getPrompts()
   }, [])
 
-  return props.userMetadata ? (
+  return prompts.length ? (
     <Layout
       props={props}
     >
