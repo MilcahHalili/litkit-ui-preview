@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import Loading from "../../components/Loading";
 import Styles from "../../styles/pages/workshop/Id.module.scss"
+import Router from "next/router";
 
 const Workshops = () => {
     const [workshops, setWorkshops] = useState([]);
@@ -11,6 +12,12 @@ const Workshops = () => {
         const workshopsData = await res.json();
         workshopsData.reverse();
         setWorkshops(workshopsData);
+    };
+
+    const handleClick = workshopId => {
+        console.log(workshopId)
+        localStorage.setItem('workshopId', workshopId);
+        Router.push('workshop/[wid]/prompt', `workshop/${workshopId}/prompt`);
     };
 
     useEffect(() => {
@@ -23,7 +30,7 @@ const Workshops = () => {
                 <h1 className={Styles.h1}>Workshops</h1>
                 <main>
                     {workshops.map(workshop => (
-                        <div className={Styles.workshopButton}>
+                        <div onClick={() => handleClick(workshop.id)} className={Styles.workshopButton}>
                             {workshop.name}
                         </div>
                     ))}

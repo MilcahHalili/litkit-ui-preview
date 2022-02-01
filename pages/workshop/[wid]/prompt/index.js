@@ -5,23 +5,22 @@ import Prompt from "../../../../components/Prompt"
 import Styles from "../../../../styles/pages/prompt/Prompt.module.scss"
 
 const Prompts = (props) => {
-  const [prompts, setPrompts] = useState([])
+  const [prompts, setPrompts] = useState([]);
 
   const getPrompts = async () => {
-    const res = await fetch(`api/workshop/${localStorage.workshopId}/prompt`)
-    const result = await res.json()
-    result.reverse()
-    setPrompts(result)
-  }
+    const res = await fetch(`api/workshop/${localStorage.workshopId}/prompt`);
+    const result = await res.json();
+    result.reverse();
+    setPrompts(result);
+  };
 
   useEffect(() => {
-    getPrompts()
-  }, [])
+    console.log('prompts???')
+    getPrompts();
+  }, []);
 
   return prompts.length ? (
-    <Layout
-      props={props}
-    >
+    <Layout props={props}>
       <div className={Styles.promptIndexContainer}>
         <h1 className={Styles.pageh1}>Prompts</h1>
         <main>
@@ -41,7 +40,7 @@ const Prompts = (props) => {
     </Layout>
   ) : (
     <Loading />
-  )
-}
+  );
+};
 
-export default Prompts
+export default Prompts;
