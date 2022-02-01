@@ -8,7 +8,7 @@ const Prompts = (props) => {
   const [prompts, setPrompts] = useState([])
 
   const getPrompts = async () => {
-    const res = await fetch(`api/workshop/${localStorage.workshopId}/prompt`);
+    const res = await fetch(`api/workshop/${localStorage.workshopId}/prompt`)
     const result = await res.json()
     result.reverse()
     setPrompts(result)
