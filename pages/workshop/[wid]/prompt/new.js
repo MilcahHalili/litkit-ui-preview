@@ -18,11 +18,12 @@ const NewPrompt = () => {
     const data = {
       title: promptTitle,
       content: promptContent,
-      email: localStorage.email
+      email: localStorage.email,
+      workshopId: localStorage.workshopId
     }
 
     console.log(data, 'data from create prompt')
-    const res = await fetch(`/api/workshop/${localStorage.workshopId}/prompt/new`, {
+    const res = await fetch(`/api/workshop/${localStorage.workshopId}/prompt/create`, {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
@@ -44,7 +45,7 @@ const NewPrompt = () => {
     await e.preventDefault()
     await createPrompt()
     console.log('yay!')
-    router.push('/#__next', '/')
+    router.push(`/workshop/${localStorage.workshopId}/prompt`)
   }
 
   return (

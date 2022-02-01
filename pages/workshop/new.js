@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import Styles from '../../styles/pages/workshop/Id.module.scss'
 
 const NewWorkshop = () => {
   const [ workshopName, setWorkshopName ] = useState([])
@@ -40,7 +41,7 @@ const NewWorkshop = () => {
             onChange={handleChange}
           />
           <input
-            type="submit" value="Create"
+            type="submit" value="Create" className={Styles.workshopButton}
           />
         </form>
       </main>
