@@ -8,14 +8,13 @@ const Prompts = (props) => {
   const [prompts, setPrompts] = useState([]);
 
   const getPrompts = async () => {
-    const res = await fetch(`api/workshop/${localStorage.workshopId}/prompt`);
+    const res = await fetch(`/api/workshop/${localStorage.workshopId}/prompt`);
     const result = await res.json();
     result.reverse();
     setPrompts(result);
   };
 
   useEffect(() => {
-    console.log('prompts???')
     getPrompts();
   }, []);
 
@@ -25,15 +24,12 @@ const Prompts = (props) => {
         <h1 className={Styles.pageh1}>Prompts</h1>
         <main>
           {prompts.map((prompt, idx) => (
-            <>
+            <div key={idx}>
               <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
               <div className={Styles.prompt}>
-                <Prompt
-                  key={idx}
-                  prompt={prompt}
-                />
+                <Prompt prompt={prompt} />
               </div>
-            </>
+            </div>
           ))}
         </main>
       </div>

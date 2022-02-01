@@ -29,8 +29,8 @@ const Workshops = () => {
             <div className={Styles.workshopsIndexContainer}>
                 <h1 className={Styles.h1}>Workshops</h1>
                 <main>
-                    {workshops.map(workshop => (
-                        <div onClick={() => handleClick(workshop.id)} className={Styles.workshopButton}>
+                    {workshops.map((workshop, idx) => (
+                        <div onClick={() => handleClick(workshop.id)} className={Styles.workshopButton} key={idx}>
                             {workshop.name}
                         </div>
                     ))}

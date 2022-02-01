@@ -13,7 +13,7 @@ const Prompt = ({ prompt }) => {
   const responses = prompt.posts;
 
   const getAuthorName = async () => {
-    const author = await fetch(`api/user/${prompt.authorId}`).then(res => res.json());
+    const author = await fetch(`/api/user/${prompt.authorId}`).then(res => res.json());
     const name = author.name;
     setAuthorName(name);
   };
@@ -28,7 +28,7 @@ const Prompt = ({ prompt }) => {
   };
 
   const getCommentCount = async responseId => {
-    const responseDetails = await fetch(`api/post/${responseId}`);
+    const responseDetails = await fetch(`/api/post/${responseId}`);
     const res = await responseDetails.json();
     setCommentCount(res[1].length);
   };
