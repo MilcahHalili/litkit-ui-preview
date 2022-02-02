@@ -12,7 +12,6 @@ const Workshops = () => {
         const userRes = await fetch(`/api/user/${localStorage.userId}`);
         const userData = await userRes.json();
         setUser(userData);
-        console.log(userData)
 
         const workshopRes = await fetch('api/workshop');
         const workshopsData = await workshopRes.json();

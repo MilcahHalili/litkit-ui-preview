@@ -14,7 +14,6 @@ const Prompts = (props) => {
     const userRes = await fetch(`/api/user/${localStorage.userId}`);
     const userData = await userRes.json();
     setUser(userData);
-    console.log(userData)
 
     const res = await fetch(`/api/workshop/${localStorage.workshopId}/prompt`);
     const result = await res.json();
