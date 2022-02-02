@@ -12,6 +12,7 @@ const Workshops = () => {
         const userRes = await fetch(`api/user/${localStorage.userId}`);
         const userData = await userRes.json();
         setUser(userData);
+        
         const workshopRes = await fetch('api/workshop');
         const workshopsData = await workshopRes.json();
 
@@ -21,7 +22,6 @@ const Workshops = () => {
             workshopsData.map((workshop, idx) => {
                 if (workshop.users[idx] === user) {
                     setWorkshops(workshops => [...workshops, workshop]);
-                    console.log('added', workshop)
                 }
             });
         }
