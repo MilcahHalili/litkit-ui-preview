@@ -59,7 +59,8 @@ export default function Index(props) {
     });
   }, []);
 
-  return (props.userEmail
+  return (
+    props.userEmail
     ? (!props.username
       ? <div className={Styles.index}>
         <img src="https://i.imgur.com/NxwZ9x0.png" width="100px" height="100px" className={Styles.logo} />

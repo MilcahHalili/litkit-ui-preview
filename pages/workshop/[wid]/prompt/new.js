@@ -22,7 +22,6 @@ const NewPrompt = () => {
       workshopId: localStorage.workshopId
     }
 
-    console.log(data, 'data from create prompt')
     const res = await fetch(`/api/workshop/${localStorage.workshopId}/prompt/create`, {
       body: JSON.stringify(data),
       headers: {
