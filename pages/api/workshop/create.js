@@ -2,11 +2,11 @@ import { PrismaClient } from '@prisma/client'
 
 export default function handler(req, res) {
   const prisma = new PrismaClient()
+  console.log(req.body)
   if (req.method === 'POST') {
     async function main() {
       const workshop = await prisma.workshop.create({
         data: {
-          instructorId: 1,
           name: req.body.name
         }
       })

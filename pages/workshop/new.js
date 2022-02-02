@@ -9,7 +9,7 @@ const NewWorkshop = () => {
 
   const createWorkshop = async (data) => {
     data = {
-      name: workshopName
+      name: workshopName,
     }
     const res = await fetch('/api/workshop/create', {
       body: JSON.stringify(data),
@@ -18,6 +18,7 @@ const NewWorkshop = () => {
       },
       method: 'POST'
     })
+    console.log(res)
     const result = await res.json()
   }
 
@@ -43,7 +44,9 @@ const NewWorkshop = () => {
               className={Styles.nameInput}
             />
             <input
-              type="submit" value="Create" className={Styles.submit}
+              type="submit" 
+              value="Submit" 
+              className={Styles.submit}
             />
           </form>
         </main>
