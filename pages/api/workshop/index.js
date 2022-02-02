@@ -4,7 +4,12 @@ export default function handler(req, res) {
 	const prisma = new PrismaClient();
 
 	async function main() {
-		const workshops = await prisma.workshop.findMany({});
+		const workshops = await prisma.workshop.findMany({
+			include: {
+				users: true,
+				prompts: true
+			}
+		});
 		res.status(200).json(workshops);
 	};
 
