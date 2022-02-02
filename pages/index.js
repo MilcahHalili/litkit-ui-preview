@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import { magic } from '../magic'
 import Loading from '../components/Loading'
-import Prompts from '../pages/workshop/[wid]/prompt/index.js'
 import Styles from '../styles/pages/Index.module.scss'
 import Layout from '../components/Layout'
+import Workshops from '../pages/workshop/index.js'
 
 export default function Index(props) {
   const [pendingUsername, setPendingUsername] = useState();
@@ -59,7 +59,8 @@ export default function Index(props) {
     });
   }, []);
 
-  return (props.userEmail
+  return (
+    props.userEmail
     ? (!props.username
       ? <div className={Styles.index}>
         <img src="https://i.imgur.com/NxwZ9x0.png" width="100px" height="100px" className={Styles.logo} />
@@ -89,7 +90,7 @@ export default function Index(props) {
             </p>
           </div>
         </Layout>
-        : <Prompts props={props} />
+        : <Workshops props={props} />
     )
     : <Loading />
   );

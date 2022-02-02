@@ -65,8 +65,8 @@ const Post = () => {
     getOnePost()
   }, [])
 
-  const comments = data[1]?.map(comment => (
-    <div className={Styles.comment} key={comment.id}>
+  const comments = data[1]?.map((comment, idx) => (
+    <div className={Styles.comment} key={idx}>
       <p>{parse(comment.content)}</p>
       <h4>{comment?.author?.name}</h4>
     </div>

@@ -8,6 +8,13 @@
 	border: 4px solid $marigold;
 	padding: 0 2rem 2rem;
 
+	header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+	}
+
 	h1 {
 		text-align: center;
 	}
@@ -32,4 +39,33 @@
 	&:hover {
 		box-shadow: 1px 1px 3px $shadow;
 	}
+}
+
+.addButton {
+	background: $marigold;
+	width: 38px;
+	border-radius: 75px;
+	border: 4px solid $marigold;
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: $white;
+	margin-top: 10px;
+}
+
+.nameInput {
+	width: 100%;
+	height: 44px;
+	padding-left: 1rem;
+}
+
+.submit {
+	margin-top: 20px;
+	background: $white;
+	height: 44px;
+	width: 100%;
+	border-radius: 75px;
+	border: 4px solid $sage;
+	font-size: 16px;
+	font-weight: 600;
+	color: $compost;
 }

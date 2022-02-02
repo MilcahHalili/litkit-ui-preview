@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Router from "next/router";
-import Styles from "../styles/Components/Prompt.module.scss"
-import parse from 'html-react-parser';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinusCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import Styles from "../styles/Components/Prompt.module.scss";
+import parse from "html-react-parser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinusCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Prompt = ({ prompt }) => {
   const [authorName, setAuthorName] = useState('');
@@ -13,7 +13,7 @@ const Prompt = ({ prompt }) => {
   const responses = prompt.posts;
 
   const getAuthorName = async () => {
-    const author = await fetch(`api/user/${prompt.authorId}`).then(res => res.json());
+    const author = await fetch(`/api/user/${prompt.authorId}`).then(res => res.json());
     const name = author.name;
     setAuthorName(name);
   };
@@ -28,17 +28,17 @@ const Prompt = ({ prompt }) => {
   };
 
   const getCommentCount = async responseId => {
-    const responseDetails = await fetch(`api/post/${responseId}`);
+    const responseDetails = await fetch(`/api/post/${responseId}`);
     const res = await responseDetails.json();
     setCommentCount(res[1].length);
   };
-  
+
   const handleClick = () => {
     localStorage.setItem('promptId', prompt.id);
     localStorage.setItem('workshopId', prompt.workshopId);
-    Router.push('workshop/[wid]/prompt/[id]', `workshop/${prompt.workshopId}/prompt/${prompt.id}`);
+    Router.push(`/workshop/${prompt.workshopId}/prompt/[id]`, `/workshop/${prompt.workshopId}/prompt/${prompt.id}`);
   };
-  
+
   useEffect(() => {
     getAuthorName();
     setResponseCount(responses.length);
@@ -66,7 +66,7 @@ const Prompt = ({ prompt }) => {
               <FontAwesomeIcon icon={faMinusCircle} className={Styles.minus} /> Incomplete
             </span>
           }
-          </p>
+        </p>
       </div>
     </div>
   );

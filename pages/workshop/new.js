@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import Styles from '../../styles/pages/workshop/Id.module.scss'
+import Layout from '../../components/Layout'
 
 const NewWorkshop = () => {
-  const [ workshopName, setWorkshopName ] = useState([])
+  const [workshopName, setWorkshopName] = useState([])
   const router = useRouter()
 
   const createWorkshop = async (data) => {
     data = {
-      name: workshopName
+      name: workshopName,
     }
     const res = await fetch('/api/workshop/create', {
       body: JSON.stringify(data),
@@ -16,8 +18,8 @@ const NewWorkshop = () => {
       },
       method: 'POST'
     })
+    console.log(res)
     const result = await res.json()
-    console.log(result)
   }
 
   const handleChange = e => {
@@ -31,20 +33,25 @@ const NewWorkshop = () => {
   }
 
   return (
-    <>
-      <h1>Create new workshop</h1>
-      <main>
-        <form onSubmit={handleSubmit}>
-          <input
-            placeholder="name"
-            onChange={handleChange}
-          />
-          <input
-            type="submit" value="Create"
-          />
-        </form>
-      </main>
-    </>
+    <Layout>
+      <div className={Styles.workshopsIndexContainer}>
+        <h1>Create New Workshop</h1>
+        <main>
+          <form onSubmit={handleSubmit}>
+            <input
+              placeholder="Workshop Name. . ."
+              onChange={handleChange}
+              className={Styles.nameInput}
+            />
+            <input
+              type="submit" 
+              value="Submit" 
+              className={Styles.submit}
+            />
+          </form>
+        </main>
+      </div>
+    </Layout>
   )
 }
 

@@ -5,43 +5,47 @@ import Prompt from "../../../../components/Prompt"
 import Styles from "../../../../styles/pages/prompt/Prompt.module.scss"
 
 const Prompts = (props) => {
-  const [prompts, setPrompts] = useState([])
+  const [prompts, setPrompts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getPrompts = async () => {
-    const res = await fetch(`api/workshop/${localStorage.workshopId}/prompt`)
-    const result = await res.json()
-    result.reverse()
-    setPrompts(result)
-  }
+    const res = await fetch(`/api/workshop/${localStorage.workshopId}/prompt`);
+    const result = await res.json();
+    result.reverse();
+    setPrompts(result);
+    console.log(result)
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    getPrompts()
-  }, [])
+    getPrompts();
+  }, []);
 
-  return prompts.length ? (
-    <Layout
-      props={props}
-    >
+  return !isLoading ? (
+    <Layout props={props}>
       <div className={Styles.promptIndexContainer}>
         <h1 className={Styles.pageh1}>Prompts</h1>
-        <main>
-          {prompts.map((prompt, idx) => (
-            <>
-              <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
-              <div className={Styles.prompt}>
-                <Prompt
-                  key={idx}
-                  prompt={prompt}
-                />
+
+        <button className={Styles.addButton}>+ New Prompt</button>
+
+        {prompts.length > 0
+          ? <main>
+            {prompts.map((prompt, idx) => (
+              <div key={idx}>
+                <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
+                <div className={Styles.prompt}>
+                  <Prompt prompt={prompt} />
+                </div>
               </div>
-            </>
-          ))}
-        </main>
+            ))}
+          </main>
+          : <p>No prompts yet. . .</p>
+        }
       </div>
     </Layout>
   ) : (
     <Loading />
-  )
-}
+  );
+};
 
-export default Prompts
+export default Prompts;
