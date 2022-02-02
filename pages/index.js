@@ -13,7 +13,7 @@ export default function Index(props) {
   const updateUsername = async (data) => {
     data = {
       name: pendingUsername,
-      email: userMetadata.email
+      email: localStorage.email
     }
     const res = await fetch('/api/user/edit', {
       body: JSON.stringify(data),

@@ -9,10 +9,11 @@ const Workshops = () => {
     const [workshops, setWorkshops] = useState([]);
 
     const getUserWorkshops = async () => {
-        const userRes = await fetch(`api/user/${localStorage.userId}`);
+        const userRes = await fetch(`/api/user/${localStorage.userId}`);
         const userData = await userRes.json();
         setUser(userData);
-        
+        console.log(userData)
+
         const workshopRes = await fetch('api/workshop');
         const workshopsData = await workshopRes.json();
 
@@ -20,7 +21,7 @@ const Workshops = () => {
             setWorkshops(workshopsData);
         } else {
             workshopsData.map((workshop, idx) => {
-                if (workshop.users[idx] === user) {
+                if (workshop.users.length && workshop.users[idx] === user) {
                     setWorkshops(workshops => [...workshops, workshop]);
                 }
             });
