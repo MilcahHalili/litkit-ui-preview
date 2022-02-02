@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react"
-import Layout from "../../components/Layout"
-import Loading from "../../components/Loading"
-import Prompt from "../../components/Prompt"
-import Styles from "../../styles/pages/prompt/Prompt.module.scss"
+import Layout from "../../../../components/Layout"
+import Loading from "../../../../components/Loading"
+import Prompt from "../../../../components/Prompt"
+import Styles from "../../../../styles/pages/prompt/Prompt.module.scss"
 
 const Prompts = (props) => {
   const [prompts, setPrompts] = useState([])
 
   const getPrompts = async () => {
-    const res = await fetch('api/prompt')
+    const res = await fetch(`api/workshop/${localStorage.workshopId}/prompt`)
     const result = await res.json()
     result.reverse()
     setPrompts(result)

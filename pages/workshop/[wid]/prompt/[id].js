@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react"
 import Link from 'next/link'
-import { useRouter } from "next/router"
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
-import Layout from '../../components/Layout'
-import Styles from "../../styles/pages/prompt/Id.module.scss"
-import Loading from '../../components/Loading'
+import Layout from '../../../../components/Layout'
+import Styles from "../../../../styles/pages/prompt/Id.module.scss"
+import Loading from '../../../../components/Loading'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
   ssr: false,
@@ -15,13 +14,9 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 const Prompt = () => {
   const [data, setData] = useState([]);
   const [postContent, setPostContent] = useState('');
-  const router = useRouter();
-  const {
-    query: { id },
-  } = router;
 
   const getOnePrompt = async () => {
-    const promptData = await fetch(`../api/prompt/${router.query.id}`);
+    const promptData = await fetch(`/api/workshop/${localStorage.workshopId}/prompt/${localStorage.promptId}`);
     const res = await promptData.json();
     setData(res);
   };
@@ -29,7 +24,7 @@ const Prompt = () => {
   const createPost = async () => {
     const data = {
       content: postContent,
-      promptId: id,
+      promptId: localStorage.promptId,
       email: localStorage.email
     }
     const res = await fetch('/api/post/create', {
@@ -52,7 +47,7 @@ const Prompt = () => {
 
   useEffect(() => {
     getOnePrompt();
-  }, [router]);
+  }, []);
 
   const posts = data[1]?.map(post => (
     <Link
