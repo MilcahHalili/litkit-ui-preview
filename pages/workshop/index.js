@@ -20,7 +20,7 @@ const Workshops = () => {
             setWorkshops(workshopsData);
         } else {
             for (let i = 0; i < workshopsData.length; i++) {
-                console.log(workshopsData[i].users.length, workshopsData[i].users)
+                // console.log(workshopsData[i].users.length, workshopsData[i].users)
                 for (let j = 0; j < workshopsData[i].users.length; j++) {
                     if (workshopsData[i].users[j].id == localStorage.userId) {
                         setWorkshops(workshops => [...workshops, workshopsData[i]])

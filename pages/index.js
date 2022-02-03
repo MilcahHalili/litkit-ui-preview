@@ -8,7 +8,7 @@ import Workshops from '../pages/workshop/index.js'
 
 export default function Index(props) {
   const [pendingUsername, setPendingUsername] = useState();
-  // const [isVerified, setIsVerified] = useState(null);
+  const [inWorkshop, setInWorkshop] = useState(null);
 
   const updateUsername = async (data) => {
     data = {
@@ -37,12 +37,14 @@ export default function Index(props) {
     updateUsername()
   }
 
-  // const checkVerification = async () => {
-  //   const user = await fetch(`api/user/${localStorage.userId}`).then(res => res.json());
-  //   if (user.isVerified === false) {
-  //     setIsVerified(false);
-  //   }
-  // };
+  const checkInWorkshop = async () => {
+    const user = await fetch(`api/user/${localStorage.userId}`).then(res => res.json());
+    if (user.workshops.length) {
+      setInWorkshop(true);
+    } else {
+      setInWorkshop(false);
+    }
+  };
 
   useEffect(() => {
     // On mount, we check if a user is logged in.
@@ -51,7 +53,7 @@ export default function Index(props) {
       if (magicIsLoggedIn) {
         props.setUserEmail(localStorage?.email);
         props.setUsername(localStorage?.name);
-        checkVerification();
+        checkInWorkshop();
       } else {
         // If no user is logged in, redirect to `/login`
         Router.push('/login');
@@ -81,17 +83,16 @@ export default function Index(props) {
           </form>
         </div>
       </div>
-      // : isVerified === false
-      //   ? <Layout>
-      //     <div className={Styles.pending}>
-      //       <h2>Pending Verification. . .</h2>
-      //       <p>
-      //         Welcome to LitKit! Please <a href="mailto:someone@yoursite.com?subject=LitKit User Verification" className={Styles.mailLink}>email us</a> to be added to a workshop. Once you are verified, return here to see your prompts. Happy writing!
-      //       </p>
-      //     </div>
-      //   </Layout>
-      //   : <Workshops props={props} />
-        :<Workshops props={props} />
+      : inWorkshop === false
+        ? <Layout>
+          <div className={Styles.pending}>
+            <h2>Pending Verification. . .</h2>
+            <p>
+              Welcome to LitKit! Please <a href="mailto:someone@yoursite.com?subject=LitKit User Verification" className={Styles.mailLink}>email us</a> to be added to a workshop. Once you are verified, return here to see your prompts. Happy writing!
+            </p>
+          </div>
+        </Layout>
+        : <Workshops props={props} />
     )
     : <Loading />
   );
