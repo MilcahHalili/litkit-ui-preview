@@ -19,11 +19,14 @@ const Workshops = () => {
         if (userData.isInstructor) {
             setWorkshops(workshopsData);
         } else {
-            workshopsData.map((workshop, idx) => {
-                if (workshop.users.length && workshop.users[idx] === user) {
-                    setWorkshops(workshops => [...workshops, workshop]);
-                }
-            });
+            for (let i = 0; i < workshopsData.length; i++) {
+                console.log(workshopsData[i].users.length, workshopsData[i].users)
+                for (let j = 0; j < workshopsData[i].users.length; j++) {
+                    if (workshopsData[i].users[j].id == localStorage.userId) {
+                        setWorkshops(workshops => [...workshops, workshopsData[i]])
+                    }
+                } 
+            }
         }
     };
 
