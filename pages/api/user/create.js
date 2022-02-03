@@ -16,8 +16,7 @@ export default function handler(req, res) {
           data: {
             email: req.body.email,
             name: '',
-            isInstructor: false,
-            isVerified: false
+            isInstructor: false
           }
         })
         res.status(200).json(user)
