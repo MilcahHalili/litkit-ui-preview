@@ -12,14 +12,13 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 
 const Post = () => {
-  const [data, setData] = useState([])
-  const [commentContent, setCommentContent] = useState([])
+  const [data, setData] = useState([]);
+  const [commentContent, setCommentContent] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter()
   const {
     query: { id }
-  } = router
+  } = router;
 
   const createComment = async () => {
     const data = {
@@ -39,50 +38,15 @@ const Post = () => {
   }
 
   const getOnePost = async () => {
-    // if (id && typeof window !== 'undefined') {
-    //   fetch(`../../api/post/${id}`)
-    //     .then(res => res.json())
-    //     .then(res => {
-    //       setData(res)
-    //     })
-    //     .catch(err => console.error(err))
-    // } else if (typeof window !== 'undefined') {
-    //   fetch(`../../api/post/${localStorage.postId}`)
-    //     .then(res => res.json())
-    //     .then(res => {
-    //       setData(res)
-    //     })
-    //     .catch(err => console.error(err))
-    // }
-
     const postRes = await fetch(`/api/post/${localStorage.postId}`);
     const postData = await postRes.json();
-    setData(postData)
-    setIsLoaded(true)
-    console.log("post data => ", postData)
-    console.log("comments =>", data[1])
+    setData(postData);
 
     for (let i = 0; i < postData[1].length; i++) {
       if (postData[1][i].authorId !== postData[0].authorId) {
-        console.log('add 1')
         setCommentCount(commentCount + 1);
       }
     }
-  }
-
-  const getCommentCount = async data => {
-    console.log('pist', data)
-
-    let postData =  data[0];
-    let commentsArr = data[1];
-
-    for (let i = 0; i < commentsArr.length; i++) {
-      if (commentsArr[i].authorId !== postData.authorId) {
-        console.log('add 1')
-        setCommentCount(commentCount + 1);
-      }
-    }
-
   };
 
   const handleSubmit = async e => {
