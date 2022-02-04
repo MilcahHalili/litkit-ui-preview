@@ -55,7 +55,7 @@ const Prompt = () => {
       href={`/post/${post.id}`}
     >
       <div className={Styles.post}>
-        <h4>{post.author.name}</h4>
+        <h4>by {post.author.name}</h4>
         {parse(post.content)}
         <div>
           <div>
@@ -70,7 +70,7 @@ const Prompt = () => {
     <Layout>
       <div className={Styles.prompt}>
         <h2 className={Styles.h2}>{data[0]?.title || 'Loading'}</h2>
-        <h3 className={Styles.h3}>By {data[0]?.author?.name || "Unknown instructor"}</h3>
+        <h3 className={Styles.h3}>by {data[0]?.author?.name || "Unknown instructor"}</h3>
         {parse(data[0].content)}
         <form>
           <QuillNoSSRWrapper

@@ -4,21 +4,13 @@ export default function handler(req, res) {
   const prisma = new PrismaClient()
   if (req.method === 'POST') {
     async function main() {
-      const user = await prisma.user.findUnique({
-        where: {
-          email: req.body.email
-        }
-      });
-      const prompt = await prisma.prompt.create({
+      const category = await prisma.category.create({
         data: {
-          authorId: user.id,
+          name: req.body.name,
           workshopId: parseInt(req.body.workshopId),
-          title: req.body.title,
-          content: req.body.content,
-          categoryId: parseInt(req.body.categoryId)
         }
       });
-      res.status(200).json(prompt)
+      res.status(200).json(category)
     }
 
     main()

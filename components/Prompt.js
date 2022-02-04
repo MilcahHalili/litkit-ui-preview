@@ -18,6 +18,12 @@ const Prompt = ({ prompt }) => {
     setAuthorName(name);
   };
 
+  const getCommentCount = async responseId => {
+    const responseDetails = await fetch(`/api/post/${responseId}`);
+    const res = await responseDetails.json();
+    setCommentCount(res[1].length);
+  };
+
   const checkComplete = async () => {
     responses.map(response => {
       if (response.authorId == localStorage.userId) {
@@ -25,12 +31,6 @@ const Prompt = ({ prompt }) => {
         getCommentCount(response.id);
       }
     });
-  };
-
-  const getCommentCount = async responseId => {
-    const responseDetails = await fetch(`/api/post/${responseId}`);
-    const res = await responseDetails.json();
-    setCommentCount(res[1].length);
   };
 
   const handleClick = () => {
@@ -49,7 +49,7 @@ const Prompt = ({ prompt }) => {
 
   return (
     <div onClick={() => handleClick()} className={Styles.prompt}>
-      <h2 className={Styles.prompth2}>{prompt.title}</h2>
+      <h2 className={Styles.prompth2}>{prompt.category?.name}{prompt.category ? ': ' : ''}{prompt.title}</h2>
       <p className={Styles.instructorName}>By {authorName || 'Unknown Instructor'}</p>
       {promptContent}
 
