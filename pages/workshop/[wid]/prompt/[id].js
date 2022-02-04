@@ -5,6 +5,7 @@ import parse from 'html-react-parser';
 import Layout from '../../../../components/Layout'
 import Styles from "../../../../styles/pages/prompt/Id.module.scss"
 import Loading from '../../../../components/Loading'
+import Router from "next/router";
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
   ssr: false,
@@ -45,25 +46,24 @@ const Prompt = () => {
     getOnePrompt();
   }
 
+  const clickPost = postId => {
+    console.log('post clicked')
+    localStorage.setItem('postId', postId);
+    Router.push('/post/[id]', `/post/${postId}`);
+  };
+
   useEffect(() => {
     getOnePrompt();
   }, []);
 
   const posts = data[1]?.map((post, idx) => (
-    <Link
-      key={idx}
-      href={`/post/${post.id}`}
-    >
-      <div className={Styles.post}>
-        <h4>{post.author.name}</h4>
-        {parse(post.content)}
-        <div>
-          <div>
-            <h5>{post.comments.length} comments</h5>
-          </div>
-        </div>
+    <div key={idx} onClick={() => clickPost(post.id)} className={Styles.post} >
+      <h4>{post.author.name}</h4>
+      {parse(post.content)}
+      <div>
+        <h5>{post.comments.length} comments</h5>
       </div>
-    </Link>
+    </div>
   ));
 
   return data[0] ? (
