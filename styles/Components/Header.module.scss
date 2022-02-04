@@ -2,33 +2,59 @@
 @import 'breakpoints';
 
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-  & .dropDownMenuContainer {
-    position: relative;
-  }
+	& .dropDownMenuContainer {
+		position: relative;
+	}
 
-  & .dropDownIcon {
-    font-size: 2rem;
-    cursor: pointer;
-  }
+	& .dropDownIcon {
+		font-size: 2rem;
+		cursor: pointer;
+	}
 }
 
 .logo {
-  font-weight: bold;
+	font-weight: bold;
 }
 
-.logoutButton {
-  position: absolute;
-  right: -0.5rem;
-  background: $white;
-  height: 44px;
-  width: 100%;
-  border-radius: 75px;
-  border: 4px solid $sage;
-  font-size: 16px;
-  font-weight: 600;
-  color: $compost;
+.menu {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: $white;
+	width: 100%;
+	position: absolute;
+	right: -1rem;
+	border: 4px solid $sage;
+}
+
+.textControl {
+	height: 44px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	font-family: Arial;
+  border-bottom: 1px solid $sage;
+}
+
+.tcButton {
+	color: $marigold;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.menuButton {
+	background: $white;
+	height: 44px;
+	width: 90%;
+	border: none;
+	font-size: 16px;
+	font-weight: 600;
+	color: $compost;
 }

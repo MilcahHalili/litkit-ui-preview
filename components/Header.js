@@ -6,13 +6,23 @@ import { magic } from '../magic'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandSparkles } from '@fortawesome/free-solid-svg-icons'
+import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import Styles from "../styles/Components/Header.module.scss"
 
 const Header = ({ props }) => {
   const router = useRouter();
   const isActive = (pathname) => router.pathname === pathname;
-  const [showMobileLogout, setShowMobileLogout] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const decText = () => {
+    console.log('decrease text')
+  };
+  
+  const incText = () => {
+    console.log('increase text')
+    
+  };
 
   /**
    * Perform logout action via Magic.
@@ -32,12 +42,31 @@ const Header = ({ props }) => {
       </Link>
 
       <div className={Styles.dropDownMenuContainer}>
-        <h2 onClick={() => setShowMobileLogout(!showMobileLogout)}>
+        <h2 onClick={() => setShowMenu(!showMenu)}>
           <FontAwesomeIcon icon={faHandSparkles} className={Styles.usernameIcon} />
           {(typeof window !== 'undefined' && (props.username || localStorage.name)) ? ', ' + (props.username || localStorage.name) + '!' : ''}
           <span className={Styles.dropDownIcon}> ▾</span>
         </h2>
-        {showMobileLogout ? <button className={Styles.logoutButton} onClick={logout}>Logout</button> : ''}
+
+        {showMenu
+          ? <div className={Styles.menu}>
+            <div className={Styles.textControl}>
+              <FontAwesomeIcon
+                icon={faMinusCircle}
+                className={Styles.tcButton}
+                onClick={() => decText()}
+              />
+              Text Size
+              <FontAwesomeIcon
+                icon={faPlusCircle}
+                className={Styles.tcButton}
+                onClick={() => incText()}
+              />
+            </div>
+            <button className={Styles.menuButton} onClick={logout}>Logout</button>
+          </div>
+          : ''
+        }
       </div>
     </nav>
   );
