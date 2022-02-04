@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import Layout from '../../../../components/Layout'
 import Styles from '../../../../styles/pages/prompt/Id.module.scss'
+import Router from "next/router";
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
   ssr: false,
@@ -10,7 +11,9 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 
 const NewPrompt = () => {
-  const [promptTitle, setPromptTitle] = useState([])
+  const [categories, setCategories] = useState([])
+  const [promptTitle, setPromptTitle] = useState('')
+  const [promptCategoryId, setPromptCategoryId] = useState('')
   const [promptContent, setPromptContent] = useState([])
   const router = useRouter()
 
@@ -19,6 +22,7 @@ const NewPrompt = () => {
       title: promptTitle,
       content: promptContent,
       email: localStorage.email,
+      categoryId: (promptCategoryId == '') ? categories[0].id : promptCategoryId,
       workshopId: localStorage.workshopId
     }
 
@@ -32,11 +36,19 @@ const NewPrompt = () => {
     const result = await res.json()
   }
 
+  const getCategories = async () => {
+    const res = await fetch(`/api/workshop/${localStorage.workshopId}/category`)
+    const result = await res.json()
+    setCategories(result)
+  }
+
   const handleChange = e => {
     if (e.target.id === 'title') {
       setPromptTitle(e.target.value)
     } else if (e.target.id === 'content') {
       setPromptContent(e.target.value)
+    } else if (e.target.id === 'category') {
+      setPromptCategoryId(e.target.value)
     }
   }
 
@@ -45,6 +57,10 @@ const NewPrompt = () => {
     await createPrompt();
     router.push(`/workshop/${localStorage.workshopId}/prompt`);
   }
+
+  useEffect(() => {
+    getCategories()
+  }, [])
 
   return (
     <Layout>
@@ -58,6 +74,19 @@ const NewPrompt = () => {
             className={Styles.titleInput}
             id="title"
           />
+          <select
+            className={Styles.titleInput}
+            id="category"
+            onChange={handleChange}
+            defaultValue={promptCategoryId}
+          >
+            <option onClick={() => Router.push(`/workshop/${localStorage.workshopId}/category/new`)}>Create new category</option>
+            {categories.map((category) => {
+              return (
+                <option value={category.id} key={category.id}>{category.name}</option>
+                )
+            })}
+          </select>
 
           <QuillNoSSRWrapper
             theme="snow"
