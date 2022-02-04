@@ -8,6 +8,7 @@ import Styles from "../../../../styles/pages/prompt/Prompt.module.scss"
 const Prompts = (props) => {
   const [user, setUser] = useState();
   const [prompts, setPrompts] = useState([]);
+  const [promptsLoading, setPromptsLoading] = useState(true);
 
   const getUserPrompts = async () => {
     const userRes = await fetch(`/api/user/${localStorage.userId}`);
@@ -18,6 +19,7 @@ const Prompts = (props) => {
     const result = await res.json();
     result.reverse();
     setPrompts(result);
+    setPromptsLoading(false);
   };
 
   const addNew = () => {
@@ -37,18 +39,20 @@ const Prompts = (props) => {
             {user.isInstructor ? <button onClick={() => addNew()} className={Styles.addButton}>+</button> : ''}
           </header>
 
-          {prompts.length > 0
-            ? <main>
-              {prompts.map((prompt, idx) => (
-                <div key={idx}>
-                  <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
-                  <div className={Styles.prompt}>
-                    <Prompt prompt={prompt} />
+          {promptsLoading
+            ? <p>Loading . . .</p>
+            : prompts.length > 0
+              ? <main>
+                {prompts.map((prompt, idx) => (
+                  <div key={idx}>
+                    <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
+                    <div className={Styles.prompt}>
+                      <Prompt prompt={prompt} />
+                    </div>
                   </div>
-                </div>
-              ))}
-            </main>
-            : <p>No prompts yet. . .</p>
+                ))}
+              </main>
+              : <p>No prompts yet. . .</p>
           }
         </div>
       </Layout>
