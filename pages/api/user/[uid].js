@@ -7,6 +7,9 @@ export default function handler(req, res) {
     const user = await prisma.user.findUnique({
       where: {
         id: parseInt(uid)
+      },
+      include: {
+        workshops: true
       }
     })
     res.status(200).json(user)

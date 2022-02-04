@@ -59,7 +59,6 @@ model User {
   name         String
   image        String?
   isInstructor Boolean?
-  isVerified   Boolean?
   posts        Post[]
   comments     Comment[]
   workshops    Workshop[]

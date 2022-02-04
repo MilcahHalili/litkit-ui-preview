@@ -12,12 +12,13 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 
 const Post = () => {
-  const [data, setData] = useState([])
-  const [commentContent, setCommentContent] = useState([])
+  const [data, setData] = useState([]);
+  const [commentContent, setCommentContent] = useState([]);
+  const [commentCount, setCommentCount] = useState(0);
   const router = useRouter()
   const {
     query: { id }
-  } = router
+  } = router;
 
   const createComment = async () => {
     const data = {
@@ -37,23 +38,16 @@ const Post = () => {
   }
 
   const getOnePost = async () => {
-    if (id && typeof window !== 'undefined') {
-      fetch(`../../api/post/${id}`)
-        .then(res => res.json())
-        .then(res => {
-          setData(res)
-          localStorage.setItem('id', `${id}`)
-        })
-        .catch(err => console.error(err))
-    } else if (typeof window !== 'undefined') {
-      fetch(`../../api/post/${localStorage.id}`)
-        .then(res => res.json())
-        .then(res => {
-          setData(res)
-        })
-        .catch(err => console.error(err))
+    const postRes = await fetch(`/api/post/${localStorage.postId}`);
+    const postData = await postRes.json();
+    setData(postData);
+
+    for (let i = 0; i < postData[1].length; i++) {
+      if (postData[1][i].authorId !== postData[0].authorId) {
+        setCommentCount(commentCount + 1);
+      }
     }
-  }
+  };
 
   const handleSubmit = async e => {
     await e.preventDefault()
@@ -62,13 +56,13 @@ const Post = () => {
   }
 
   useEffect(() => {
-    getOnePost()
-  }, [])
+    getOnePost();
+  }, []);
 
   const comments = data[1]?.map((comment, idx) => (
     <div className={Styles.comment} key={idx}>
       <p>{parse(comment.content)}</p>
-      <h4>{comment?.author?.name}</h4>
+      <h4>— {comment?.author?.name}</h4>
     </div>
   ))
 
@@ -99,8 +93,8 @@ const Post = () => {
           </form>
         </div>
         <div className={Styles.post}>
-          <h4>Comments ({comments.length}/3)</h4>
-          { comments }
+          <h4>Comments ({commentCount || 0}/3)</h4>
+          {comments}
         </div>
       </main>
     </Layout>
