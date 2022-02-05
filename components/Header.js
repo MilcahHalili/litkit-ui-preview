@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Router from 'next/router'
@@ -14,7 +14,7 @@ const Header = ({ props }) => {
   const router = useRouter();
   const isActive = (pathname) => router.pathname === pathname;
   const [showMenu, setShowMenu] = useState(false);
-  const [fontSize, setFontSize] = useState(localStorage.getItem('fontSize') || 16);
+  const [fontSize, setFontSize] = useState();
 
   const decText = () => {
     console.log('decrease text')
@@ -38,6 +38,11 @@ const Header = ({ props }) => {
       Router.push('/login');
     });
   }, [Router]);
+
+  useEffect(() => {
+    // on load, set the fontSize
+    setFontSize(localStorage.fontSize);
+  }, []);
 
   return (
     <nav className={Styles.nav}>
