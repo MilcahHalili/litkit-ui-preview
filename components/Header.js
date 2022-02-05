@@ -21,7 +21,6 @@ const Header = ({ props }) => {
   
   const incText = () => {
     console.log('increase text')
-    
   };
 
   /**
