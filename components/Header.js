@@ -14,13 +14,20 @@ const Header = ({ props }) => {
   const router = useRouter();
   const isActive = (pathname) => router.pathname === pathname;
   const [showMenu, setShowMenu] = useState(false);
+  const [fontSize, setFontSize] = useState(16);
 
   const decText = () => {
     console.log('decrease text')
+    let newSize = fontSize - 2;
+    document.getElementById('bodyody').style.fontSize = `${newSize}px`
+    setFontSize(newSize);
   };
   
   const incText = () => {
     console.log('increase text')
+    let newSize = fontSize + 2;
+    document.getElementById('bodyody').style.fontSize = `${newSize}px`
+    setFontSize(newSize);
   };
 
   /**
@@ -33,7 +40,7 @@ const Header = ({ props }) => {
   }, [Router]);
 
   return (
-    <nav className={Styles.nav}>
+    <nav className={Styles.nav} id="pepee">
       <Link href="/">
         <a className={Styles.logo} data-active={isActive("/")}>
           <img src="https://i.imgur.com/NxwZ9x0.png" width="100px" height="100px" />
