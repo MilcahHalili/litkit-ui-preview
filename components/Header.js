@@ -14,7 +14,7 @@ const Header = ({ props }) => {
   const router = useRouter();
   const isActive = (pathname) => router.pathname === pathname;
   const [showMenu, setShowMenu] = useState(false);
-  const [fontSize, setFontSize] = useState();
+  const [fontSize, setFontSize] = useState(parseInt(16));
 
   const decText = () => {
     console.log('decrease text')
