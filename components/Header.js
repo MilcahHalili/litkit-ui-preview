@@ -19,14 +19,14 @@ const Header = ({ props }) => {
   const decText = () => {
     console.log('decrease text')
     let newSize = fontSize - 2;
-    document.getElementById('bodyody').style.fontSize = `${newSize}px`
+    document.getElementById('accessibleBody').style.fontSize = `${newSize}px`
     setFontSize(newSize);
   };
   
   const incText = () => {
     console.log('increase text')
     let newSize = fontSize + 2;
-    document.getElementById('bodyody').style.fontSize = `${newSize}px`
+    document.getElementById('accessibleBody').style.fontSize = `${newSize}px`
     setFontSize(newSize);
   };
 
@@ -40,7 +40,7 @@ const Header = ({ props }) => {
   }, [Router]);
 
   return (
-    <nav className={Styles.nav} id="pepee">
+    <nav className={Styles.nav}>
       <Link href="/">
         <a className={Styles.logo} data-active={isActive("/")}>
           <img src="https://i.imgur.com/NxwZ9x0.png" width="100px" height="100px" />
