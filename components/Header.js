@@ -14,25 +14,27 @@ const Header = ({ props }) => {
   const router = useRouter();
   const isActive = (pathname) => router.pathname === pathname;
   const [showMenu, setShowMenu] = useState(false);
-  const [fontSize, setFontSize] = useState(parseInt(16));
+  const [fontSize, setFontSize] = useState();
 
   const decText = () => {
     console.log('decrease text')
     let newSize = fontSize - 2;
     document.getElementById('accessibleBody').style.fontSize = `${newSize}px`
     setFontSize(newSize);
+    console.log(fontSize)
   };
-  
+
   const incText = () => {
     console.log('increase text')
     let newSize = fontSize + 2;
     document.getElementById('accessibleBody').style.fontSize = `${newSize}px`
     setFontSize(newSize);
+    console.log(fontSize)
   };
 
   /**
    * Perform logout action via Magic.
-  */
+   */
   const logout = useCallback(() => {
     magic.user.logout().then(() => {
       Router.push('/login');
@@ -40,9 +42,17 @@ const Header = ({ props }) => {
   }, [Router]);
 
   useEffect(() => {
-    // on load, set the fontSize
-    setFontSize(localStorage.fontSize);
-  }, []);
+    if (localStorage.getItem('fontSize') !== null) {
+      setFontSize(parseInt(localStorage.fontSize))
+    } else {
+      setFontSize(parseInt(16))
+    }
+  }, []); // on load, set the fontSize
+
+  useEffect(() => {
+    localStorage.setItem('fontSize', fontSize)
+    document.getElementById('accessibleBody').style.fontSize = `${fontSize}px`
+  }, [fontSize]); // update font size on page and localStorage every time fontSize is changed
 
   return (
     <nav className={Styles.nav}>
