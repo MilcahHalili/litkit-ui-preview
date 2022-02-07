@@ -17,19 +17,15 @@ const Header = ({ props }) => {
   const [fontSize, setFontSize] = useState();
 
   const decText = () => {
-    console.log('decrease text')
     let newSize = fontSize - 2;
     document.getElementById('accessibleBody').style.fontSize = `${newSize}px`
     setFontSize(newSize);
-    console.log(fontSize)
   };
 
   const incText = () => {
-    console.log('increase text')
     let newSize = fontSize + 2;
     document.getElementById('accessibleBody').style.fontSize = `${newSize}px`
     setFontSize(newSize);
-    console.log(fontSize)
   };
 
   /**
