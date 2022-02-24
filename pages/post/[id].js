@@ -42,11 +42,17 @@ const Post = () => {
     const postData = await postRes.json();
     setData(postData);
 
+    const postAuthor = postData[0].authorId;
+    const commentsArr = postData[1];
+    let count = 0;
+
     for (let i = 0; i < postData[1].length; i++) {
-      if (postData[1][i].authorId !== postData[0].authorId) {
-        setCommentCount(commentCount + 1);
+      if (commentsArr[i].authorId !== postAuthor) {
+        count++;
       }
     }
+
+    setCommentCount(count);
   };
 
   const handleSubmit = async e => {
@@ -66,41 +72,41 @@ const Post = () => {
     </div>
   ))
 
-  return data[0] ? (
-    <Layout>
-      <main className={Styles.main}>
-        <div className={Styles.post}>
-          <section className={Styles.content}>
-            <h3>By {data[0].author.name}</h3>
-            <p>{parse(data[0].content)}</p>
-          </section>
-          <form>
-            <QuillNoSSRWrapper
-              theme="snow"
-              name="content"
-              id="content"
-              value={commentContent}
-              className={Styles.quill}
-              onChange={setCommentContent}
-            />
-            <input
-              type="submit"
-              value="Submit"
-              id="submit"
-              className={Styles.submit}
-              onClick={handleSubmit}
-            />
-          </form>
-        </div>
-        <div className={Styles.post}>
-          <h4>Comments ({commentCount || 0}/3)</h4>
-          {comments}
-        </div>
-      </main>
-    </Layout>
-  ) : (
-    <Loading />
-  )
+  return (
+    data[0]
+      ? <Layout>
+        <main className={Styles.main}>
+          <div className={Styles.post}>
+            <section className={Styles.content}>
+              <h3>By {data[0].author.name}</h3>
+              <p>{parse(data[0].content)}</p>
+            </section>
+            <form>
+              <QuillNoSSRWrapper
+                theme="snow"
+                name="content"
+                id="content"
+                value={commentContent}
+                className={Styles.quill}
+                onChange={setCommentContent}
+              />
+              <input
+                type="submit"
+                value="Submit"
+                id="submit"
+                className={Styles.submit}
+                onClick={handleSubmit}
+              />
+            </form>
+          </div>
+          <div className={Styles.post}>
+            <h4>Comments ({commentCount || 0}/3)</h4>
+            {comments}
+          </div>
+        </main>
+      </Layout>
+      : <Loading />
+  );
 }
 
 export default Post
