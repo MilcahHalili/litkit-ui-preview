@@ -18,6 +18,7 @@
 	transition: box-shadow 0.1s ease-in;
 	width: 100%;
 	border: 1px solid $sage;
+  cursor: pointer;
 
 	&:hover {
 		box-shadow: 1px 1px 3px $shadow;
