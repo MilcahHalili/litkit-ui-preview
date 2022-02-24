@@ -15,16 +15,12 @@
   (orientation: portrait) and (min-width: $md-phone),
   (orientation: portrait) and (min-width: $lg-phone) {
     padding: 0.9rem;
-
-    h2 {
-      font-size: 1rem;
-    }
   }
 }
 
-.authorName {
+.instructorName {
   text-align: center;
-  font-size: 13.333px;
+  font-weight: bold;
 }
 
 .checkMark {

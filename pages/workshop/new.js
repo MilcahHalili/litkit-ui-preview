@@ -18,7 +18,6 @@ const NewWorkshop = () => {
       },
       method: 'POST'
     })
-    console.log(res)
     const result = await res.json()
   }
 

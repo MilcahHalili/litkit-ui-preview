@@ -46,7 +46,6 @@ const Prompt = () => {
   }
 
   const clickPost = postId => {
-    console.log('post clicked')
     localStorage.setItem('postId', postId);
     Router.push('/post/[id]', `/post/${postId}`);
   };

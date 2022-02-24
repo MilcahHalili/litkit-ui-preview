@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client'
 
 export default function handler(req, res) {
   const prisma = new PrismaClient()
-  console.log(req.body)
   if (req.method === 'POST') {
     async function main() {
       const workshop = await prisma.workshop.create({
