@@ -8,7 +8,7 @@ import Styles from "../../../../styles/pages/prompt/Prompt.module.scss"
 const Prompts = (props) => {
   const [user, setUser] = useState();
   const [prompts, setPrompts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [promptsLoading, setPromptsLoading] = useState(true);
 
   const getUserPrompts = async () => {
     const userRes = await fetch(`/api/user/${localStorage.userId}`);
@@ -19,12 +19,12 @@ const Prompts = (props) => {
     const result = await res.json();
     result.reverse();
     setPrompts(result);
-    setIsLoading(false);
+    setPromptsLoading(false);
   };
 
   const addNew = () => {
     Router.push('/workshop/[wid]/prompt/new', `/workshop/${localStorage.workshopId}/prompt/new`);
-};
+  };
 
   useEffect(() => {
     getUserPrompts();
