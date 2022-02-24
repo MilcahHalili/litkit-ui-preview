@@ -14,7 +14,7 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 const Post = () => {
   const [data, setData] = useState([]);
   const [commentContent, setCommentContent] = useState([]);
-  const [commentCount, setCommentCount] = useState(0);
+  const [commenterCount, setCommenterCount] = useState(0);
   const router = useRouter()
   const {
     query: { id }
@@ -44,15 +44,17 @@ const Post = () => {
 
     const postAuthor = postData[0].authorId;
     const commentsArr = postData[1];
+    let commenters = [];
     let count = 0;
 
     for (let i = 0; i < postData[1].length; i++) {
-      if (commentsArr[i].authorId !== postAuthor) {
+      if (commentsArr[i].authorId !== postAuthor && !commenters.includes(commentsArr[i].authorId)) {
+        commenters.push(commentsArr[i].authorId);
         count++;
       }
     }
 
-    setCommentCount(count);
+    setCommenterCount(count);
   };
 
   const handleSubmit = async e => {
@@ -72,40 +74,39 @@ const Post = () => {
     </div>
   ))
 
-  return (
-    data[0]
-      ? <Layout>
-        <main className={Styles.main}>
-          <div className={Styles.post}>
-            <section className={Styles.content}>
-              <h3>By {data[0].author.name}</h3>
-              <p>{parse(data[0].content)}</p>
-            </section>
-            <form>
-              <QuillNoSSRWrapper
-                theme="snow"
-                name="content"
-                id="content"
-                value={commentContent}
-                className={Styles.quill}
-                onChange={setCommentContent}
-              />
-              <input
-                type="submit"
-                value="Submit"
-                id="submit"
-                className={Styles.submit}
-                onClick={handleSubmit}
-              />
-            </form>
-          </div>
-          <div className={Styles.post}>
-            <h4>Comments ({commentCount || 0}/3)</h4>
-            {comments}
-          </div>
-        </main>
-      </Layout>
-      : <Loading />
+  return (data[0]
+    ? <Layout>
+      <main className={Styles.main}>
+        <div className={Styles.post}>
+          <section className={Styles.content}>
+            <h3>By {data[0].author.name}</h3>
+            <p>{parse(data[0].content)}</p>
+          </section>
+          <form>
+            <QuillNoSSRWrapper
+              theme="snow"
+              name="content"
+              id="content"
+              value={commentContent}
+              className={Styles.quill}
+              onChange={setCommentContent}
+            />
+            <input
+              type="submit"
+              value="Submit"
+              id="submit"
+              className={Styles.submit}
+              onClick={handleSubmit}
+            />
+          </form>
+        </div>
+        <div className={Styles.post}>
+          <h4>Commenters ({commenterCount || 0}/3)</h4>
+          {comments}
+        </div>
+      </main>
+    </Layout>
+    : <Loading />
   );
 }
 
