@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser';
 import Layout from '../../../../components/Layout'
@@ -47,7 +46,6 @@ const Prompt = () => {
   }
 
   const clickPost = postId => {
-    console.log('post clicked')
     localStorage.setItem('postId', postId);
     Router.push('/post/[id]', `/post/${postId}`);
   };

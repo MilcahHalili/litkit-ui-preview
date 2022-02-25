@@ -8,7 +8,7 @@ import Styles from "../../../../styles/pages/prompt/Prompt.module.scss"
 const Prompts = (props) => {
   const [user, setUser] = useState();
   const [prompts, setPrompts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [promptsLoading, setPromptsLoading] = useState(true);
 
   const getUserPrompts = async () => {
     const userRes = await fetch(`/api/user/${localStorage.userId}`);
@@ -19,42 +19,44 @@ const Prompts = (props) => {
     const result = await res.json();
     result.reverse();
     setPrompts(result);
-    setIsLoading(false);
+    setPromptsLoading(false);
   };
 
   const addNew = () => {
     Router.push('/workshop/[wid]/prompt/new', `/workshop/${localStorage.workshopId}/prompt/new`);
-};
+  };
 
   useEffect(() => {
     getUserPrompts();
   }, []);
 
-  return !isLoading ? (
-    <Layout props={props}>
-      <div className={Styles.promptIndexContainer}>
-        <header>
-          <h1 className={Styles.pageh1}>Prompts</h1>
-          {user.isInstructor ? <button onClick={() => addNew()} className={Styles.addButton}>+</button> : ''}
-        </header>
+  return (
+    user
+      ? <Layout props={props}>
+        <div className={Styles.promptIndexContainer}>
+          <header>
+            <h1 className={Styles.pageh1}>Prompts</h1>
+            {user.isInstructor ? <button onClick={() => addNew()} className={Styles.addButton}>+</button> : ''}
+          </header>
 
-        {prompts.length > 0
-          ? <main>
-            {prompts.map((prompt, idx) => (
-              <div key={idx}>
-                <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
-                <div className={Styles.prompt}>
-                  <Prompt prompt={prompt} user={user} />
-                </div>
-              </div>
-            ))}
-          </main>
-          : <p>No prompts yet. . .</p>
-        }
-      </div>
-    </Layout>
-  ) : (
-    <Loading />
+          {promptsLoading
+            ? <p>Loading . . .</p>
+            : prompts.length > 0
+              ? <main>
+                {prompts.map((prompt, idx) => (
+                  <div key={idx}>
+                    <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
+                    <div className={Styles.prompt}>
+                      <Prompt prompt={prompt} user={user} />
+                    </div>
+                  </div>
+                ))}
+              </main>
+              : <p>No prompts yet. . .</p>
+          }
+        </div>
+      </Layout>
+      : <Loading />
   );
 };
 
