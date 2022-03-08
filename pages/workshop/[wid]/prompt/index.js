@@ -47,7 +47,7 @@ const Prompts = (props) => {
                   <div key={idx}>
                     <p className={Styles.createdAt}>{prompt.createdAt.split('').slice(0, 10).join('')}</p>
                     <div className={Styles.prompt}>
-                      <Prompt prompt={prompt} />
+                      <Prompt prompt={prompt} user={user} />
                     </div>
                   </div>
                 ))}

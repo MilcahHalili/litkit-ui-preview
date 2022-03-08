@@ -5,13 +5,13 @@ import parse from "html-react-parser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
-const Prompt = ({ prompt }) => {
+const Prompt = ({ prompt, user }) => {
   const [authorName, setAuthorName] = useState('');
   const [complete, setComplete] = useState(false);
   const [responseCount, setResponseCount] = useState(0);
   const [commentCount, setCommentCount] = useState(0);
   const responses = prompt.posts;
-
+  
   const getAuthorName = async () => {
     const author = await fetch(`/api/user/${prompt.authorId}`).then(res => res.json());
     const name = author.name;
@@ -57,16 +57,19 @@ const Prompt = ({ prompt }) => {
         <p className={Styles.statusText}>
           {responseCount > 0 ? responseCount : 'No'} Response{responseCount === 1 ? '' : 's'}
         </p>
-        <p>
-          {complete
-            ? <span>
-              <FontAwesomeIcon icon={faCheckCircle} className={Styles.checkMark} /> Completed  (<span className={commentCount > 0 ? Styles.commentText : ''}>{commentCount}/3 comments</span>)
-            </span>
-            : <span>
-              <FontAwesomeIcon icon={faMinusCircle} className={Styles.minus} /> Incomplete
-            </span>
-          }
-        </p>
+        {!user.isInstructor
+          ? <p>
+            {complete
+              ? <span>
+                <FontAwesomeIcon icon={faCheckCircle} className={Styles.checkMark} /> Completed  (<span className={commentCount > 0 ? Styles.commentText : ''}>{commentCount}/3 comments</span>)
+              </span>
+              : <span>
+                <FontAwesomeIcon icon={faMinusCircle} className={Styles.minus} /> Incomplete
+              </span>
+            }
+          </p>
+          : ''
+        }
       </div>
     </div>
   );
